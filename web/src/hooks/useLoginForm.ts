@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-hot-toast';
-import { setCredentials } from '../features/auth/authSlice';
+import { setCredentials } from '../features/authSlice';
 import { useApi } from './useApi';
 import { authService } from '../services/auth.service';
 import { validation } from '../utils/validation';

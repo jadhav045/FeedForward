@@ -1,7 +1,7 @@
-// src/features/auth/authSlice.ts
+// src/features/authSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AuthState, User } from '../../types/auth';
-import { storage } from '../../utils/storage';
+import { AuthState, User } from '../types/auth';
+import { storage } from '../utils/storage';
 
 const initialState: AuthState = {
   user: storage.getUser(),
@@ -40,4 +40,4 @@ const authSlice = createSlice({
 });
 
 export const { setCredentials, logout } = authSlice.actions;
-export const authReducer = authSlice.reducer;
+export default authSlice.reducer;

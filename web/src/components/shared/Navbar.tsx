@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon, UserCircleIcon } from '@heroicons/react/24/outline';
 import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../../features/auth/authSlice';
+import { logout } from '../../features/authSlice';
 import { RootState } from '../../store/store';
 import {roleBasedNavigation} from '../../config/nav.config';
 
