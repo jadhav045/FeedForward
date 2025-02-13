@@ -1,17 +1,16 @@
 import axios, { AxiosInstance, AxiosResponse, AxiosError } from 'axios';
 import { ApiResponse, ApiError } from '../types/api.types';
+import { API_CONFIG } from '../config/api.config';
 
 class Api {
   private instance: AxiosInstance;
-  private static baseURL = 'http://localhost:3000/api';
+  private static baseURL = API_CONFIG.BASE_URL;
 
   constructor() {
     this.instance = axios.create({
       baseURL: Api.baseURL,
-      timeout: 10000,
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      timeout: API_CONFIG.TIMEOUT,
+      headers: API_CONFIG.HEADERS,
     });
 
     this.setupInterceptors();

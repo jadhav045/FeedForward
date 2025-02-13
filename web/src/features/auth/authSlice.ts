@@ -14,16 +14,22 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     setCredentials: (
-      state,
-      action: PayloadAction<{ user: User; token: string }>
+      state,                                           // Current Redux state
+      action: PayloadAction<{ user: User; token: string }> // Typed action payload
     ) => {
+      // Destructure user and token from action payload
       const { user, token } = action.payload;
-      state.user = user;
-      state.token = token;
-      state.isAuthenticated = true;
-      storage.setToken(token);
-      storage.setUser(user);
+      
+      // Update Redux state
+      state.user = user;          // Set user object
+      state.token = token;        // Set JWT token
+      state.isAuthenticated = true; // Mark as authenticated
+      
+      // Persist to localStorage
+      storage.setToken(token);    // Save token
+      storage.setUser(user);      // Save user data
     },
+    
     logout: (state) => {
       state.user = null;
       state.token = null;

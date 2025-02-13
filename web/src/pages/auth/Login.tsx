@@ -5,27 +5,28 @@ import { useDispatch } from 'react-redux';
 import { toast } from 'react-hot-toast';
 import { setCredentials } from '../../features/auth/authSlice';
 import { Role } from '../../types/auth';
+import { authService } from '../../services/auth.service';
+import { useApi } from '../../hooks/useApi';
 
 export default function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [role, setRole] = useState<Role>('donor');
+  const { execute } = useApi();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Mock login - replace with actual API call
-    const mockUser = {
-      id: '1',
-      name: 'Test User',
-      email: 'test@example.com',
-      role: role
-    };
-    
     try {
+      const response = await execute(authService.login({
+        email: 'test@example.com',
+        password: 'password',
+        role: role
+      }));
+
       dispatch(setCredentials({
-        user: mockUser,
-        token: 'mock_token'
+        user: response.data.user,
+        token: response.data.token
       }));
       
       navigate(`/${role}`);
