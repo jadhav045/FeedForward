@@ -15,4 +15,9 @@ export default {
     Logout: '/logout',
     Register: '/register',
   },
+  OTP: {
+    Base: '/otp',
+    Send: '/send',
+    Verify: '/verify',
+  },
 } as const;
