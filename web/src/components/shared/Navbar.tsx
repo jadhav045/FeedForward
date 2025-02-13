@@ -7,6 +7,8 @@ import { logout } from '../../features/auth/authSlice';
 import { RootState } from '../../store/store';
 import {roleBasedNavigation} from '../../config/nav.config';
 
+import ThemeButton from './ThemeButton';
+
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
@@ -33,6 +35,7 @@ export default function Navbar() {
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          
             <div className="flex h-16 justify-between">
               <div className="flex">
                 <div className="flex flex-shrink-0 items-center">
@@ -84,7 +87,11 @@ export default function Navbar() {
                             >
                               Sign out
                             </button>
+
                           )}
+                        </Menu.Item>
+                        <Menu.Item>
+                        <ThemeButton/>
                         </Menu.Item>
                       </Menu.Items>
                     </Transition>

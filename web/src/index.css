@@ -1,1 +1,85 @@
 @import "tailwindcss";
+
+
+:root {
+  --bg-color: #121212;
+  --text-color: #ffffff;
+}
+
+.light {
+  --bg-color: #ffffff; /* White background for a clean look */
+  --text-color: #000000; /* Black text for sharp readability */
+
+  --leftsidebar-bg-color: rgb(204, 197, 198); /* Soft grayish-pink sidebar */
+  --button-bg-color: rgb(192, 226, 255); /* Light blue buttons */
+  --button-text-color: yellow; /* High-contrast button text */
+
+  /* 🆕 Subcomponent Colors */
+  --subcomponent-bg-color: #f8f9fa; /* Light gray background for cards/modals */
+  --subcomponent-text-color: #343a40; /* Dark gray for better readability */
+  --subcomponent-border-color: #dee2e6; /* Soft gray borders */
+
+  --hover-bg-color: #e9ecef; /* Slightly darker white for hover effects */
+  --card-shadow: rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+
+  --input-bg-color: #ffffff; /* White input fields */
+  --input-text-color: #212529; /* Dark gray input text */
+  --input-border-color: #ced4da; /* Soft gray border */
+}
+
+.dark {
+  --bg-color: #333030; /* Dark background */
+  --text-color: #E0E0E0; /* Light text for readability */
+
+  --leftsidebar-bg-color: #313136; /* Dark sidebar */
+  --button-bg-color: #ff4081; /* Bright pink buttons */
+  --button-text-color: green; /* Green text for contrast */
+
+  /* 🆕 Subcomponent Colors */
+  --subcomponent-bg-color: #252526; /* Slightly lighter than the main background */
+  --subcomponent-text-color: #f1f1f1; /* Soft white text */
+  --subcomponent-border-color: #3a3b3c; /* Dark gray border */
+
+  --hover-bg-color: #2d2d2e; /* Slightly lighter gray for hover */
+  --card-shadow: rgba(255, 255, 255, 0.1); /* Soft glow effect */
+
+  --input-bg-color: #2b2b2b; /* Dark input fields */
+  --input-text-color: #e4e4e4; /* Light gray text */
+  --input-border-color: #555; /* Dark gray border */
+}
+
+
+.blue {
+  --bg-color: #05445E;
+  --text-color: #D4F1F4;
+
+  --leftsidebar-bg-color: #565694;
+  
+  --button-bg-color: #189AB4;
+  --button-text-color: #75E6DA;
+}
+
+.green {
+  --bg-color: #28a745;
+  --text-color: #ffffff;
+  --leftsidebar-bg-color: #3fb8a6;
+  --button-bg-color: pink;
+  --button-text-color: black;
+}
+
+
+.purple {
+  --bg-color: #6f42c1;
+  --text-color: #ffffff;
+
+  --leftsidebar-bg-color: #77096f;
+  --button-bg-color: purple;
+  --button-text-color: rgb(103, 18, 18);
+}
+
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
