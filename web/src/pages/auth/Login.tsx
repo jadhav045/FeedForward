@@ -1,70 +1,53 @@
-// src/pages/auth/Login.tsx
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { toast } from 'react-hot-toast';
-import { setCredentials } from '../../features/auth/authSlice';
-import { Role } from '../../types/auth';
-import { authService } from '../../services/auth.service';
-import { useApi } from '../../hooks/useApi';
+import { Link } from 'react-router-dom';
+import { FormInput } from '../../components/basic/FormInput';
+import { Button } from '../../components/basic/Button';
+import { useLoginForm } from '../../hooks/useLoginForm';
 
 export default function Login() {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const [role, setRole] = useState<Role>('donor');
-  const { execute } = useApi();
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    try {
-      const response = await execute(authService.login({
-        email: 'test@example.com',
-        password: 'password',
-        role: role
-      }));
-
-      dispatch(setCredentials({
-        user: response.data.user,
-        token: response.data.token
-      }));
-      
-      navigate(`/${role}`);
-      toast.success('Login successful!');
-    } catch (error) {
-      toast.error('Login failed!');
-    }
-  };
+  const {
+    formData,
+    errors,
+    isResetPassword,
+    handleChange,
+    handleSubmit,
+    handleForgotPassword,
+  } = useLoginForm();
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Sign in to your account
-          </h2>
-        </div>
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          <select
-            value={role}
-            onChange={(e) => setRole(e.target.value as Role)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md"
-          >
-            <option value="donor">Donor</option>
-            <option value="ngo">NGO</option>
-            <option value="admin">Admin</option>
-          </select>
-          
-          {/* Add email and password fields here */}
-          
-          <button
-            type="submit"
-            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            Sign in
-          </button>
-        </form>
-      </div>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <FormInput
+        type="text"
+        name="username"
+        placeholder="Username/Email/Mobile"
+        value={formData.username}
+        onChange={handleChange}
+        required
+        error={errors.username}
+      />
+
+      <FormInput
+        type="password"
+        name="password"
+        placeholder="Password"
+        value={formData.password}
+        onChange={handleChange}
+        required
+        error={errors.password}
+      />
+
+      <Button type="submit">Sign In</Button>
+      
+      <Button 
+        type="button" 
+        variant="outline" 
+        onClick={handleForgotPassword}
+      >
+        Forgot Password?
+      </Button>
+
+      <Link to="/auth/register">
+        Don't have an account? Sign up
+      </Link>
+    </form>
   );
 }

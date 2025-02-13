@@ -17,6 +17,7 @@ import DonorHome from './pages/donor/Home.tsx';
 import NGOHome from './pages/ngo/Home.tsx';
 import ErrorPage from './pages/Error.tsx';
 import { ProtectedRoute } from './components/shared/ProtectedRoute.tsx';
+import Register from './pages/auth/Register.jsx';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           
           <Route path="/auth" element={<AuthLayout />}>
             <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
           </Route>
 
           <Route
