@@ -9,6 +9,10 @@ interface Props {
 }
 
 export const ProtectedRoute = ({ children, allowedRole }: Props) => {
+
+  //remove this line after implementing the authentication
+  // return <>{children}</>;
+
   const { isAuthenticated, user } = useAuth();
   const location = useLocation();
 

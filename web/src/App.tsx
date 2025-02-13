@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { Toaster } from 'react-hot-toast';
 import { store } from './store/store.ts';
+import { isAuthenticated, getStoredUserRole } from './utils/auth';
 
 // Layouts
 import AdminLayout from './components/layouts/AdminLayout.tsx';
@@ -24,7 +25,16 @@ function App() {
     <Provider store={store}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Navigate to="/auth/login" replace />} />
+          <Route 
+            path="/" 
+            element={
+              isAuthenticated() ? (
+                <Navigate to={`/${getStoredUserRole()}`} replace />
+              ) : (
+                <Navigate to="/auth/login" replace />
+              )
+            } 
+          />
           
           <Route path="/auth" element={<AuthLayout />}>
             <Route path="login" element={<Login />} />
