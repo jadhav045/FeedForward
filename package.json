@@ -4,7 +4,15 @@
   "description": "## **🚀 Project Overview**   **FeedForward** is a digital platform designed to **connect surplus food sources** (restaurants, hotels, caterers) with **NGOs** and community organizations in real-time. Our goal is to **minimize food waste** while ensuring that surplus food reaches those in need.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "web": "cd web && npm run dev",
+    "server": "cd server && npm run dev",
+    "dev": "concurrently -k \"npm run web\" \"npm run server\"",
+    "install:web": "cd web && npm install",
+    "install:server": "cd server && npm install",
+    "install:all": "npm install && npm run install:web && npm run install:server",
+    "clean": "rm -rf node_modules && cd web && rm -rf node_modules && cd ../server && rm -rf node_modules",
+    "clean:install": "npm run clean && npm run install:all"
   },
   "repository": {
     "type": "git",
@@ -16,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/jadhav045/FeedForward/issues"
   },
-  "homepage": "https://github.com/jadhav045/FeedForward#readme"
+  "homepage": "https://github.com/jadhav045/FeedForward#readme",
+  "dependencies": {
+    "concurrently": "^9.1.2"
+  }
 }
