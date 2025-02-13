@@ -1,7 +1,9 @@
 import { IUser, User } from '@src/models/User';
 import { getRandomInt } from '@src/util/misc';
 import orm from './MockOrm';
-
+import { log } from 'node:console';
+import { generateToken } from './token';
+import bcrypt from 'bcrypt';
 /******************************************************************************
                                 Functions
 ******************************************************************************/
@@ -104,6 +106,68 @@ async function insertMult(users: IUser[] | readonly IUser[]): Promise<void> {
                                 Export default
 ******************************************************************************/
 
+async function register(user: any): Promise<{ user:any,token:string, status: number }> {
+  try {
+    // Check if the user already exists
+    console.log("🔍 Checking if user exists:", user.email);
+    const existingUser = await User.findOne({ email: user.email });
+    
+    if (existingUser) {
+      console.log("❌ User already exists:", existingUser);
+      throw new Error("User already exists");
+      // return { message: "User already exists" };
+    }
+    if (!user.id) {
+      user.id = getRandomInt();
+    }
+
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(user.password, saltRounds);
+
+    const newUser = new User({ ...user, password: hashedPassword }); // Use .save() instead of insertOne()
+    await newUser.save();
+    const token = generateToken(newUser.id);
+
+    console.log("✅ User registered successfully:", newUser);
+    return { user: newUser, token:token,status:200 };
+  } catch (error) {
+    console.error("❌ Error registering user:");
+    // throw new Error("Internal Server Error");
+    return { user: null, token: "", status: 400 };
+  }
+
+}
+
+async function login(user: any): Promise<{ user:any,token:string, status: number }> {
+  try {
+    // Check if the user already exists
+    console.log("🔍 Checking if user exists:", user.username);
+    const existing = await User.findOne({ username: user.username });
+    if(existing){
+      console.log("✅ User exists:", existing);
+      const password = existing.password;
+      const isMatch = await bcrypt.compare(user.password,existing.password);
+      console.log("🔑 Password match:", isMatch);
+      if (isMatch) {
+        const { password: _, ...userWithoutPassword } = existing;
+        const token = generateToken(existing.id);
+        return { user: userWithoutPassword, token: token, status: 200 };
+      }
+      else{
+        return { user: null, token: "", status: 400 };
+      }
+    }
+    else{
+      console.log("❌ User does not exist:", existing);
+      return { user: null, token: "", status: 400 };
+    } 
+  } catch (error) {
+    console.error("❌ Error in logging user:");
+    // throw new Error("Internal Server Error");
+    return { user: null, token: "", status: 400 };
+  }
+}
+
 export default {
   getOne,
   persists,
@@ -113,4 +177,6 @@ export default {
   delete: delete_,
   deleteAllUsers,
   insertMult,
+  register,
+  login,
 } as const;

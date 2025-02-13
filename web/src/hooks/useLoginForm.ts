@@ -85,6 +85,7 @@ export const useLoginForm = () => {
 
     try {
       const response = await execute(authService.login(formData));
+      console.log(response);
       
       dispatch(setCredentials({
         user: response.data.user,

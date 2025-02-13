@@ -7,5 +7,12 @@ export default {
     Add: '/add',
     Update: '/update',
     Delete: '/delete/:id',
+
+  },
+  Auth: {
+    Base: '/auth',
+    Login: '/login',
+    Logout: '/logout',
+    Register: '/register',
   },
 } as const;

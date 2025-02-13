@@ -14,6 +14,7 @@ import HttpStatusCodes from '@src/common/HttpStatusCodes';
 import { RouteError } from '@src/common/route-errors';
 import { NodeEnvs } from '@src/common/constants';
 import { request } from 'http';
+import cors from 'cors';
 
 
 /******************************************************************************
@@ -26,6 +27,7 @@ const app = express();
 // **** Setup
 
 // Basic middleware
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 

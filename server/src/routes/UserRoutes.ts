@@ -7,6 +7,7 @@ import User from '@src/models/User';
 import { IUser } from '@src/models/User';
 
 import { parseReq, IReq, IRes } from './common';
+import { stat } from 'fs';
 
 
 
@@ -14,22 +15,18 @@ import { parseReq, IReq, IRes } from './common';
                                 Variables
 ******************************************************************************/
 
-// const Validators = {
-//   add: parseReq({ user: User.test.bind(User) }),
-//   update: parseReq({ user: User.test.bind(User) }),
-//   delete: parseReq({ id: transform(Number, isNumber) }),
-// } as const;
-
-const validateUser = (user: any): user is IUser => {
-  return User.test(user) as unknown as boolean;
-};
-
 const Validators = {
-  add: parseReq({ user: validateUser }),
-  update: parseReq({ user: validateUser }),
+  add: parseReq({ user: User.test.bind(User) }),
+  update: parseReq({ user: User.test.bind(User) }),
   delete: parseReq({ id: transform(Number, isNumber) }),
 } as const;
 
+// const validateUser = (user: any): user is IUser => {
+//   const Validators = {
+//     add: parseReq({ user: User.test.bind(User) }),
+//     update: parseReq({ user: User.test.bind(User) }),
+//     delete: parseReq({ id: transform(Number, isNumber) }),
+//   } as const;
 /******************************************************************************
                                 Functions
 ******************************************************************************/
@@ -75,10 +72,48 @@ async function delete_(req: IReq, res: IRes) {
                                 Export default
 ******************************************************************************/
 
+async function register(req: IReq, res: IRes) {
+  console.log('for register');
+  // console.log(req.body);
+  const user = req.body;
+  
+  // const { user } = Validators.add(req.body);
+  console.log(user);
+
+  const response = await UserService.register(user);
+  console.log("response: ",(response));
+  // console.log(response.status);
+  if (response.status === 200) {
+    return res.status(HttpStatusCodes.OK).json({data: { user: response.user, token: response.token },status:200});
+  }
+  else {
+    return res.status(HttpStatusCodes.BAD_REQUEST).json({data:{ message: response.message },status:400});
+  }
+  // res.status(HttpStatusCodes.OK).json({ message: 'register' });
+}
+
+async function login(req:IReq,res:IRes) {
+  console.log('for login');
+  const user = req.body;
+  console.log(user);
+  const response = await UserService.login(user);
+  console.log("response: ",(response));
+  if (response.status === 200) {
+    return res.status(HttpStatusCodes.OK).json({data:{ user: response.user, token: response.token },status:200});
+  }
+  else {
+    return res.status(HttpStatusCodes.BAD_REQUEST).json({data:{ message: response.message },status:400});
+  }
+  
+}
+
+
 export default {
   getAll,
   add,
   update,
   delete: delete_,
+  register,
+  login,
 } as const;
 

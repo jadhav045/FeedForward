@@ -65,9 +65,21 @@ async function _delete(id: number): Promise<{ success: boolean; message: string 
                                 Export default
 ******************************************************************************/
 
+
+
+async function register(user: any): Promise<object> {
+  return await UserRepo.register(user);
+}
+async function login(user: any): Promise<object> {
+  return await UserRepo.login(user);
+}
+
 export default {
   getAll,
   addOne,
   updateOne,
   delete: _delete,
+  register,
+  login,
+  
 } as const;

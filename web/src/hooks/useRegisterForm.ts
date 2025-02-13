@@ -150,6 +150,8 @@ export const useRegisterForm = () => {
     try {
       console.log("Registering user...", formData);
       const response = await execute(authService.register(formData));
+      console.log("res at userRegisterForm : ",response);
+      
 
       dispatch(setCredentials(response.data));
 
