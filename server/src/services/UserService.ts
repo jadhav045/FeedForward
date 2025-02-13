@@ -1,5 +1,6 @@
 import { RouteError } from '@src/common/route-errors';
 import HttpStatusCodes from '@src/common/HttpStatusCodes';
+import { AuthResponse } from '../types/auth.types';
 
 import UserRepo from '@src/repos/UserRepo';
 import { IUser } from '@src/models/User';
@@ -67,10 +68,10 @@ async function _delete(id: number): Promise<{ success: boolean; message: string 
 
 
 
-async function register(user: any): Promise<object> {
+async function register(user: any): Promise<AuthResponse> {
   return await UserRepo.register(user);
 }
-async function login(user: any): Promise<object> {
+async function login(user: any): Promise<AuthResponse> {
   return await UserRepo.login(user);
 }
 
@@ -81,5 +82,4 @@ export default {
   delete: _delete,
   register,
   login,
-  
 } as const;

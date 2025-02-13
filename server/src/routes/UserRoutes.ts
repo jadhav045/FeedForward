@@ -8,8 +8,7 @@ import { IUser } from '@src/models/User';
 
 import { parseReq, IReq, IRes } from './common';
 import { stat } from 'fs';
-
-
+import { AuthResponse } from '../types/auth.types';
 
 /******************************************************************************
                                 Variables
@@ -74,39 +73,53 @@ async function delete_(req: IReq, res: IRes) {
 
 async function register(req: IReq, res: IRes) {
   console.log('for register');
-  // console.log(req.body);
   const user = req.body;
   
-  // const { user } = Validators.add(req.body);
-  console.log(user);
+  const response = await UserService.register(user) as AuthResponse;
+  console.log("response: ", response);
 
-  const response = await UserService.register(user);
-  console.log("response: ",(response));
-  // console.log(response.status);
   if (response.status === 200) {
-    return res.status(HttpStatusCodes.OK).json({data: { user: response.user, token: response.token },status:200});
+    return res.status(HttpStatusCodes.OK).json({
+      data: { 
+        user: response.user, 
+        token: response.token 
+      },
+      status: 200
+    });
+  } else {
+    return res.status(HttpStatusCodes.BAD_REQUEST).json({
+      data: { 
+        message: response.message || 'Registration failed' 
+      },
+      status: 400
+    });
   }
-  else {
-    return res.status(HttpStatusCodes.BAD_REQUEST).json({data:{ message: response.message },status:400});
-  }
-  // res.status(HttpStatusCodes.OK).json({ message: 'register' });
 }
 
-async function login(req:IReq,res:IRes) {
+async function login(req: IReq, res: IRes) {
   console.log('for login');
   const user = req.body;
-  console.log(user);
-  const response = await UserService.login(user);
-  console.log("response: ",(response));
-  if (response.status === 200) {
-    return res.status(HttpStatusCodes.OK).json({data:{ user: response.user, token: response.token },status:200});
-  }
-  else {
-    return res.status(HttpStatusCodes.BAD_REQUEST).json({data:{ message: response.message },status:400});
-  }
   
-}
+  const response = await UserService.login(user) as AuthResponse;
+  console.log("response: ", response);
 
+  if (response.status === 200) {
+    return res.status(HttpStatusCodes.OK).json({
+      data: { 
+        user: response.user, 
+        token: response.token 
+      },
+      status: 200
+    });
+  } else {
+    return res.status(HttpStatusCodes.BAD_REQUEST).json({
+      data: { 
+        message: response.message || 'Login failed' 
+      },
+      status: 400
+    });
+  }
+}
 
 export default {
   getAll,

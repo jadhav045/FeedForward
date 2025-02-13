@@ -4,6 +4,7 @@ import orm from './MockOrm';
 import { log } from 'node:console';
 import { generateToken } from './token';
 import bcrypt from 'bcrypt';
+import { AuthResponse } from '../types/auth.types';
 /******************************************************************************
                                 Functions
 ******************************************************************************/
@@ -106,7 +107,7 @@ async function insertMult(users: IUser[] | readonly IUser[]): Promise<void> {
                                 Export default
 ******************************************************************************/
 
-async function register(user: any): Promise<{ user:any,token:string, status: number }> {
+async function register(user: any): Promise<AuthResponse> {
   try {
     // Check if the user already exists
     console.log("🔍 Checking if user exists:", user.email);
@@ -129,16 +130,25 @@ async function register(user: any): Promise<{ user:any,token:string, status: num
     const token = generateToken(newUser.id);
 
     console.log("✅ User registered successfully:", newUser);
-    return { user: newUser, token:token,status:200 };
+    return { 
+      user: newUser, 
+      token: token,
+      status: 200 
+    };
   } catch (error) {
     console.error("❌ Error registering user:");
     // throw new Error("Internal Server Error");
-    return { user: null, token: "", status: 400 };
+    return { 
+      user: null, 
+      token: "", 
+      status: 400,
+      message: error.message 
+    };
   }
 
 }
 
-async function login(user: any): Promise<{ user:any,token:string, status: number }> {
+async function login(user: any): Promise<AuthResponse> {
   try {
     // Check if the user already exists
     console.log("🔍 Checking if user exists:", user.username);
@@ -151,20 +161,39 @@ async function login(user: any): Promise<{ user:any,token:string, status: number
       if (isMatch) {
         const { password: _, ...userWithoutPassword } = existing;
         const token = generateToken(existing.id);
-        return { user: userWithoutPassword, token: token, status: 200 };
+        return { 
+          user: userWithoutPassword, 
+          token: token, 
+          status: 200 
+        };
       }
       else{
-        return { user: null, token: "", status: 400 };
+        return { 
+          user: null, 
+          token: "", 
+          status: 400,
+          message: "Invalid credentials" 
+        };
       }
     }
     else{
       console.log("❌ User does not exist:", existing);
-      return { user: null, token: "", status: 400 };
+      return { 
+        user: null, 
+        token: "", 
+        status: 400,
+        message: "Invalid credentials" 
+      };
     } 
   } catch (error) {
     console.error("❌ Error in logging user:");
     // throw new Error("Internal Server Error");
-    return { user: null, token: "", status: 400 };
+    return { 
+      user: null, 
+      token: "", 
+      status: 400,
+      message: "Invalid credentials" 
+    };
   }
 }
 
