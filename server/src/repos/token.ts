@@ -9,6 +9,6 @@ const SECRET_KEY = "your_secret_key"; // Replace with a strong secret key
  */
 export function generateToken(userId: string): string {
   return jwt.sign({ id: userId }, SECRET_KEY, {
-    expiresIn: "12h", // Token expires in 1 hour
+    expiresIn: "1h", // Token expires in 1 hour
   });
 }
