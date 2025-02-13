@@ -1,0 +1,20 @@
+{
+  "name": "feedforward",
+  "version": "1.0.0",
+  "description": "## **🚀 Project Overview**   **FeedForward** is a digital platform designed to **connect surplus food sources** (restaurants, hotels, caterers) with **NGOs** and community organizations in real-time. Our goal is to **minimize food waste** while ensuring that surplus food reaches those in need.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jadhav045/FeedForward.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jadhav045/FeedForward/issues"
+  },
+  "homepage": "https://github.com/jadhav045/FeedForward#readme"
+}
