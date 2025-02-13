@@ -8,6 +8,9 @@ yarn-error.log
 .env.production
 .env.test
 
+# But allow
+!.env.example
+
 # Ignore build files
 /build
 /dist
