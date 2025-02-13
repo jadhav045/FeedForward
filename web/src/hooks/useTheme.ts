@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "../store/store";
-import { setTheme, Theme } from "../features/themeSlice";
+import { setTheme } from "../features/themeSlice";
+import { Theme } from "../types/theme.types";
 
 //  using this we update the theme in the redux store
 
