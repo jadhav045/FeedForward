@@ -41,6 +41,7 @@ if (ENV.NodeEnv === NodeEnvs.Production.valueOf()) {
 
 // Add APIs, must be after middleware
 app.use(Paths.Base, BaseRouter);
+// app.use(Paths.Users, BaseRouter);
 
 // Add error handler
 app.use((err: Error, _: Request, res: Response, next: NextFunction) => {
@@ -68,6 +69,8 @@ app.use(express.static(staticDir));
 
 // Nav to users pg by default
 app.get('/', (_: Request, res: Response) => {
+  console.log("redirecting to /users");
+  
   return res.redirect('/users');
 });
 

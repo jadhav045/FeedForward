@@ -4,16 +4,29 @@ import { transform } from 'jet-validators/utils';
 import HttpStatusCodes from '@src/common/HttpStatusCodes';
 import UserService from '@src/services/UserService';
 import User from '@src/models/User';
+import { IUser } from '@src/models/User';
 
 import { parseReq, IReq, IRes } from './common';
+
+
 
 /******************************************************************************
                                 Variables
 ******************************************************************************/
 
+// const Validators = {
+//   add: parseReq({ user: User.test.bind(User) }),
+//   update: parseReq({ user: User.test.bind(User) }),
+//   delete: parseReq({ id: transform(Number, isNumber) }),
+// } as const;
+
+const validateUser = (user: any): user is IUser => {
+  return User.test(user) as unknown as boolean;
+};
+
 const Validators = {
-  add: parseReq({ user: (user: any) => User.test(user) }),
-  update: parseReq({ user: User.test.bind(User) }),
+  add: parseReq({ user: validateUser }),
+  update: parseReq({ user: validateUser }),
   delete: parseReq({ id: transform(Number, isNumber) }),
 } as const;
 
@@ -25,6 +38,8 @@ const Validators = {
  * Get all users.
  */
 async function getAll(_: IReq, res: IRes) {
+  console.log('getAll');
+  
   const users = await UserService.getAll();
   res.status(HttpStatusCodes.OK).json({ users });
 }
