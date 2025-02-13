@@ -9,7 +9,7 @@ export interface LoginResponse {
     username: string;
     email: string;
     mobileNo?: string;
-    role: Role;
+    role: 'admin' | 'donor' | 'ngo';
   };
   token: string;
 }
