@@ -5,20 +5,17 @@ import HttpStatusCodes from '@src/common/HttpStatusCodes';
 import UserService from '@src/services/UserService';
 import User from '@src/models/User';
 
-
 import { parseReq, IReq, IRes } from './common';
-
 
 /******************************************************************************
                                 Variables
 ******************************************************************************/
 
 const Validators = {
-  add: parseReq({ user: User.test }),
-  update: parseReq({ user: User.test }),
+  add: parseReq({ user: (user: any) => User.test(user) }),
+  update: parseReq({ user: User.test.bind(User) }),
   delete: parseReq({ id: transform(Number, isNumber) }),
 } as const;
-
 
 /******************************************************************************
                                 Functions
@@ -59,7 +56,6 @@ async function delete_(req: IReq, res: IRes) {
   res.status(HttpStatusCodes.OK).end();
 }
 
-
 /******************************************************************************
                                 Export default
 ******************************************************************************/
@@ -70,3 +66,4 @@ export default {
   update,
   delete: delete_,
 } as const;
+
