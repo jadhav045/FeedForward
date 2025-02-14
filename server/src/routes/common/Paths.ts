@@ -11,5 +11,5 @@ export default {
     Send: '/send',
     Verify: '/verify',
   },
-  
+  Docs: '/docs',
 } as const;

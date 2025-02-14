@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FeedForward API Documentation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/@headlessui/react"></script>
+    <style>
+        .endpoint-closed .endpoint-content {
+            display: none;
+        }
+        .method-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            font-size: 0.875rem;
+            color: white;
+        }
+        .method-GET { background-color: #22c55e; }
+        .method-POST { background-color: #3b82f6; }
+        .method-PUT { background-color: #eab308; }
+        .method-DELETE { background-color: #ef4444; }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-900">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-8">FeedForward API Documentation</h1>
+        <div id="api-docs" class="space-y-8"></div>
+    </div>
+
+    <script>
+        async function loadDocs() {
+            try {
+                const response = await fetch('/api/docs/data');
+                const { data: docs } = await response.json();
+                const container = document.getElementById('api-docs');
+                
+                docs.sections.forEach(section => {
+                    const sectionEl = createSection(section);
+                    container.appendChild(sectionEl);
+                });
+            } catch (error) {
+                console.error('Failed to load API docs:', error);
+            }
+        }
+
+        function createSection(section) {
+            const div = document.createElement('div');
+            div.className = 'bg-white rounded-lg shadow-md p-6';
+            
+            div.innerHTML = `
+                <h2 class="text-2xl font-bold mb-2">${section.title}</h2>
+                <p class="text-gray-600 mb-6">${section.description}</p>
+                <div class="space-y-4">
+                    ${section.endpoints.map(endpoint => createEndpoint(endpoint)).join('')}
+                </div>
+            `;
+            
+            return div;
+        }
+
+        // Update the createEndpoint function
+        function createEndpoint(endpoint) {
+            const safeEndpoint = {
+                ...endpoint,
+                path: endpoint.path.replace(/"/g, '&quot;'),
+                description: endpoint.description.replace(/"/g, '&quot;')
+            };
+
+            const responseAccordions = endpoint.responses?.map(response => `
+                <div class="response-item border-l-4 pl-4 mb-4 ${
+                    response.status === 200 
+                        ? 'border-green-500' 
+                        : response.status >= 400 && response.status < 500 
+                            ? 'border-yellow-500' 
+                            : 'border-red-500'
+                }">
+                    <div class="flex items-center gap-2 cursor-pointer" 
+                         onclick="toggleResponse(this)">
+                        <span class="font-mono text-sm px-2 py-1 rounded ${
+                            response.status === 200 
+                                ? 'bg-green-100 text-green-800' 
+                                : response.status >= 400 && response.status < 500 
+                                    ? 'bg-yellow-100 text-yellow-800' 
+                                    : 'bg-red-100 text-red-800'
+                        }">${response.status}</span>
+                        <span class="text-sm font-medium">${response.description}</span>
+                        <svg class="w-4 h-4 transform transition-transform duration-200 ml-auto" 
+                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 9l-7 7-7-7" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="response-content hidden mt-2">
+                        <pre class="bg-gray-50 p-3 rounded-md text-sm overflow-x-auto">
+${JSON.stringify(response.data, null, 2)}</pre>
+                    </div>
+                </div>
+            `).join('') || '';
+
+            return `
+                <div class="endpoint endpoint-closed border rounded-lg">
+                    <div class="flex items-center justify-between p-4 cursor-pointer" 
+                         onclick="toggleEndpoint(this)">
+                        <div class="flex items-center gap-4">
+                            <span class="method-badge method-${safeEndpoint.method}">
+                                ${safeEndpoint.method}
+                            </span>
+                            <span class="font-semibold">${safeEndpoint.path}</span>
+                        </div>
+                        <svg class="w-5 h-5 transform transition-transform duration-200" 
+                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 9l-7 7-7-7" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="endpoint-content p-4 border-t">
+                        <p class="text-gray-600 mb-4">${safeEndpoint.description}</p>
+                        <div class="grid md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <h3 class="font-medium mb-2">Request Body</h3>
+                                <pre class="bg-gray-100 p-4 rounded-md">${JSON.stringify(safeEndpoint.requestBody, null, 2)}</pre>
+                            </div>
+                            <div>
+                                <h3 class="font-medium mb-2">Response Body</h3>
+                                <pre class="bg-gray-100 p-4 rounded-md">${JSON.stringify(safeEndpoint.responseBody, null, 2)}</pre>
+                            </div>
+                        </div>
+                        <div class="mb-6">
+                            <h3 class="font-medium mb-2">Possible Responses</h3>
+                            ${responseAccordions}
+                        </div>
+                        <div>
+                            <button 
+                                onclick='testEndpoint(this, ${JSON.stringify(safeEndpoint).replace(/'/g, "&apos;")})' 
+                                class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                                Test Endpoint
+                            </button>
+                            <div class="test-form hidden mt-4"></div>
+                            <pre class="test-result hidden mt-4 p-4 rounded-md"></pre>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function toggleEndpoint(element) {
+            const endpoint = element.closest('.endpoint');
+            endpoint.classList.toggle('endpoint-closed');
+            const arrow = element.querySelector('svg');
+            arrow.style.transform = endpoint.classList.contains('endpoint-closed') 
+                ? 'rotate(0deg)' 
+                : 'rotate(180deg)';
+        }
+
+        // Add this new function for response toggles
+        function toggleResponse(element) {
+            const content = element.nextElementSibling;
+            const arrow = element.querySelector('svg');
+            
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                arrow.style.transform = 'rotate(180deg)';
+            } else {
+                content.classList.add('hidden');
+                arrow.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // Replace the existing testEndpoint function
+        async function testEndpoint(button, endpoint) {
+            const container = button.closest('.endpoint');
+            const formContainer = container.querySelector('.test-form');
+            const resultContainer = container.querySelector('.test-result');
+            
+            try {
+                if (formContainer.classList.contains('hidden')) {
+                    formContainer.innerHTML = createTestForm(endpoint);
+                    formContainer.classList.remove('hidden');
+                } else {
+                    formContainer.classList.add('hidden');
+                    resultContainer.classList.add('hidden');
+                }
+            } catch (error) {
+                console.error('Error in testEndpoint:', error);
+                resultContainer.textContent = 'Error creating test form';
+                resultContainer.classList.remove('hidden');
+                resultContainer.className = 'mt-4 p-4 rounded-md bg-red-100';
+            }
+        }
+
+        // Replace the existing createTestForm function
+        function createTestForm(endpoint) {
+            try {
+                if (endpoint.path.includes('/auth/login')) {
+                    // Special handling for login endpoint
+                    return `
+                        <form onsubmit="handleTest(event, '${endpoint.path}', '${endpoint.method}')" class="space-y-4">
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium mb-1">
+                                    username (email, username, or mobile)
+                                </label>
+                                <input 
+                                    name="username" 
+                                    class="w-full p-2 border rounded"
+                                    placeholder="Enter email, username, or mobile" 
+                                />
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium mb-1">password</label>
+                                <input 
+                                    name="password" 
+                                    type="password" 
+                                    class="w-full p-2 border rounded" 
+                                />
+                            </div>
+                            <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+                                Send Request
+                            </button>
+                        </form>
+                    `;
+                }
+
+                // Default form creation for other endpoints
+                const fields = Object.entries(endpoint.requestBody || {})
+                    .map(([key, type]) => `
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-1">${key} (${type})</label>
+                            <input name="${key}" class="w-full p-2 border rounded" />
+                        </div>
+                    `).join('');
+
+                return `
+                    <form onsubmit="handleTest(event, '${endpoint.path}', '${endpoint.method}')" class="space-y-4">
+                        ${fields}
+                        <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+                            Send Request
+                        </button>
+                    </form>
+                `;
+            } catch (error) {
+                console.error('Error in createTestForm:', error);
+                return '<div class="text-red-500">Error creating form</div>';
+            }
+        }
+
+        async function handleTest(e, path, method) {
+            e.preventDefault();
+            const form = e.target;
+            const resultContainer = form.closest('.endpoint').querySelector('.test-result');
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+
+            try {
+                const response = await fetch(`/api${path}`, {
+                    method: method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });
+                
+                const result = await response.json();
+                resultContainer.textContent = JSON.stringify(result, null, 2);
+                resultContainer.classList.remove('hidden');
+                resultContainer.className = `mt-4 p-4 rounded-md ${
+                    response.ok ? 'bg-green-100' : 'bg-red-100'
+                }`;
+            } catch (error) {
+                resultContainer.textContent = JSON.stringify(error, null, 2);
+                resultContainer.classList.remove('hidden');
+                resultContainer.className = 'mt-4 p-4 rounded-md bg-red-100';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadDocs);
+    </script>
+</body>
+</html>

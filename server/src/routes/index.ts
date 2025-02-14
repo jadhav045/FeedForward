@@ -3,7 +3,7 @@ import { Router } from 'express';
 import Paths from './common/Paths';
 import UserRoutes from './UserRoutes';
 import OTPRoutes from './OTPRoutes';
-
+import DocsRoutes from './DocsRoutes';
 /******************************************************************************
                                 Variables
 ******************************************************************************/
@@ -28,6 +28,10 @@ otpRouter.post(Paths.OTP.Verify, OTPRoutes.verifyOTP);
 
 // Add to apiRouter
 apiRouter.use(Paths.OTP.Base, otpRouter);
+
+// Add docs routes
+apiRouter.get(Paths.Docs, DocsRoutes.getDocsPage);
+apiRouter.get(`${Paths.Docs}/data`, DocsRoutes.getDocs);
 
 /******************************************************************************
                                 Export default

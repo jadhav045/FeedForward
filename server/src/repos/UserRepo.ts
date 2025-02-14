@@ -78,6 +78,10 @@ async function login(user: any): Promise<AuthResponse> {
         { mobileNo: user.username }
       ]
     });
+   
+
+    console.log("🔍 Found user:", existing);
+    // return;
 
     if(existing) {
       console.log("✅ User exists:", existing);
