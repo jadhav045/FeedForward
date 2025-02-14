@@ -2,6 +2,7 @@
 import { nanoid } from 'nanoid';
 import { OTPStore, SendOTPResponse, VerifyOTPResponse } from '../types/otp.types';
 import { emailService } from './EmailService';
+import { smsService } from './SMSService';
 import { logger } from '../utils/logger';
 
 class OTPService {
@@ -13,9 +14,10 @@ class OTPService {
   }
 
   private validateMobile(mobile: string): boolean {
-    const mobileRegex = /^[0-9]{10}$/;
+    // Matches format: +91XXXXXXXXXX (country code + 10 digits)
+    const mobileRegex = /^\+91[0-9]{10}$/;
     return mobileRegex.test(mobile);
-  }
+}
 
   private generateOTP(): string {
     return nanoid(6).toUpperCase(); // 6-digit uppercase OTP
@@ -57,6 +59,15 @@ class OTPService {
         if (!emailResponse.success) {
           throw new Error(emailResponse.message);
         }
+      } else if (type === 'mobile') {
+        const smsResponse = await smsService.sendSMS({
+          to: identifier,
+          message: `Your FeedForward verification code is: ${otp}. It will expire in 10 minutes.`
+        });
+
+        if (!smsResponse.success) {
+          throw new Error(smsResponse.message);
+        }
       }
 
       logger.info(`OTP sent successfully to: ${identifier}`);
@@ -65,7 +76,7 @@ class OTPService {
         message: `OTP sent to your ${type}`
       };
 
-    } catch (error) {
+    } catch (error: any) {
       logger.error(`Failed to send OTP:`, error);
       return {
         success: false,

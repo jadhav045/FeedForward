@@ -37,6 +37,7 @@
     "morgan": "^1.10.0",
     "nanoid": "^5.0.9",
     "nodemailer": "^6.10.0",
+    "twilio": "^5.4.4",
     "winston": "^3.17.0"
   },
   "devDependencies": {
