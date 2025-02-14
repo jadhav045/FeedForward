@@ -1,5 +1,4 @@
 // src/services/OTPService.ts
-import { nanoid } from 'nanoid';
 import { OTPStore, SendOTPResponse, VerifyOTPResponse } from '../types/otp.types';
 import { emailService } from './EmailService';
 import { smsService } from './SMSService';
@@ -14,12 +13,12 @@ class OTPService {
   }
 
   private validateMobile(mobile: string): boolean {
-    // Matches format: +91XXXXXXXXXX (country code + 10 digits)
     const mobileRegex = /^\+91[0-9]{10}$/;
     return mobileRegex.test(mobile);
-}
+  }
 
-  private generateOTP(): string {
+  private async generateOTP(): Promise<string> {
+    const { nanoid } = await import('nanoid');
     return nanoid(6).toUpperCase(); // 6-digit uppercase OTP
   }
 
@@ -34,7 +33,7 @@ class OTPService {
         throw new Error('Invalid mobile number');
       }
 
-      const otp = this.generateOTP();
+      const otp = await this.generateOTP();
       const expiresAt = new Date(Date.now() + 10 * 60 * 1000);
 
       // Store OTP
