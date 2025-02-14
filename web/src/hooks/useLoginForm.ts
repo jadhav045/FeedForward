@@ -85,16 +85,18 @@ export const useLoginForm = () => {
 
     try {
       const response = await execute(authService.login(formData));
+      console.log(response);
       
       dispatch(setCredentials({
-        user: response.data.user,
+        user: response.data.user._doc,
         token: response.data.token
       }));
 
       // Redirect to the originally requested page or role-based dashboard
-      const from = location.state?.from?.pathname || `/${response.data.user.role.toLowerCase()}`;
-      navigate(from, { replace: true });
-      
+      // const from = location.state?.from?.pathname || `/${response.data.user.role.toLowerCase()}`;
+      const from =  `/${response.data.user._doc.role.toLowerCase()}`||location.state?.from?.pathname ;
+      console.log("from: ",from);
+      navigate(from);
       toast.success('Login successful!');
     } catch (error) {
       toast.error('Invalid credentials');

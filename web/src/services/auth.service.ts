@@ -11,6 +11,7 @@ export const authService = {
   },
 
   register: async (data: RegisterFormData) => {
+    console.log("🚀 ~ file: auth.service.ts ~ line 33 ~ register: async ~ data", data);
     return api.post<LoginResponse>('/auth/register', data);
   },
 

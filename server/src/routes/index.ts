@@ -2,6 +2,7 @@ import { Router } from 'express';
 
 import Paths from './common/Paths';
 import UserRoutes from './UserRoutes';
+import OTPRoutes from './OTPRoutes';
 
 /******************************************************************************
                                 Variables
@@ -20,9 +21,20 @@ userRouter.post(Paths.Users.Add, UserRoutes.add);
 userRouter.put(Paths.Users.Update, UserRoutes.update);
 userRouter.delete(Paths.Users.Delete, UserRoutes.delete);
 
-// Add UserRouter
-apiRouter.use(Paths.Users.Base, userRouter);
 
+userRouter.post(Paths.Auth.Register, UserRoutes.register);
+userRouter.post(Paths.Auth.Login, UserRoutes.login);
+
+// Add UserRouter
+apiRouter.use(Paths.Auth.Base, userRouter);
+
+// Add OTP routes
+const otpRouter = Router();
+otpRouter.post(Paths.OTP.Send, OTPRoutes.sendOTP);
+otpRouter.post(Paths.OTP.Verify, OTPRoutes.verifyOTP);
+
+// Add to apiRouter
+apiRouter.use(Paths.OTP.Base, otpRouter);
 
 /******************************************************************************
                                 Export default
