@@ -7,47 +7,59 @@
 }
 
 .light {
-  --bg-color: #ffffff; /* White background for a clean look */
-  --text-color: #000000; /* Black text for sharp readability */
+  --bg-color: #fdfdfd; /* Slightly off-white */
+  --text-color: #212529; /* Deep gray for readability */
 
-  --leftsidebar-bg-color: rgb(204, 197, 198); /* Soft grayish-pink sidebar */
-  --button-bg-color: rgb(192, 226, 255); /* Light blue buttons */
-  --button-text-color: yellow; /* High-contrast button text */
+  --navbar-bg-color: #9193a7; /* Muted lavender gray */
+  --navbar-text-color: #3c3f58; /* Deep navy gray */
+
+  --leftsidebar-bg-color: #e9ecef; /* Soft pastel gray */
+  --leftsidebar-text-color: #495057; /* Dark slate gray */
+
+  --button-bg-color: #4a90e2; /* Professional medium blue for a trustworthy look */
+  --button-text-color: #ffffff; /* White for clear readability */
 
   /* 🆕 Subcomponent Colors */
-  --subcomponent-bg-color: #f8f9fa; /* Light gray background for cards/modals */
-  --subcomponent-text-color: #343a40; /* Dark gray for better readability */
-  --subcomponent-border-color: #dee2e6; /* Soft gray borders */
+  --subcomponent-bg-color: #f8f9fb; /* Near-white for a clean, minimal look */
+  --subcomponent-text-color: #333740; /* Slightly softened black for reduced strain */
+  --subcomponent-border-color: #d1d5db; /* Neutral gray for refined separation */
 
-  --hover-bg-color: #e9ecef; /* Slightly darker white for hover effects */
-  --card-shadow: rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  --hover-bg-color: #dee2e9; /* Muted gray-blue for a soft hover effect */
+  --card-shadow: rgba(0, 0, 0, 0.08); /* Softer shadow for a sleek and subtle depth */
 
-  --input-bg-color: #ffffff; /* White input fields */
-  --input-text-color: #212529; /* Dark gray input text */
-  --input-border-color: #ced4da; /* Soft gray border */
+  --input-bg-color: #ffffff; /* Clean white input fields */
+  --input-text-color: #2c3e50; /* Dark navy-gray for a sophisticated touch */
+  --input-border-color: #bfc7d5; /* Soft blue-gray border for a polished look */
 }
+
+
 
 .dark {
-  --bg-color: #333030; /* Dark background */
-  --text-color: #E0E0E0; /* Light text for readability */
+  --bg-color: #24243d; /* Deep charcoal for a rich dark mode experience */
+  --text-color: #e4e6eb; /* Soft white for comfortable reading */
 
-  --leftsidebar-bg-color: #313136; /* Dark sidebar */
-  --button-bg-color: #ff4081; /* Bright pink buttons */
-  --button-text-color: green; /* Green text for contrast */
+  --navbar-bg-color: #313136; /* Deep muted gray-black */
+  --navbar-text-color: #f1f1f1; /* Soft white */
+
+  --leftsidebar-bg-color: #252526; /* Dark sidebar */
+  --leftsidebar-text-color: #d6d6d6; /* Soft light gray */
+
+  
+  --button-bg-color: #4a90e2; /* Vibrant blue for an eye-catching, professional look */
+  --button-text-color: #ffffff; /* Crisp white for clear readability */
 
   /* 🆕 Subcomponent Colors */
-  --subcomponent-bg-color: #252526; /* Slightly lighter than the main background */
-  --subcomponent-text-color: #f1f1f1; /* Soft white text */
-  --subcomponent-border-color: #3a3b3c; /* Dark gray border */
+  --subcomponent-bg-color: #181a1f; /* Slightly lighter than background for depth */
+  --subcomponent-text-color: #c7c9cf; /* Muted light gray for a subtle, polished feel */
+  --subcomponent-border-color: #2b2f36; /* Dark gray-blue for a refined separation */
 
-  --hover-bg-color: #2d2d2e; /* Slightly lighter gray for hover */
-  --card-shadow: rgba(255, 255, 255, 0.1); /* Soft glow effect */
+  --hover-bg-color: #22262d; /* Subtle hover effect with soft contrast */
+  --card-shadow: rgba(0, 0, 0, 0.5); /* Deeper shadow for better layering */
 
-  --input-bg-color: #2b2b2b; /* Dark input fields */
-  --input-text-color: #e4e4e4; /* Light gray text */
-  --input-border-color: #555; /* Dark gray border */
+  --input-bg-color: #1f2227; /* Dark gray input fields for a cohesive look */
+  --input-text-color: #e4e6eb; /* Light gray text for readability */
+  --input-border-color: #3a4049; /* Soft gray-blue border for a modern finish */
 }
-
 
 .blue {
   --bg-color: #05445E;
