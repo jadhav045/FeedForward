@@ -33,8 +33,7 @@ const otpRouter = Router();
 otpRouter.post(Paths.OTP.Send, OTPRoutes.sendOTP);
 otpRouter.post(Paths.OTP.Verify, OTPRoutes.verifyOTP);
 
-
-// Add OTPRouter
+// Add to apiRouter
 apiRouter.use(Paths.OTP.Base, otpRouter);
 
 /******************************************************************************

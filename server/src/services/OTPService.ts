@@ -1,6 +1,6 @@
 // src/services/OTPService.ts
 import { nanoid } from 'nanoid';
-import { OTPStore, OTPData, SendOTPResponse, VerifyOTPResponse } from '../types/otp.types';
+import { OTPStore, SendOTPResponse, VerifyOTPResponse } from '../types/otp.types';
 import { emailService } from './EmailService';
 import { logger } from '../utils/logger';
 
