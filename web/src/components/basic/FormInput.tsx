@@ -28,14 +28,25 @@ export const FormInput = ({
             onChange={onChange}
             required={required}
             maxLength={maxLength}  // Add maxLength attribute
+
+            style={{
+                color: "var(--formInput-text)",
+                backgroundColor: "var(--formInput-color)",
+                borderColor: "var(--formInput-color)"
+            }}
+            
             className={`w-full px-4 py-2 rounded-md border 
-            bg-[var(--bg-color)] 
-            text-[var(--text-color)]
-            border-[var(--border-color)]
-            focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]
+            bg-[var( --formInput-color)] 
+            text-[var( --formInput-text)]
+            border-[var( --formInput-border)]
+            focus:outline-none focus:ring-2 focus:ring-[var(--primary-bg)]
             placeholder-[var(--placeholder-color)]
             transition-colors duration-200
+           
+
             ${error ? 'border-[var(--error-color)] focus:ring-[var(--error-color)]' : ''}`}
+
+
         />
         {error && (
             <p className="mt-1 text-sm text-[var(--error-color)]">

@@ -18,7 +18,8 @@ export const NavLinkComponent = ({
     end = false,
 }: NavLinkComponentProps) => {
     const baseStyles = `inline-block transition-colors duration-200
-        text-[var(--text-color)] hover:text-[var(--primary-color)]
+        text-[var( --navlink-text)]
+         hover:text-[var(--navlink-hover)]
         ${className}`;
 
     if (isNavLink) {

@@ -3,6 +3,7 @@ import { Outlet, NavLink } from "react-router-dom";
 import Navbar from "../../components/shared/Navbar";
 import { History, Bell, Activity, Menu, X } from "lucide-react"; // Import icons
 import type { ReactNode } from "react";
+import About from "./pages/AboutPage";
 
 interface SidebarItem {
 	name: string;
@@ -27,12 +28,11 @@ const TestLayout: React.FC = () => {
 
 	return (
 		<div className="flex min-h-screen bg-[var(--bg-color)] text-[var(--text-color)]">
-			{/* Navbar (Fixed at the top) */}
-			<div className="fixed w-full z-10">
+			{/* <div className="fixed w-full z-10">
 				<Navbar />
 			</div>
 
-			{/* Mobile Sidebar Toggle Button */}
+		
 			<button
 				onClick={toggleSidebar}
 				className="lg:hidden fixed top-5 left-4 z-20 p-2 bg-[var(--leftsidebar-bg-color)] rounded-md"
@@ -41,7 +41,7 @@ const TestLayout: React.FC = () => {
 				{isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
 			</button>
 
-			{/* Sidebar (Responsive) */}
+	
 			<aside
 				className={`fixed left-0 top-0 h-full bg-[var(--leftsidebar-bg-color)] text-[var(--leftsidebar-text-color)] 
         p-4 pt-20 transition-transform lg:translate-x-0
@@ -64,10 +64,11 @@ const TestLayout: React.FC = () => {
 				</nav>
 			</aside>
 
-			{/* Main Content (Responsive Margin) */}
 			<main className="flex-1 p-6 pt-20 lg:ml-64">
 				<Outlet />
-			</main>
+			</main> */}
+
+			<About />
 		</div>
 	);
 };

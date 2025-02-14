@@ -3,9 +3,12 @@ import { OTPStore, SendOTPResponse, VerifyOTPResponse } from '../types/otp.types
 import { emailService } from './EmailService';
 import { smsService } from './SMSService';
 import { logger } from '../utils/logger';
+import { customAlphabet } from 'nanoid';
 
 class OTPService {
   private otpStore: OTPStore = {};
+  private generateNumericOTP = customAlphabet('0123456789', 6);
+
 
   private validateEmail(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
