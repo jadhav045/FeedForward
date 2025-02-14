@@ -1,7 +1,6 @@
 import { IUser, User } from '@src/models/User';
 import { getRandomInt } from '@src/utils/misc';
 import orm from './MockOrm';
-import { log } from 'node:console';
 import { generateToken } from './token';
 import bcrypt from 'bcrypt';
 import { AuthResponse } from '../types/auth.types';
