@@ -110,7 +110,7 @@ async function insertMult(users: IUser[] | readonly IUser[]): Promise<void> {
 async function register(user: any): Promise<AuthResponse> {
   try {
     // Check if the user already exists
-    console.log("🔍 Checking if user exists:", user.email);
+    console.log("🔍 Checking if user exists:", user);
     const existingUser = await User.findOne({ email: user.email });
     
     if (existingUser) {
@@ -151,8 +151,17 @@ async function register(user: any): Promise<AuthResponse> {
 async function login(user: any): Promise<AuthResponse> {
   try {
     // Check if the user already exists
-    console.log("🔍 Checking if user exists:", user.username);
-    const existing = await User.findOne({ username: user.username });
+    console.log("🔍 Checking if user exists:", user);
+
+    
+    // Check for user with any of the three identifiers
+    const existing = await User.findOne({
+      $or: [
+        { username: user.username },
+        { email: user.username },
+        { mobileNo: user.username }
+      ]
+    });
     if(existing){
       console.log("✅ User exists:", existing);
       const password = existing.password;

@@ -69,10 +69,10 @@ function App() {
 							path="test"
 							element={<Test />}
 						></Route>
-           
-           <Route path="active" element={<Active/>}/>
-           <Route path="history" element={<History/>}/>
-           <Route path="notifications" element={<Notifications/>}/>
+
+						<Route path="active" element={<Active />} />
+						<Route path="history" element={<History />} />
+						<Route path="notifications" element={<Notifications />} />
 					</Route>
 
 					<Route
