@@ -4,6 +4,7 @@
 :root {
   --bg-color: #121212;
   --text-color: #ffffff;
+  --error-color: #ef4444;
 }
 
 .light {

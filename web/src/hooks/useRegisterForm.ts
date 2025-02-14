@@ -23,7 +23,7 @@ export const useRegisterForm = () => {
 
   // Add confirm password state
   const [confirmPassword, setConfirmPassword] = useState('');
-  
+
   // Add validation errors state
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -49,7 +49,9 @@ export const useRegisterForm = () => {
         else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) error = 'Invalid email format';
         break;
       case 'mobileNo':
-        if (value && !/^[0-9]{10}$/.test(value)) error = 'Invalid mobile number';
+        if (value && !/^\+91[0-9]{10}$/.test(value)) {
+          error = 'Mobile number should be in format: +91XXXXXXXXXX';
+        }
         break;
       case 'password':
         if (!value) error = 'Password is required';
@@ -65,7 +67,14 @@ export const useRegisterForm = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    
+
+    // Clear backend errors when user starts typing
+  setErrors(prev => {
+    const newErrors = { ...prev };
+    delete newErrors[name];
+    return newErrors;
+  });
+  
     if (name === 'confirmPassword') {
       setConfirmPassword(value);
     } else {
@@ -75,7 +84,12 @@ export const useRegisterForm = () => {
       }));
     }
 
-    const error = validateField(name, value);
+    // For mobile, validate the formatted value
+    const valueToValidate = name === 'mobileNo' && !value.startsWith('+91')
+      ? `+91${value}`
+      : value;
+
+    const error = validateField(name, valueToValidate);
     if (error) {
       setErrors(prev => ({ ...prev, [name]: error }));
     } else {
@@ -87,31 +101,71 @@ export const useRegisterForm = () => {
     }
   };
 
-  const handleSendOTP = (type: 'email' | 'mobile') => {
+  // First, add the function to handle OTP sending
+  const handleSendOTP = async (type: 'email' | 'mobile') => {
+    try {
+      const identifier = type === 'email' ? formData.email : formData.mobileNo;
 
-    // add otp sending backend logicc here
+      if (!identifier) {
+        toast.error(`Please enter ${type} first!`);
+        return;
+      }
 
+      const response = await execute(
+        authService.sendOTP({
+          identifier,
+          type
+        })
+      );
 
-    toast.success(`OTP sent to your ${type}`);
-    setShowOTPInputs(prev => ({
-      ...prev,
-      [type]: true
-    }));
+      if (response.data.success) {
+        toast.success(response.data.message);
+        setShowOTPInputs(prev => ({
+          ...prev,
+          [type]: true
+        }));
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error: any) {
+      toast.error(error.message || `Failed to send OTP to ${type}`);
+    }
   };
 
-  const handleVerificationSuccess = (type: 'email' | 'mobile') => {
+  // Then, update the verification handler
+  const handleVerificationSuccess = async (type: 'email' | 'mobile', otp: string) => {
+    try {
+      const identifier = type === 'email' ? formData.email : formData.mobileNo;
 
-    // add otp verification backend logicc here
+      if (!identifier || !otp) {
+        toast.error('Missing required fields');
+        return;
+      }
 
-    setIsVerified(prev => ({
-      ...prev,
-      [type]: true
-    }));
+      const response = await execute(
+        authService.verifyOTP({
+          identifier,
+          otp
+        })
+      );
+
+      if (response.data.success) {
+        toast.success(response.data.message);
+        setIsVerified(prev => ({
+          ...prev,
+          [type]: true
+        }));
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error: any) {
+      toast.error(error.message || 'OTP verification failed');
+    }
   };
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
-    
+
     // Validate all fields
     Object.keys(formData).forEach(key => {
       const error = validateField(key, formData[key as keyof RegisterFormData]);
@@ -130,6 +184,9 @@ export const useRegisterForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log("submit button clicked...   ");
+
+    // Clear any existing backend errors
+    setErrors({});
 
     // Validate all fields before submission
     if (!validateForm()) {
@@ -150,16 +207,36 @@ export const useRegisterForm = () => {
     try {
       console.log("Registering user...", formData);
       const response = await execute(authService.register(formData));
-      console.log("res at userRegisterForm : ",response);
-      
+      console.log("res at userRegisterForm : ", response);
 
-      dispatch(setCredentials(response.data));
-
-      navigate(`/${formData.role.toLowerCase()}`);
-      
-      toast.success('Registration successful!');
-    } catch (error) {
-      toast.error('Registration failed!');
+      if (response.data.status === 200) {
+        dispatch(setCredentials(response.data));
+        navigate(`/${formData.role.toLowerCase()}`);
+        toast.success('Registration successful!');
+      } else {
+        // Handle known backend errors
+        const errorMessage = response.data.message?.toLowerCase() || '';
+        
+        if (errorMessage.includes('email')) {
+          setErrors(prev => ({ ...prev, email: response.data.message }));
+        } else if (errorMessage.includes('mobile')) {
+          setErrors(prev => ({ ...prev, mobileNo: response.data.message }));
+        } else if (errorMessage.includes('username')) {
+          setErrors(prev => ({ ...prev, username: response.data.message }));
+        } else {
+          // For any other errors
+          toast.error(response.data.message || 'Registration failed!');
+        }
+      }
+    } catch (error: any) {
+      // Handle unexpected errors
+      if (error.response?.data?.message) {
+        // Server error with message
+        toast.error(error.response.data.message);
+      } else {
+        // Generic error
+        toast.error('Registration failed. Please try again.');
+      }
     }
   };
 

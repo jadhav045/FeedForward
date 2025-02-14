@@ -25,6 +25,18 @@ export default function Register() {
         handleSubmit,
     } = useRegisterForm();
 
+    const isDisabled = !!(Object.keys(errors).length > 0 || !isVerified.email || (formData.mobileNo && !isVerified.mobile));
+    console.log('Disabled SignUp Button:', isDisabled);
+    
+    console.log('Disabled Button Debug:', {
+        hasErrors: Object.keys(errors).length > 0,
+        errors,
+        emailVerified: isVerified.email,
+        hasMobile: !!formData.mobileNo,
+        mobileVerified: isVerified.mobile,
+        isDisabled
+    });
+
     return (
         <FormComponent onSubmit={handleSubmit}>
             <h2 className="text-2xl font-bold text-center text-[var(--text-color)] mb-6">
@@ -48,11 +60,12 @@ export default function Register() {
                 value={formData.email}
                 onChange={handleChange}
                 required
+                error={errors.email}
             />
             <OTPInput
                 type="email"
                 isVerified={isVerified.email}
-                onVerificationSuccess={() => handleVerificationSuccess('email')}
+                onVerificationSuccess={(otp) => handleVerificationSuccess('email', otp)}
                 showInput={showOTPInputs.email}
                 onSendOTP={() => handleSendOTP('email')}
             />
@@ -63,12 +76,13 @@ export default function Register() {
                 placeholder="Mobile Number (Optional)"
                 value={formData.mobileNo}
                 onChange={handleChange}
+                error={errors.mobileNo}
             />
             {formData.mobileNo && (
                 <OTPInput
                     type="mobile"
                     isVerified={isVerified.mobile}
-                    onVerificationSuccess={() => handleVerificationSuccess('mobile')}
+                    onVerificationSuccess={(otp) => handleVerificationSuccess('mobile', otp)}
                     showInput={showOTPInputs.mobile}
                     onSendOTP={() => handleSendOTP('mobile')}
                 />
@@ -107,14 +121,11 @@ export default function Register() {
                 type="submit"
                 variant="primary"
                 className="w-full mt-4"
-                disabled={Object.keys(errors).length > 0 || !isVerified.email || (formData.mobileNo && !isVerified.mobile)}
-            >
-                SignUp {Object.keys(errors).length > 0 ? '(Form has errors)' : 
-                       !isVerified.email ? '(Verify Email)' : 
-                       (formData.mobileNo && !isVerified.mobile) ? '(Verify Mobile)' : ''}
+                disabled={isDisabled}>
+                SignUp
             </Button>
 
-            <NavLinkComponent 
+            <NavLinkComponent
                 to="/auth/login"
                 className="block text-center mt-4"
             >

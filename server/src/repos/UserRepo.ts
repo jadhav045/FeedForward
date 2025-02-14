@@ -109,15 +109,30 @@ async function insertMult(users: IUser[] | readonly IUser[]): Promise<void> {
 
 async function register(user: any): Promise<AuthResponse> {
   try {
-    // Check if the user already exists
+    // Check if the user already exists with email, username or mobile
     console.log("🔍 Checking if user exists:", user);
-    const existingUser = await User.findOne({ email: user.email });
+    const existingUser = await User.findOne({
+      $or: [
+        { email: user.email },
+        { username: user.username },
+        { mobileNo: user.mobileNo }
+      ]
+    });
     
     if (existingUser) {
       console.log("❌ User already exists:", existingUser);
-      throw new Error("User already exists");
-      // return { message: "User already exists" };
+      let message = "User already exists with this ";
+      if (existingUser.email === user.email) {
+        message += "email";
+      } else if (existingUser.username === user.username) {
+        message += "username";
+      } else if (existingUser.mobileNo === user.mobileNo) {
+        message += "mobile number";
+      }
+      throw new Error(message);
     }
+
+    // ...rest of your existing registration code...
     if (!user.id) {
       user.id = getRandomInt();
     }
@@ -125,7 +140,7 @@ async function register(user: any): Promise<AuthResponse> {
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(user.password, saltRounds);
 
-    const newUser = new User({ ...user, password: hashedPassword }); // Use .save() instead of insertOne()
+    const newUser = new User({ ...user, password: hashedPassword });
     await newUser.save();
     const token = generateToken(newUser.id);
 
@@ -136,8 +151,7 @@ async function register(user: any): Promise<AuthResponse> {
       status: 200 
     };
   } catch (error) {
-    console.error("❌ Error registering user:");
-    // throw new Error("Internal Server Error");
+    console.error("❌ Error registering user:", error);
     return { 
       user: null, 
       token: "", 
@@ -145,7 +159,6 @@ async function register(user: any): Promise<AuthResponse> {
       message: error.message 
     };
   }
-
 }
 
 async function login(user: any): Promise<AuthResponse> {
