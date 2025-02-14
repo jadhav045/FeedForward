@@ -24,6 +24,7 @@ import TestLayout from "./pages/Test/TestLayout.tsx";
 import Active from "./pages/Test/pages/Active.tsx";
 import Notifications from "./pages/Test/pages/Notifications.tsx";
 import History from "./pages/Test/pages/History.tsx";
+import Test2 from "./pages/Test2/Test2.tsx";
 
 function App() {
 	return (
@@ -67,8 +68,13 @@ function App() {
 					>
 						<Route
 							path="test"
-							element={<Test />}
+							element={<Test2 />}
 						></Route>
+					<Route 
+					path="/test2" 
+					element={<Test2 />}>
+						
+					</Route>
 
 						<Route path="active" element={<Active />} />
 						<Route path="history" element={<History />} />
