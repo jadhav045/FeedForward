@@ -1,5 +1,6 @@
 import { RouteError } from '@src/common/route-errors';
 import HttpStatusCodes from '@src/common/HttpStatusCodes';
+import { AuthResponse } from '../types/auth.types';
 
 import UserRepo from '@src/repos/UserRepo';
 import { IUser } from '@src/models/User';
@@ -48,7 +49,7 @@ async function updateOne(user: IUser): Promise<void> {
 /**
  * Delete a user by their id.
  */
-async function _delete(id: number): Promise<void> {
+async function _delete(id: number): Promise<{ success: boolean; message: string }> {
   const persists = await UserRepo.persists(id);
   if (!persists) {
     throw new RouteError(
@@ -65,9 +66,20 @@ async function _delete(id: number): Promise<void> {
                                 Export default
 ******************************************************************************/
 
+
+
+async function register(user: any): Promise<AuthResponse> {
+  return await UserRepo.register(user);
+}
+async function login(user: any): Promise<AuthResponse> {
+  return await UserRepo.login(user);
+}
+
 export default {
   getAll,
   addOne,
   updateOne,
   delete: _delete,
+  register,
+  login,
 } as const;

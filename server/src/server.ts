@@ -13,6 +13,8 @@ import ENV from '@src/common/ENV';
 import HttpStatusCodes from '@src/common/HttpStatusCodes';
 import { RouteError } from '@src/common/route-errors';
 import { NodeEnvs } from '@src/common/constants';
+import { request } from 'http';
+import cors from 'cors';
 
 
 /******************************************************************************
@@ -25,6 +27,7 @@ const app = express();
 // **** Setup
 
 // Basic middleware
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
@@ -40,6 +43,7 @@ if (ENV.NodeEnv === NodeEnvs.Production.valueOf()) {
 
 // Add APIs, must be after middleware
 app.use(Paths.Base, BaseRouter);
+// app.use(Paths.Users, BaseRouter);
 
 // Add error handler
 app.use((err: Error, _: Request, res: Response, next: NextFunction) => {
@@ -67,12 +71,14 @@ app.use(express.static(staticDir));
 
 // Nav to users pg by default
 app.get('/', (_: Request, res: Response) => {
+  console.log("redirecting to /users");
+  
   return res.redirect('/users');
 });
 
 // Redirect to login if not logged in.
 app.get('/users', (_: Request, res: Response) => {
-  return res.sendFile('users.html', { root: viewsDir });
+   res.send("listening ...");
 });
 
 

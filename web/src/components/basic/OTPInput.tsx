@@ -1,11 +1,11 @@
-import { useState } from 'react';
-import { toast } from 'react-hot-toast';
+import { useState, useEffect } from 'react';
 import { Button } from './Button';
+import { FormInput } from './FormInput';
 
 interface OTPInputProps {
   type: 'email' | 'mobile';
   isVerified: boolean;
-  onVerificationSuccess: () => void;
+  onVerificationSuccess: (otp: string) => void;
   showInput: boolean;
   onSendOTP: () => void;
 }
@@ -17,44 +17,81 @@ export const OTPInput = ({
   showInput, 
   onSendOTP 
 }: OTPInputProps) => {
-  const [otp, setOTP] = useState('');
+  const [otp, setOtp] = useState('');
+  const [countdown, setCountdown] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
-  if (isVerified) {
-    return <span className="text-green-600">{type} Verified ✓</span>;
-  }
+  useEffect(() => {
+    if (countdown > 0) {
+      const timer = setTimeout(() => setCountdown(countdown - 1), 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [countdown]);
+
+  const handleSendOTP = async () => {
+    setIsLoading(true);
+    try {
+      await onSendOTP();
+      setCountdown(60);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleVerify = async () => {
+    setIsLoading(true);
+    try {
+      await onVerificationSuccess(otp);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
-    <div className="space-y-2">
-      <Button
-        variant="outline"
-        onClick={onSendOTP}
-      >
-        Send {type} OTP
-      </Button>
+    <div className="mb-4">
+      {!isVerified && (
+        <Button 
+          type="button" 
+          variant="outline" 
+          onClick={handleSendOTP}
+          disabled={countdown > 0 || isLoading}
+          isLoading={isLoading && !showInput}
+        >
+          {showInput 
+            ? countdown > 0 
+              ? `Resend OTP in ${countdown}s` 
+              : 'Resend OTP'
+            : `Verify ${type}`}
+        </Button>
+      )}
       
-      {showInput && (
-        <div className="flex gap-2">
-          <input
+      {showInput && !isVerified && (
+        <div className="mt-2 flex gap-2">
+          <FormInput
             type="text"
-            placeholder={`Enter ${type} OTP`}
+            name="otp"
+            placeholder="Enter OTP"
             value={otp}
-            onChange={(e) => setOTP(e.target.value)}
-            className="p-2 border rounded-md"
+            onChange={(e) => setOtp(e.target.value.toUpperCase())}
+            required
+            maxLength={6}
           />
-          <Button
-            variant="secondary"
-            onClick={() => {
-              if (otp === '1234') {
-                onVerificationSuccess();
-                toast.success(`${type} verified successfully!`);
-              } else {
-                toast.error('Invalid OTP');
-              }
-            }}
+          <Button 
+            type="button"
+            variant="primary"
+            onClick={handleVerify}
+            disabled={otp.length !== 6 || isLoading}
+            isLoading={isLoading && showInput}
           >
             Verify
           </Button>
         </div>
+      )}
+
+      {isVerified && (
+        <p className="text-sm text-[var(--success-color)]">
+          ✓ {type} verified
+        </p>
       )}
     </div>
   );

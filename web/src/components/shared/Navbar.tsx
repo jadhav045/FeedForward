@@ -31,7 +31,7 @@ export default function Navbar() {
   };
 
   return (
-    <Disclosure as="nav" className="bg-white shadow">
+    <Disclosure as="nav" className="bg-white shadow" style={{background:"var( --navbar-bg-color)", color:"var( --navbar-text-color)"}}>
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -53,6 +53,7 @@ export default function Navbar() {
                       key={item.name}
                       to={item.href}
                       className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                      
                     >
                       {item.name}
                     </Link>
@@ -61,9 +62,11 @@ export default function Navbar() {
               </div>
               
               <div className="hidden sm:ml-6 sm:flex sm:items-center">
-                {user && (
-                  <Menu as="div" className="relative ml-3">
-                    <Menu.Button className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                {/* {user && ( */}
+                  <Menu as="div" className="relative ml-3" >
+                    <Menu.Button className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" 
+                    style={{background:"var( --bg-color)", color:"var( --text-color)"}}
+                    >
                       <UserCircleIcon className="h-8 w-8 text-gray-400" />
                     </Menu.Button>
                     <Transition
@@ -96,7 +99,7 @@ export default function Navbar() {
                       </Menu.Items>
                     </Transition>
                   </Menu>
-                )}
+                {/* )} */}
               </div>
 
               <div className="-mr-2 flex items-center sm:hidden">
