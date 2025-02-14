@@ -17,7 +17,30 @@ export interface IUser extends Document {
   mobileNo: string;
   role: string;
   password: string;
-  // created: Date;
+  adderss: string;
+  longitude: string;
+  latitude: string;
+  photo: string;
+  fullName: string;
+  profession: string;
+  regNo: string;
+  orgType: string;
+  foodType: string;
+  motive: string;
+  employeeNos: string;
+  history: [
+    {
+      eventName: string;
+      photo: string;
+      address: string;
+      // location: string;
+      longitude: string;
+      latitude: string;
+      details: string;
+    }
+  ]
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 /******************************************************************************
@@ -32,6 +55,30 @@ const UserSchema: Schema = new Schema({
   mobileNo: { type: String, required: false },
   role: { type: String, required: true },
   password: { type: String, required: true },
+  adderss: { type: String, required: false },
+  longitude: { type: String, required: false },
+  latitude: { type: String, required: false },
+  photo: { type: String, required: false },
+  fullName: { type: String, required: false },
+  profession: { type: String, required: false },
+  regNo: { type: String, required: false },
+  orgType: { type: String, required: false },
+  foodType: { type: String, required: false },
+  motive: { type: String, required: false },
+  employeeNos: { type: String, required: false },
+  history: [
+    {
+      eventName: { type: String, required: false },
+      photo: { type: String, required: false },
+      address: { type: String, required: false },
+      // location: { type: String, required: false },
+      longitude: { type: String, required: false },
+      latitude: { type: String, required: false },
+      details: { type: String, required: false },
+    }
+  ],
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now },
   // Add other fields as needed
 });
 
