@@ -6,8 +6,8 @@ export const roleBasedNavigation = {
     ],
     donor: [
       { name: 'Dashboard', href: '/donor' },
-      { name: 'My Donations', href: '/donor/donations' },
-      { name: 'New Donation', href: '/donor/donations/new' },
+      { name: 'My Profile', href: '/donor/profile' },
+      
     ],
     ngo: [
       { name: 'Dashboard', href: '/ngo' },

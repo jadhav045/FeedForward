@@ -1,9 +1,5 @@
-import { isString } from 'jet-validators';
-
-import schema from '@src/util/schema';
-import { isRelationalKey } from '@src/util/validators';
 import mongoose, { Schema, Document, Model } from 'mongoose';
-import e from 'express';
+
 
 /******************************************************************************
                                   Types
@@ -17,21 +13,69 @@ export interface IUser extends Document {
   mobileNo: string;
   role: string;
   password: string;
-  // created: Date;
+  adderss: string;
+  longitude: string;
+  latitude: string;
+  photo: string;
+  fullName: string;
+  profession: string;
+  regNo: string;
+  orgType: string;
+  foodType: string;
+  motive: string;
+  employeeNos: string;
+  history: [
+    {
+      eventName: string;
+      photo: string;
+      address: string;
+      // location: string;
+      longitude: string;
+      latitude: string;
+      details: string;
+    }
+  ]
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 /******************************************************************************
                                  Setup
 ******************************************************************************/
 
+
 const UserSchema: Schema = new Schema({
   id: { type: Number, required: true, unique: true },
   // name: { type: String, required: true },
-  email: { type: String, required: true },
-  username: { type: String, required: true },
-  mobileNo: { type: String, required: false },
+  email: { type: String, required: true, lowercase: true, unique: true },
+  username: { type: String, required: true, unique: true },
+  mobileNo: { type: String, required: false, unique: true },
   role: { type: String, required: true },
   password: { type: String, required: true },
+  address: { type: String, required: false },
+  longitude: { type: String, required: false },
+  latitude: { type: String, required: false },
+  photo: { type: String, required: false },
+  fullName: { type: String, required: false },
+  profession: { type: String, required: false },
+  regNo: { type: String, required: false },
+  orgType: { type: String, required: false },
+  foodType: { type: String, required: false },
+  motive: { type: String, required: false },
+  employeeNos: { type: String, required: false },
+  history: [
+    {
+      eventName: { type: String, required: false },
+      photo: { type: String, required: false },
+      address: { type: String, required: false },
+      // location: { type: String, required: false },
+      longitude: { type: String, required: false },
+      latitude: { type: String, required: false },
+      details: { type: String, required: false },
+    }
+  ],
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now },
   // Add other fields as needed
 });
 
