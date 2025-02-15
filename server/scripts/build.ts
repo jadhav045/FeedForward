@@ -19,6 +19,7 @@ import childProcess from 'child_process';
     await copy('./temp/config.js', './config.js');
     await copy('./temp/src', './dist');
     await remove('./temp/');
+
   } catch (err) {
     logger.err(err);
     // eslint-disable-next-line n/no-process-exit

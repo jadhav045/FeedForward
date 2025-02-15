@@ -17,14 +17,18 @@ import AdminHome from "./pages/admin/Home.tsx";
 import DonorHome from "./pages/donor/Home.tsx";
 import NGOHome from "./pages/ngo/Home.tsx";
 import ErrorPage from "./pages/Error.tsx";
-import { ProtectedRoute } from "./components/shared/ProtectedRoute.tsx";
+import { ProtectedPrivateRoute, ProtectedRoute } from "./components/shared/ProtectedRoute.tsx";
 import Register from "./pages/auth/Register.jsx";
 import Test from "./pages/Test/Test.tsx";
 import TestLayout from "./pages/Test/TestLayout.tsx";
 import Active from "./pages/Test/pages/Active.tsx";
 import Notifications from "./pages/Test/pages/Notifications.tsx";
 import History from "./pages/Test/pages/History.tsx";
+<<<<<<< HEAD
 import Test2 from "./pages/Test2/Test2.tsx";
+=======
+import Profile from "./pages/Profile.tsx";
+>>>>>>> 5afd6481ed061e3317770c41b45e1c65854246a9
 
 function App() {
 	return (
@@ -107,7 +111,14 @@ function App() {
 							index
 							element={<DonorHome />}
 						/>
+						<Route
+							path="profile"
+							element={<Profile />}
+						/>
+
 					</Route>
+
+					<Route path="/profile" element={<ProtectedPrivateRoute children={<Profile />} />} />
 
 					<Route
 						path="/ngo"
