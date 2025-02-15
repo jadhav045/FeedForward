@@ -1,4 +1,4 @@
-export default function Home() {
+export default function DonorHome() {
     return (
         <div>
         <h1>Donor Home</h1>
