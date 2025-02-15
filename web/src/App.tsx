@@ -14,21 +14,28 @@ import AuthLayout from "./components/layouts/AuthLayout.tsx";
 // Pages
 import Login from "./pages/auth/Login.tsx";
 import AdminHome from "./pages/admin/Home.tsx";
-import DonorHome from "./pages/donor/Home.tsx";
-import NGOHome from "./pages/ngo/Home.tsx";
+import DonorHome from "./pages/donor/DonorHome.tsx";
+import NgoHome from "./pages/ngo/NgoHome.tsx";
+
 import ErrorPage from "./pages/Error.tsx";
 import { ProtectedPrivateRoute, ProtectedRoute } from "./components/shared/ProtectedRoute.tsx";
 import Register from "./pages/auth/Register.jsx";
 import Test from "./pages/Test/Test.tsx";
 import TestLayout from "./pages/Test/TestLayout.tsx";
-import Active from "./pages/Test/pages/Active.tsx";
-import Notifications from "./pages/Test/pages/Notifications.tsx";
-import History from "./pages/Test/pages/History.tsx";
-<<<<<<< HEAD
-import Test2 from "./pages/Test2/Test2.tsx";
-=======
+
 import Profile from "./pages/Profile.tsx";
->>>>>>> 5afd6481ed061e3317770c41b45e1c65854246a9
+
+import NgoRequests from "./pages/ngo/NgoRequests.tsx";
+import NgoHistory from "./pages/ngo/NgoHistory.tsx";
+import NgoNotifications from "./pages/ngo/NgoNotifications.tsx";
+
+import DonorHistory from "./pages/donor/DonorHistory.tsx";
+import DonorNotifications from "./pages/donor/DonorNotifications.tsx";
+import DonorPostings from "./pages/donor/DonorPostings.tsx";
+
+import Active from "./pages/test/pages/Active.tsx";
+import History from "./pages/test/pages/History.tsx";
+import Notifications from "./pages/test/pages/Notifications.tsx";
 
 function App() {
 	return (
@@ -97,6 +104,10 @@ function App() {
 							index
 							element={<AdminHome />}
 						/>
+						<Route
+							path="profile"
+							element={<Profile />}
+						/>
 					</Route>
 
 					<Route
@@ -115,10 +126,20 @@ function App() {
 							path="profile"
 							element={<Profile />}
 						/>
+						<Route
+							path="history"
+							element={<DonorHistory />}
+						/>
+						<Route
+							path="notifications"
+							element={<DonorNotifications />}
+						/>
+						<Route
+							path="postings"
+							element={<DonorPostings />}
+						/>
 
 					</Route>
-
-					<Route path="/profile" element={<ProtectedPrivateRoute children={<Profile />} />} />
 
 					<Route
 						path="/ngo"
@@ -130,7 +151,23 @@ function App() {
 					>
 						<Route
 							index
-							element={<NGOHome />}
+							element={<NgoHome />}
+						/>
+						<Route
+							path="profile"
+							element={<Profile />}
+						/>
+						<Route
+							path="history"
+							element={<NgoHistory />}
+						/>
+						<Route
+							path="notifications"
+							element={<NgoNotifications />}
+						/>
+						<Route
+							path="requests"
+							element={<NgoRequests />}
 						/>
 					</Route>
 
