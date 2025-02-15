@@ -8,6 +8,10 @@ interface Props {
   allowedRole: Role;
 }
 
+interface PrivateProps {
+  children: React.ReactNode;
+}
+
 export const ProtectedRoute = ({ children, allowedRole }: Props) => {
 
   //remove this line after implementing the authentication
@@ -24,6 +28,18 @@ export const ProtectedRoute = ({ children, allowedRole }: Props) => {
 
   if (user?.role !== allowedRole) {
     return <Navigate to="/error" replace />;
+  }
+
+  return <>{children}</>;
+};
+
+export const ProtectedPrivateRoute = ({ children }: PrivateProps) => {
+
+  const { isAuthenticated } = useAuth();
+  const location = useLocation();
+  
+  if (!isAuthenticated) {
+    return <Navigate to="/auth/login" state={{ from: location }} replace />;
   }
 
   return <>{children}</>;

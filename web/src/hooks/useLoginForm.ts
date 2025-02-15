@@ -6,6 +6,7 @@ import { setCredentials } from '../features/authSlice';
 import { useApi } from './useApi';
 import { authService } from '../services/auth.service';
 import { validation } from '../utils/validation';
+import { LoginFormData } from '../types/auth.types';
 
 export const useLoginForm = () => {
   const navigate = useNavigate();
@@ -13,22 +14,22 @@ export const useLoginForm = () => {
   const dispatch = useDispatch();
   const { execute } = useApi();
 
-  const [formData, setFormData] = useState({
+  type LoginFormFields = keyof LoginFormData;
+
+  const [formData, setFormData] = useState<LoginFormData>({
     username: '',
     password: '',
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [isResetPassword, setIsResetPassword] = useState(false);
+  
 
   const validateField = (name: string, value: string) => {
     if (name === 'username') {
-      if (!value) return 'Username/Email/Mobile is required';
-      return '';
+      return validation.username(value);
     }
     if (name === 'password') {
-      if (!value) return 'Password is required';
-      return '';
+      return validation.password(value);
     }
     return '';
   };
@@ -55,7 +56,7 @@ export const useLoginForm = () => {
 
 
       // Simulate password reset request
-      setIsResetPassword(true);
+   
       toast.success('Password reset link sent to your email');
     } catch (error) {
       toast.error('Failed to send reset link');
@@ -65,7 +66,7 @@ export const useLoginForm = () => {
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
     
-    Object.keys(formData).forEach(key => {
+    (Object.keys(formData) as LoginFormFields[]).forEach(key => {
       const error = validateField(key, formData[key]);
       if (error) newErrors[key] = error;
     });
@@ -95,6 +96,7 @@ export const useLoginForm = () => {
       // Redirect to the originally requested page or role-based dashboard
       // const from = location.state?.from?.pathname || `/${response.data.user.role.toLowerCase()}`;
       const from =  `/${response.data.user._doc.role.toLowerCase()}`||location.state?.from?.pathname ;
+
       console.log("from: ",from);
       navigate(from);
       toast.success('Login successful!');
@@ -106,7 +108,6 @@ export const useLoginForm = () => {
   return {
     formData,
     errors,
-    isResetPassword,
     handleChange,
     handleSubmit,
     handleForgotPassword,
