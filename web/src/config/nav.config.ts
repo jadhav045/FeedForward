@@ -20,4 +20,4 @@ export const roleBasedNavigation = {
       {name:'Notifications', href:'/ngo/notifications'},
       {name:'Requests', href:'/ngo/requests'}
     ],
-  };
+};

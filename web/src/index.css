@@ -1,98 +1,262 @@
+/* ========================= */
+/* 🌟 Global Theme Variables */
+/* ========================= */
 @import "tailwindcss";
 
 
 :root {
-  --bg-color: #121212;
-  --text-color: #ffffff;
-  --error-color: #ef4444;
+    --primary-bg: #ffffff;
+    --primary-text: #1e293b;
+  
+    /* Navbar */
+    --navbar-bg: #C1BAA1;
+    --navbar-text: #1e293b;
+    --navbar-border: #e2e8f0;
+    --navbar-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --navbar-hover: #A59D84;
+  
+    /* Sidebar */
+    --sidebar-bg: #C1BAA1;
+    --sidebar-text: #334155;
+    --sidebar-border: #0978ff;
+    --sidebar-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+    --sidebar-hover: #A59D84;
+  
+    /* Forms */
+    --form-bg: #ffffff;
+    --form-hover: #fbfbfb;
+    --form-shadow: 0 2px 4px rgba(89, 11, 245, 0.7);
+    --form-border:#062d54;
+
+    /* Form Titles */
+    --formTitle-color: #3874d4;
+    --formTitle-text: #1e293b;
+    --formTitle-size: 1.2rem;
+  
+    /* Form Inputs */
+    --formInput-color: #cbd0d7;
+    --formInput-text: #080707;
+    --formInput-size: 0.9rem;
+    --formInput-border: #e2e8f0;
+
+    /* placeholder */
+    --placeholder-color: #bd7f7f;
+    --placeholder-text: #191c21;
+  
+    /* Buttons */
+    --primaryButton-bg: #7b93ca;
+    --primaryButton-text: #ffffff;
+    --primaryButton-hover: #43578d;
+    --primaryButton-shadow: 0 2px 4px rgba(89, 11, 245, 0.7);
+  
+    --secondaryButton-bg: #e2e8f0;
+    --secondaryButton-text: #334155;
+    --secondaryButton-hover: #cbd5e1;
+    --secondaryButton-shadow: 0 2px 4px rgba(89, 11, 245, 0.7);
+
+    --outlineButton-bg: #13263e;
+    --outlineButton-text: #334155;
+    --outlineButton-hover: #5e7694;
+    --outlineButton-shadow: 0 2px 4px rgba(89, 11, 245, 0.7);
+
+    /*Navlink  */
+    --navlink-bg: #840000;
+    --navlink-text: #0e1b32;
+    --navlink-hover: #d3a10c;
+
+
+    /* SelectInput */
+    --select-bg: #d57b7b; /* White background */
+    --select-text: #0c1828; /* Dark blue-gray text */
+    --select-border: #ad8787; /* Light gray border */
+    --select-hover-bg: #4f88c2; /* Soft gray hover background */
+    --select-hover-border: #7e94b3; /* Slightly darker border on hover */
+    --select-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    --select-outline: 2px solid #2563eb; /* Primary blue outline on focus */
+  }
+  
+  /* ========================= */
+  /* 🌙 Dark Mode Theme */
+  /* ========================= */
+  .dark {
+    --primary-bg: #1e293b;
+    --primary-text: #f8fafc;
+
+    /* Navbar */
+    --navbar-bg: #2c3e50;
+    --navbar-text: #f8fafc;
+    --navbar-border: #475569;
+    --navbar-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --navbar-hover: #34495e;
+
+    /* Sidebar */
+    --sidebar-bg: #2c3e50;
+    --sidebar-text: #f8fafc;
+    --sidebar-border: #4a6fa5;
+    --sidebar-shadow: 2px 0 8px rgba(0, 0, 0, 0.3);
+    --sidebar-hover: #34495e;
+
+    /* Forms */
+    --form-bg: #34495e;
+    --form-hover: #2c3e50;
+    --form-shadow: 0 2px 4px rgba(11, 89, 245, 0.7);
+    --form-border: #4a6fa5;
+
+    /* Form Titles */
+    --formTitle-color: #7ab1e7;
+    --formTitle-text: #f8fafc;
+    --formTitle-size: 1.2rem;
+
+    /* Form Inputs */
+    --formInput-color: #4a6fa5;
+    --formInput-text: #f8fafc;
+    --formInput-size: 0.9rem;
+    --formInput-border: #475569;
+
+    /* Placeholder */
+    --placeholder-color: #94a3b8;
+    --placeholder-text: #f8fafc;
+
+    /* Buttons */
+    --primaryButton-bg: #43578d;
+    --primaryButton-text: #ffffff;
+    --primaryButton-hover: #7b93ca;
+    --primaryButton-shadow: 0 2px 4px rgba(11, 89, 245, 0.7);
+
+    --secondaryButton-bg: #475569;
+    --secondaryButton-text: #f8fafc;
+    --secondaryButton-hover: #4a6fa5;
+    --secondaryButton-shadow: 0 2px 4px rgba(11, 89, 245, 0.7);
+
+    --outlineButton-bg: #5e7694;
+    --outlineButton-text: #ffffff;
+    --outlineButton-hover: #7b93ca;
+    --outlineButton-shadow: 0 2px 4px rgba(11, 89, 245, 0.7);
+
+    /* Navlink */
+    --navlink-bg: #840000;
+    --navlink-text: #f8fafc;
+    --navlink-hover: #d3a10c;
+
+    /* SelectInput */
+    --select-bg: #4a6fa5;
+    --select-text: #f8fafc;
+    --select-border: #7e94b3;
+    --select-hover-bg: #5e7694;
+    --select-hover-border: #94a3b8;
+    --select-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+    --select-outline: 2px solid #7ab1e7;
 }
-
-.light {
-  --bg-color: #fdfdfd; /* Slightly off-white */
-  --text-color: #212529; /* Deep gray for readability */
-
-  --navbar-bg-color: #9193a7; /* Muted lavender gray */
-  --navbar-text-color: #3c3f58; /* Deep navy gray */
-
-  --leftsidebar-bg-color: #e9ecef; /* Soft pastel gray */
-  --leftsidebar-text-color: #495057; /* Dark slate gray */
-
-  --button-bg-color: #4a90e2; /* Professional medium blue for a trustworthy look */
-  --button-text-color: #ffffff; /* White for clear readability */
-
-  /* 🆕 Subcomponent Colors */
-  --subcomponent-bg-color: #f8f9fb; /* Near-white for a clean, minimal look */
-  --subcomponent-text-color: #333740; /* Slightly softened black for reduced strain */
-  --subcomponent-border-color: #d1d5db; /* Neutral gray for refined separation */
-
-  --hover-bg-color: #dee2e9; /* Muted gray-blue for a soft hover effect */
-  --card-shadow: rgba(0, 0, 0, 0.08); /* Softer shadow for a sleek and subtle depth */
-
-  --input-bg-color: #ffffff; /* Clean white input fields */
-  --input-text-color: #2c3e50; /* Dark navy-gray for a sophisticated touch */
-  --input-border-color: #bfc7d5; /* Soft blue-gray border for a polished look */
-}
-
-
-
-.dark {
-  --bg-color: #24243d; /* Deep charcoal for a rich dark mode experience */
-  --text-color: #e4e6eb; /* Soft white for comfortable reading */
-
-  --navbar-bg-color: #313136; /* Deep muted gray-black */
-  --navbar-text-color: #f1f1f1; /* Soft white */
-
-  --leftsidebar-bg-color: #252526; /* Dark sidebar */
-  --leftsidebar-text-color: #d6d6d6; /* Soft light gray */
 
   
-  --button-bg-color: #4a90e2; /* Vibrant blue for an eye-catching, professional look */
-  --button-text-color: #ffffff; /* Crisp white for clear readability */
-
-  /* 🆕 Subcomponent Colors */
-  --subcomponent-bg-color: #181a1f; /* Slightly lighter than background for depth */
-  --subcomponent-text-color: #c7c9cf; /* Muted light gray for a subtle, polished feel */
-  --subcomponent-border-color: #2b2f36; /* Dark gray-blue for a refined separation */
-
-  --hover-bg-color: #22262d; /* Subtle hover effect with soft contrast */
-  --card-shadow: rgba(0, 0, 0, 0.5); /* Deeper shadow for better layering */
-
-  --input-bg-color: #1f2227; /* Dark gray input fields for a cohesive look */
-  --input-text-color: #e4e6eb; /* Light gray text for readability */
-  --input-border-color: #3a4049; /* Soft gray-blue border for a modern finish */
-}
-
-.blue {
-  --bg-color: #05445E;
-  --text-color: #D4F1F4;
-
-  --leftsidebar-bg-color: #565694;
+  /* ========================= */
+  /* 🌐 General Styles */
+  /* ========================= */
+  body {
+    background-color: var(--primary-bg);
+    color: var(--primary-text);
+    font-family: "Inter", sans-serif;
+  }
   
-  --button-bg-color: #189AB4;
-  --button-text-color: #75E6DA;
-}
-
-.green {
-  --bg-color: #28a745;
-  --text-color: #ffffff;
-  --leftsidebar-bg-color: #3fb8a6;
-  --button-bg-color: pink;
-  --button-text-color: black;
-}
-
-
-.purple {
-  --bg-color: #6f42c1;
-  --text-color: #ffffff;
-
-  --leftsidebar-bg-color: #77096f;
-  --button-bg-color: purple;
-  --button-text-color: rgb(103, 18, 18);
-}
-
-
-body {
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
+  /* ========================= */
+  /* 📌 Navbar Styles */
+  /* ========================= */
+  .navbar {
+    background-color: var(--navbar-bg);
+    color: var(--navbar-text);
+    border-bottom: 2px solid var(--navbar-border);
+    box-shadow: var(--navbar-shadow);
+    padding: 1rem;
+  }
+  
+  .navbar:hover {
+    background-color: var(--navbar-hover);
+  }
+  
+  /* ========================= */
+  /* 📌 Sidebar Styles */
+  /* ========================= */
+  .sidebar {
+    background-color: var(--sidebar-bg);
+    color: var(--sidebar-text);
+    border-right: 2px solid var(--sidebar-border);
+    box-shadow: var(--sidebar-shadow);
+    width: 250px;
+    height: 100vh;
+    padding: 1rem;
+  }
+  
+  .sidebar:hover {
+    background-color: var(--sidebar-hover);
+  }
+  
+  /* ========================= */
+  /* ✍️ Form Styles */
+  /* ========================= */
+  form {
+    background-color: var(--form-bg);
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: var(--form-shadow);
+  }
+  
+  form:hover {
+    background-color: var(--form-hover);
+  }
+  
+  h3 {
+    color: var(--formTitle-color);
+    font-size: var(--formTitle-size);
+    font-weight: bold;
+  }
+  
+  /* ========================= */
+  /* 🔤 Form Inputs */
+  /* ========================= */
+  input, select {
+    background-color: var(--formInput-color);
+    color: var(--formInput-text);
+    font-size: var(--formInput-size);
+    padding: 0.5rem;
+    border: 1px solid var(--formInput-color);
+    border-radius: 6px;
+    width: 100%;
+  }
+  
+  input:focus {
+    outline: none;
+    border: 1px solid var(--primaryButton-bg);
+  }
+  
+  /* ========================= */
+  /* 🎨 Buttons */
+  /* ========================= */
+  .primary-button {
+    background-color: var(--primaryButton-bg);
+    color: var(--primaryButton-text);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .primary-button:hover {
+    background-color: var(--primaryButton-hover);
+  }
+  
+  .secondary-button {
+    background-color: var(--secondaryButton-bg);
+    color: var(--secondaryButton-text);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .secondary-button:hover {
+    background-color: var(--secondaryButton-hover);
+  }

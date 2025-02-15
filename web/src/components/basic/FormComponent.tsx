@@ -12,10 +12,13 @@ export const FormComponent = ({
     <form
         onSubmit={onSubmit}
         className={`max-w-md mx-auto p-6 rounded-lg shadow-md 
-        bg-[var(--bg-secondary-color)]
-        border border-[var(--border-color)]
+        bg-[var(--form-bg)]
+        border border-[var(--form-border)]
+        shadow-[var(--form-shadow)]
         space-y-4 ${className}`}
     >
         {children}
     </form>
 );
+
+
