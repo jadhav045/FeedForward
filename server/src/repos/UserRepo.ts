@@ -4,6 +4,8 @@ import orm from './MongoOrm';
 import { generateToken } from './token';
 import bcrypt from 'bcrypt';
 import { AuthResponse } from '../types/auth.types';
+// import { profile } from 'console';
+import { token } from 'morgan';
 
 /******************************************************************************
                                 Functions
@@ -16,13 +18,14 @@ let db: any;
 })();
 
 async function register(user: any): Promise<AuthResponse> {
+  const { email, username, mobileNo } = user;
   try {
     console.log("🔍 Checking if user exists:", user);
     const existingUser = await User.findOne({
       $or: [
         { email: user.email },
-        { username: user.username },
-        { mobileNo: user.mobileNo }
+        { username: user.username }
+        // { mobileNo: user.mobileNo }
       ]
     });
     
@@ -45,7 +48,9 @@ async function register(user: any): Promise<AuthResponse> {
 
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(user.password, saltRounds);
-
+    if (!mobileNo){
+      user.mobileNo = " ";
+    }
     const newUser = new User({ ...user, password: hashedPassword });
     await newUser.save();
     const token = generateToken(newUser.id);
@@ -116,6 +121,43 @@ async function login(user: any): Promise<AuthResponse> {
     };
   }
 }
+async function updateprofile(user: any): Promise<AuthResponse> {
+  try {
+    console.log("🔍 Checking if user exists:", user);
+    const existing = await User.findOne({username: user.username});
+    console.log("🔍 Found user:", existing);
+    // return;  
+    if(existing) {
+      console.log("✅ User exists:", existing);
+      // const { password: _, ...userWithoutPassword } = existing;
+      const updatedUser = await User.findOneAndUpdate({username: user.username}, user, {new: true});
+      if (updatedUser) {
+        const { password: _, ...userWithoutPassword } = updatedUser;
+        console.log("🔍 Updated user:", userWithoutPassword);
+        const token = generateToken(existing.id);
+        return { 
+          user: userWithoutPassword, 
+          token: token, 
+          status: 200 
+        };
+      }
+    }
+    return { 
+      user: null, 
+      token: "", 
+      status: 400,
+      message: "User not found" 
+    };
+  } catch (error) {
+    console.error("❌ Error in getting user:", error);
+    return { 
+      user: null, 
+      token: "", 
+      status: 400,
+      message: "Invalid credentials" 
+    };
+  }
+};
 
 /******************************************************************************
                                 Export default
@@ -124,4 +166,5 @@ async function login(user: any): Promise<AuthResponse> {
 export default {
   register,
   login,
+  updateprofile,
 } as const;

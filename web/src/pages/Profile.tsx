@@ -15,7 +15,7 @@ export default function Profile() {
     handleFileChange,
     handleSubmit
   } = useProfile();
-
+  // console.log("user details ",user)
   if (!user) return <div>No User Found</div>;
 
   return (
@@ -31,9 +31,9 @@ export default function Profile() {
               <FormInput
                 name="username"
                 placeholder="Username"
-                value={formData.username}
+                value={formData.username || user.username}
                 onChange={handleChange}
-                disabled
+                // disabled
                 error={errors.username}
               />
             </div>
@@ -44,7 +44,7 @@ export default function Profile() {
                 type="email"
                 name="email"
                 placeholder="Email Address"
-                value={formData.email}
+                value={formData.email || user.email}
                 onChange={handleChange}
                 disabled
                 error={errors.email}
@@ -56,9 +56,8 @@ export default function Profile() {
               <FormInput
                 name="mobileNo"
                 placeholder="Mobile Number"
-                value={formData.mobileNo}
+                value={formData.mobileNo|| user.mobileNo}
                 onChange={handleChange}
-                disabled
                 error={errors.mobileNo}
               />
             </div>
