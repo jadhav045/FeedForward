@@ -1,9 +1,5 @@
-import { isString } from 'jet-validators';
-
-import schema from '@src/util/schema';
-import { isRelationalKey } from '@src/util/validators';
 import mongoose, { Schema, Document, Model } from 'mongoose';
-import e from 'express';
+
 
 /******************************************************************************
                                   Types
@@ -47,15 +43,16 @@ export interface IUser extends Document {
                                  Setup
 ******************************************************************************/
 
+
 const UserSchema: Schema = new Schema({
   id: { type: Number, required: true, unique: true },
   // name: { type: String, required: true },
-  email: { type: String, required: true },
-  username: { type: String, required: true },
-  mobileNo: { type: String, required: false },
+  email: { type: String, required: true, lowercase: true, unique: true },
+  username: { type: String, required: true, unique: true },
+  mobileNo: { type: String, required: false, unique: true },
   role: { type: String, required: true },
   password: { type: String, required: true },
-  adderss: { type: String, required: false },
+  address: { type: String, required: false },
   longitude: { type: String, required: false },
   latitude: { type: String, required: false },
   photo: { type: String, required: false },

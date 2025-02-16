@@ -41,25 +41,19 @@ export const useRegisterForm = () => {
     let error = '';
     switch (name) {
       case 'username':
-        if (!value) error = 'Username is required';
-        else if (value.length < 3) error = 'Username must be at least 3 characters';
+        error = validation.username(value);
         break;
       case 'email':
-        if (!value) error = 'Email is required';
-        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) error = 'Invalid email format';
+        error = validation.email(value);
         break;
       case 'mobileNo':
-        if (value && !/^\+91[0-9]{10}$/.test(value)) {
-          error = 'Mobile number should be in format: +91XXXXXXXXXX';
-        }
+        error = validation.mobile(value);
         break;
       case 'password':
-        if (!value) error = 'Password is required';
-        else if (value.length < 8) error = 'Password must be at least 8 characters';
+        error = validation.password(value);
         break;
       case 'confirmPassword':
-        if (!value) error = 'Please confirm password';
-        else if (value !== formData.password) error = 'Passwords do not match';
+        error = validation.confirmPassword(value, formData.password);
         break;
     }
     return error;
@@ -213,7 +207,7 @@ export const useRegisterForm = () => {
         dispatch(setCredentials(response.data));
         navigate(`/${formData.role.toLowerCase()}`);
         toast.success('Registration successful!');
-      } else {
+      } else { 
         // Handle known backend errors
         const errorMessage = response.data.message?.toLowerCase() || '';
         

@@ -34,7 +34,7 @@ class SMSService {
         to: formattedNumber
       });
 
-      logger.info(`SMS sent successfully. SID: ${message.sid}`);
+      logger.info(`SMS sent successfully.`);
       return {
         success: true,
         message: 'SMS sent successfully'

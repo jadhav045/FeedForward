@@ -13,7 +13,6 @@ import ENV from '@src/common/ENV';
 import HttpStatusCodes from '@src/common/HttpStatusCodes';
 import { RouteError } from '@src/common/route-errors';
 import { NodeEnvs } from '@src/common/constants';
-import { request } from 'http';
 import cors from 'cors';
 
 
@@ -56,29 +55,6 @@ app.use((err: Error, _: Request, res: Response, next: NextFunction) => {
     res.status(status).json({ error: err.message });
   }
   return next(err);
-});
-
-
-// **** Front-End Content
-
-// Set views directory (html)
-const viewsDir = path.join(__dirname, 'views');
-app.set('views', viewsDir);
-
-// Set static directory (js and css).
-const staticDir = path.join(__dirname, 'public');
-app.use(express.static(staticDir));
-
-// Nav to users pg by default
-app.get('/', (_: Request, res: Response) => {
-  console.log("redirecting to /users");
-  
-  return res.redirect('/users');
-});
-
-// Redirect to login if not logged in.
-app.get('/users', (_: Request, res: Response) => {
-   res.send("listening ...");
 });
 
 
