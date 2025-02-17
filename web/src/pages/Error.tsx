@@ -1,23 +1,35 @@
-import { useRouteError, isRouteErrorResponse, useNavigate } from 'react-router-dom';
+// src/pages/Error.tsx
+import { useNavigate } from 'react-router-dom';
 import { XCircleIcon } from '@heroicons/react/24/outline';
 
-export default function ErrorPage() {
-  const error = useRouteError();
+interface ErrorPageProps {
+  error?: Error;
+  status?: number;
+}
+
+export function ErrorPage({ error, status }: ErrorPageProps) {
   const navigate = useNavigate();
 
   let errorTitle = 'Something went wrong!';
-  let errorMessage = 'An unexpected error has occurred.';
+  let errorMessage = error?.message || 'An unexpected error has occurred.';
 
-  if (isRouteErrorResponse(error)) {
-    if (error.status === 404) {
-      errorTitle = '404 - Page Not Found';
-      errorMessage = 'The page you are looking for does not exist.';
-    } else if (error.status === 403) {
-      errorTitle = '403 - Forbidden';
-      errorMessage = 'You do not have permission to access this page.';
-    } else if (error.status === 401) {
-      errorTitle = '401 - Unauthorized';
-      errorMessage = 'Please login to access this page.';
+  // Handle specific error status codes
+  if (status) {
+    switch (status) {
+      case 404:
+        errorTitle = '404 - Page Not Found';
+        errorMessage = 'The page you are looking for does not exist.';
+        break;
+      case 403:
+        errorTitle = '403 - Forbidden';
+        errorMessage = 'You do not have permission to access this page.';
+        break;
+      case 401:
+        errorTitle = '401 - Unauthorized';
+        errorMessage = 'Please login to access this page.';
+        break;
+      default:
+        break;
     }
   }
 

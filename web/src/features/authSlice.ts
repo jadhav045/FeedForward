@@ -1,6 +1,6 @@
 // src/features/authSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AuthState, User } from '../types/auth';
+import { AuthState, User } from '../types/auth.types';
 import { storage } from '../utils/storage';
 
 const initialState: AuthState = {

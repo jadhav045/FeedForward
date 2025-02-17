@@ -247,5 +247,6 @@ export const apiDocs: ApiDocumentation = {
         }
       ]
     }
+    
   ]
 };

@@ -19,13 +19,19 @@ export default function Register() {
         showOTPInputs,
         isVerified,
         errors,
+        loading,
         handleChange,
         handleSendOTP,
         handleVerificationSuccess,
         handleSubmit,
     } = useRegisterForm();
 
-    const isDisabled = !!(Object.keys(errors).length > 0 || !isVerified.email || (formData.mobileNo && !isVerified.mobile));
+    const isDisabled = loading || !!(
+        Object.keys(errors).length > 0 || 
+        !isVerified.email || 
+        (formData.mobileNo && !isVerified.mobile)
+    );
+
     console.log('Disabled SignUp Button:', isDisabled);
     
     console.log('Disabled Button Debug:', {
@@ -121,7 +127,8 @@ export default function Register() {
                 type="submit"
                 variant="primary"
                 className="w-full mt-4"
-                disabled={isDisabled}>
+                disabled={isDisabled}
+                isLoading={loading}>
                 SignUp
             </Button>
 

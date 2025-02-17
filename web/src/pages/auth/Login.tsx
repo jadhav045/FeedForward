@@ -39,7 +39,11 @@ export default function Login() {
                 error={errors.password}
             />
 
-            <Button type="submit" className="w-full">
+            <Button 
+                type="submit" 
+                className="w-full"
+    
+            >
                 Sign In
             </Button>
 
