@@ -2,6 +2,7 @@ import HttpStatusCodes from '@src/common/HttpStatusCodes';
 import UserService from '@src/services/UserService';
 import { IReq, IRes } from './common';
 import { AuthResponse } from '../types/auth.types';
+import { profile } from 'console';
 
 /******************************************************************************
                                 Functions
@@ -50,6 +51,27 @@ async function login(req: IReq, res: IRes) {
     });
   }
 }
+async function profile(req: IReq, res: IRes) {
+  const user = req.body;
+  const response = await UserService.profile(user) as AuthResponse;
+
+  if (response.status === 200) {
+    return res.status(HttpStatusCodes.OK).json({
+      data: { 
+        user: response.user, 
+        token: response.token 
+      },
+      status: 200
+    });
+  } else {
+    return res.status(HttpStatusCodes.BAD_REQUEST).json({
+      data: { 
+        message: response.message || 'Login failed' 
+      },
+      status: 400
+    });
+  }
+}
 
 /******************************************************************************
                                 Export default
@@ -58,4 +80,5 @@ async function login(req: IReq, res: IRes) {
 export default {
   register,
   login,
+  profile,
 } as const;

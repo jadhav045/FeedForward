@@ -19,7 +19,12 @@ async function login(user: any): Promise<AuthResponse> {
   return await UserRepo.login(user);
 }
 
+async function profile(user: any): Promise<AuthResponse> {
+  return await UserRepo.updateprofile(user);
+}
+
 export default {
   register,
   login,
+  profile,
 } as const;

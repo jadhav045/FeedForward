@@ -2,6 +2,7 @@ import { IReq, IRes } from './common';
 import { otpService } from '../services/OTPService';
 import HttpStatusCodes from '@src/common/HttpStatusCodes';
 import { OTPRequest, OTPVerifyRequest } from '../types/otp.types';
+import { log } from 'console';
 
 // Add validators like other routes
 const Validators = {
@@ -27,6 +28,7 @@ const Validators = {
 async function sendOTP(req: IReq, res: IRes) {
   try {
     const data = Validators.send(req.body);
+    console.log('data', data);
     const response = await otpService.sendOTP(data.identifier, data.type);
 
     if (response.success) {

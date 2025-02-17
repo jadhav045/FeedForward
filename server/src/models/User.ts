@@ -49,7 +49,7 @@ const UserSchema: Schema = new Schema({
   // name: { type: String, required: true },
   email: { type: String, required: true, lowercase: true, unique: true },
   username: { type: String, required: true, unique: true },
-  mobileNo: { type: String, required: false, unique: true },
+  mobileNo: { type: String, required: false, unique: false },
   role: { type: String, required: true },
   password: { type: String, required: true },
   address: { type: String, required: false },

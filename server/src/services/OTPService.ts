@@ -13,12 +13,12 @@ class OTPService {
   }
 
   private validateMobile(mobile: string): boolean {
-    const mobileRegex = /^\+91[0-9]{10}$/;
+    const mobileRegex = /^(?:\+91)?[6-9]\d{9}$/;
     return mobileRegex.test(mobile);
   }
 
   private async generateOTP(): Promise<string> {
-    const { nanoid } = await import('nanoid');
+    const { nanoid } = await import('nanoid/non-secure');
     return nanoid(6).toUpperCase(); // 6-digit uppercase OTP
   }
 
