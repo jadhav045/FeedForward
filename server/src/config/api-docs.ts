@@ -95,6 +95,77 @@ export const apiDocs: ApiDocumentation = {
               }
             }
           ]
+        },
+        {
+          path: Paths.Auth.Base + Paths.Auth.updateProfile,
+          method: 'PUT',
+          description: 'Update user profile information',
+          requestBody: {
+            username: 'string',
+            email: 'string',
+            mobileNo: 'string',
+            fullName: 'string',
+            address: 'string',
+            longitude: 'string',
+            latitude: 'string',
+            photo: 'string',
+            profession: 'string',
+            regNo: 'string?',
+            orgType: '"individual" | "organization"',
+            foodType: 'string?',
+            motive: 'string?',
+            history: 'string?',
+            employeeNos: 'string?',
+          },
+          responseBody:
+          {
+            data: 
+            {
+              user: 
+              {
+                id: 'string',
+                email: 'string',
+                username: 'string',
+                mobileNo: 'string',
+                role: '"admin" | "ngo" | "donor"',
+                history: 'string[]',
+                createdAt: 'string',
+                updatedAt: 'string',
+                address: 'string',
+                employeeNos: 'string?',
+                foodType: 'string?',
+                fullName: 'string',
+                latitude: 'string',
+                longitude: 'string',
+                motive: 'string?',
+                orgType: '"individual" | "organization"',
+                photo: 'string',
+                profession: 'string',
+                regNo: 'string?',
+              },
+              token: 'jwt_token_string',
+            },
+            status: 200
+          },
+          responses: [
+            {
+              status: HttpStatusCodes.OK,
+              description: 'Profile updated successfully',
+              data: {
+                user: 'UserObject',
+                token: 'jwt_token_string',
+                status: 200
+              }
+            },
+            {
+              status: HttpStatusCodes.BAD_REQUEST,
+              description: 'Profile update failed',
+              data: {
+                message: 'Invalid credentials',
+                status: 400
+              }
+            }
+          ]
         }
       ],
     },

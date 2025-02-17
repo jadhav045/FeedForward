@@ -132,7 +132,7 @@ async function updateprofile(user: any): Promise<AuthResponse> {
       // const { password: _, ...userWithoutPassword } = existing;
       const updatedUser = await User.findOneAndUpdate({username: user.username}, user, {new: true});
       if (updatedUser) {
-        const { password: _, ...userWithoutPassword } = updatedUser;
+        const { password: _, ...userWithoutPassword } = updatedUser.toObject();
         console.log("🔍 Updated user:", userWithoutPassword);
         const token = generateToken(existing.id);
         return { 
