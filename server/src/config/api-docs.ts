@@ -176,5 +176,6 @@ export const apiDocs: ApiDocumentation = {
         }
       ]
     }
+    
   ]
 };

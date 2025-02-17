@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { Toaster } from "react-hot-toast";
 import { store } from "./store/store.ts";
 import { isAuthenticated, getStoredUserRole } from "./utils/auth";
+import { ErrorBoundary } from './components/shared/ErrorBoundary';
 
 // Layouts
 import AdminLayout from "./components/layouts/AdminLayout.tsx";
@@ -17,7 +18,7 @@ import AdminHome from "./pages/admin/Home.tsx";
 import DonorHome from "./pages/donor/DonorHome.tsx";
 import NgoHome from "./pages/ngo/NgoHome.tsx";
 
-import ErrorPage from "./pages/Error.tsx";
+import {ErrorPage} from "./pages/Error.tsx";
 import { ProtectedPrivateRoute, ProtectedRoute } from "./components/shared/ProtectedRoute.tsx";
 import Register from "./pages/auth/Register.jsx";
 import Test from "./pages/Test/Test.tsx";
@@ -33,146 +34,147 @@ import DonorHistory from "./pages/donor/DonorHistory.tsx";
 import DonorNotifications from "./pages/donor/DonorNotifications.tsx";
 import DonorPostings from "./pages/donor/DonorPostings.tsx";
 
-import Active from "./pages/test/pages/Active.tsx";
-import History from "./pages/test/pages/History.tsx";
-import Notifications from "./pages/test/pages/Notifications.tsx";
 
 function App() {
 	return (
 		<Provider store={store}>
-			<BrowserRouter>
-				<Routes>
-					<Route
-						path="/"
-						element={
-							isAuthenticated() ? (
-								<Navigate
-									to={`/${getStoredUserRole()}`}
-									replace
-								/>
-							) : (
-								<Navigate
-									to="/auth/login"
-									replace
-								/>
-							)
-						}
-					/>
-
-					<Route
-						path="/auth"
-						element={<AuthLayout />}
-					>
+			 <ErrorBoundary>
+				<BrowserRouter>
+					<Routes>
 						<Route
-							path="login"
-							element={<Login />}
-						/>
-						<Route
-							path="register"
-							element={<Register />}
-						/>
-					</Route>
-
-					<Route
-						path="/test"
-						element={<TestLayout />}
-					>
-						<Route
-							path="test"
-							element={<Test />}
-						></Route>
-
-						<Route path="active" element={<Active />} />
-						<Route path="history" element={<History />} />
-						<Route path="notifications" element={<Notifications />} />
-					</Route>
-
-					<Route
-						path="/admin"
-						element={
-							<ProtectedRoute allowedRole="admin">
-								<AdminLayout />
-							</ProtectedRoute>
-						}
-					>
-						<Route
-							index
-							element={<AdminHome />}
-						/>
-						<Route
-							path="profile"
-							element={<Profile />}
-						/>
-					</Route>
-
-					<Route
-						path="/donor"
-						element={
-							<ProtectedRoute allowedRole="donor">
-								<DonorLayout />
-							</ProtectedRoute>
-						}
-					>
-						<Route
-							index
-							element={<DonorHome />}
-						/>
-						<Route
-							path="profile"
-							element={<Profile />}
-						/>
-						<Route
-							path="history"
-							element={<DonorHistory />}
-						/>
-						<Route
-							path="notifications"
-							element={<DonorNotifications />}
-						/>
-						<Route
-							path="postings"
-							element={<DonorPostings />}
+							path="/"
+							element={
+								isAuthenticated() ? (
+									<Navigate
+										to={`/${getStoredUserRole()}`}
+										replace
+									/>
+								) : (
+									<Navigate
+										to="/auth/login"
+										replace
+									/>
+								)
+							}
 						/>
 
-					</Route>
+						<Route
+							path="/auth"
+							element={<AuthLayout />}
+						>
+							<Route
+								path="login"
+								element={<Login />}
+							/>
+							<Route
+								path="register"
+								element={<Register />}
+							/>
+						</Route>
 
-					<Route
-						path="/ngo"
-						element={
-							<ProtectedRoute allowedRole="ngo">
-								<NGOLayout />
-							</ProtectedRoute>
-						}
-					>
 						<Route
-							index
-							element={<NgoHome />}
-						/>
-						<Route
-							path="profile"
-							element={<Profile />}
-						/>
-						<Route
-							path="history"
-							element={<NgoHistory />}
-						/>
-						<Route
-							path="notifications"
-							element={<NgoNotifications />}
-						/>
-						<Route
-							path="requests"
-							element={<NgoRequests />}
-						/>
-					</Route>
+							path="/test"
+							element={<TestLayout />}
+						>
+							<Route
+								path="test"
+								element={<Test />}
+							></Route>
 
-					<Route
-						path="/error"
-						element={<ErrorPage />}
-					/>
-				</Routes>
-				<Toaster position="top-right" />
-			</BrowserRouter>
+							
+						</Route>
+
+						<Route
+							path="/admin"
+							element={
+								<ProtectedRoute allowedRole="admin">
+									<AdminLayout />
+								</ProtectedRoute>
+							}
+						>
+							<Route
+								index
+								element={<AdminHome />}
+							/>
+							<Route
+								path="profile"
+								element={<Profile />}
+							/>
+						</Route>
+
+						<Route
+							path="/donor"
+							element={
+								<ProtectedRoute allowedRole="donor">
+									<DonorLayout />
+								</ProtectedRoute>
+							}
+						>
+							<Route
+								index
+								element={<DonorHome />}
+							/>
+							<Route
+								path="profile"
+								element={<Profile />}
+							/>
+							<Route
+								path="history"
+								element={<DonorHistory />}
+							/>
+							<Route
+								path="notifications"
+								element={<DonorNotifications />}
+							/>
+							<Route
+								path="postings"
+								element={<DonorPostings />}
+							/>
+
+						</Route>
+
+						<Route
+							path="/ngo"
+							element={
+								<ProtectedRoute allowedRole="ngo">
+									<NGOLayout />
+								</ProtectedRoute>
+							}
+						>
+							<Route
+								index
+								element={<NgoHome />}
+							/>
+							<Route
+								path="profile"
+								element={<Profile />}
+							/>
+							<Route
+								path="history"
+								element={<NgoHistory />}
+							/>
+							<Route
+								path="notifications"
+								element={<NgoNotifications />}
+							/>
+							<Route
+								path="requests"
+								element={<NgoRequests />}
+							/>
+						</Route>
+
+						<Route
+							path="/error"
+							element={<ErrorPage />}
+						/>
+						<Route 
+							path="*" 
+							element={<ErrorPage status={404} />} 
+						/>
+					</Routes>
+					<Toaster position="top-right" />
+				</BrowserRouter>
+			</ErrorBoundary>
 		</Provider>
 	);
 }

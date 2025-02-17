@@ -24,6 +24,7 @@ export default function Navbar() {
   //Dynamic navigation based on user role
 // Empty array if no user (unauthenticated)
   const navigation = user ? roleBasedNavigation[user.role] : [];
+  console.log("navigation: ", navigation);
 
   const handleLogout = () => {
     dispatch(logout());

@@ -1,6 +1,7 @@
 import axios, { AxiosInstance, AxiosResponse, AxiosError } from 'axios';
 import { ApiResponse, ApiError } from '../types/api.types';
 import { API_CONFIG } from '../config/api.config';
+import { storage } from '../utils/storage';
 
 class Api {
   private instance: AxiosInstance;
@@ -20,7 +21,7 @@ class Api {
     // Request interceptor
     this.instance.interceptors.request.use(
       (config) => {
-        const token = localStorage.getItem('token');
+        const token = storage.getToken();
         if (token) {
           config.headers.Authorization = `Bearer ${token}`;
         }

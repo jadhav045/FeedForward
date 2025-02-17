@@ -1,3 +1,19 @@
+
+export type Role = 'admin' | 'ngo' | 'donor';
+
+export interface User {
+  id: string;
+  username: string;
+  email: string;
+  role: Role;
+}
+
+export interface AuthState {
+  user: User | null;
+  token: string | null;
+  isAuthenticated: boolean;
+}
+
 export interface LoginFormData {
   username: string;  // This will accept username/email/mobile
   password: string;

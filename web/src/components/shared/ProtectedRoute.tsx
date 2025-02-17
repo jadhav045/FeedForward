@@ -1,7 +1,7 @@
 // src/components/shared/ProtectedRoute.tsx
 import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
-import { Role } from '../../types/auth';
+import { Role } from '../../types/auth.types';
 
 interface Props {
   children: React.ReactNode;
