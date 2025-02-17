@@ -22,24 +22,35 @@ export const Button: React.FC<ButtonProps> = ({
   const baseStyles = 'px-4 py-2 rounded-md font-medium transition-colors';
   
   const variants = {
-    primary: `bg-[var(--primary-color)] text-[var(--secondary-color)] hover:bg-[var(--primary-hover-color)] 
+    // disable is not working as it  is based on conditional rendering
+
+    primary: `bg-[var(--primaryButton-bg)] 
+    text-[var(--primaryButton-text)] 
+    hover:bg-[var(--primaryButton-hover)] 
       disabled:bg-[var(--disabled-bg-color)] disabled:text-[var(--disabled-text-color)] 
-      disabled:cursor-not-allowed disabled:opacity-60`,
-    secondary: `bg-[var(--secondary-color)] text-[var(--secondary-text-color)] 
-      hover:bg-[var(--secondary-hover-color)] disabled:bg-[var(--disabled-bg-color)] 
+      disabled:cursor-not-allowed disabled:opacity-60 cursor-pointer`,
+
+
+    secondary: `bg-[var(--secondaryButton-bg)] 
+    text-[var (--secondaryButton-text)] 
+     hover:bg-[var(--secondaryButton-hover)]
+      disabled:bg-[var(--disabled-bg-color)] 
       disabled:text-[var(--disabled-text-color)] disabled:cursor-not-allowed 
-      disabled:opacity-60`,
-    outline: `border border-[var(--border-color)] text-[var(--text-color)] 
-      hover:bg-[var(--hover-bg-color)] disabled:border-[var(--disabled-border-color)] 
+      disabled:opacity-60 cursor-pointer`,
+      
+    outline: `border border-[var(--outlineButton-bg)] 
+      text-[var(--outlineButton-text)] 
+      hover:bg-[var(--outlineButton-hover)]
+      disabled:border-[var(--disabled-border-color)] 
       disabled:text-[var(--disabled-text-color)] disabled:cursor-not-allowed 
-      disabled:hover:bg-transparent disabled:opacity-60`
+      disabled:hover:bg-transparent disabled:opacity-60 cursor-pointer` 
   };
 
   return (
     <button
       type={type}
       disabled={isLoading || disabled}
-      className={`${baseStyles} ${variants[variant]} ${className}`}
+      className= {`${baseStyles} ${variants[variant]} ${className}` }
       {...props}
     >
       {isLoading ? (

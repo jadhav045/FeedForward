@@ -11,7 +11,7 @@ export const FormComponent = ({
 }: FormComponentProps) => (
     <form
         onSubmit={onSubmit}
-        className={`max-w-md mx-auto p-6 rounded-lg shadow-md 
+        className={`max-w-md mx-auto p-6 rounded-lg 
         bg-[var(--form-bg)]
         border border-[var(--form-border)]
         shadow-[var(--form-shadow)]

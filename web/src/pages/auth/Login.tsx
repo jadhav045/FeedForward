@@ -45,7 +45,7 @@ export default function Login() {
 
             <Button
                 type="button"
-                variant="outline"
+                variant="secondary"
                 onClick={handleForgotPassword}
                 className="w-full mt-2"
             >

@@ -119,7 +119,7 @@ export default function Register() {
 
             <Button
                 type="submit"
-                variant="primary"
+                variant="secondary"
                 className="w-full mt-4"
                 disabled={isDisabled}>
                 SignUp

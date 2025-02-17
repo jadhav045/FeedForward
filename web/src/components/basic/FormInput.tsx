@@ -7,6 +7,7 @@ interface FormInputProps {
 	required?: boolean;
 	error?: string;
 	maxLength?: number; // Add maxLength prop
+	className?: string;
 }
 
 export const FormInput = ({
@@ -18,6 +19,7 @@ export const FormInput = ({
 	required = false,
 	error,
 	maxLength, // Destructure maxLength prop
+	className = "",
 }: FormInputProps) => (
 	<div className="mb-4">
 		<input
@@ -40,13 +42,14 @@ export const FormInput = ({
             focus:outline-none focus:ring-2 focus:ring-[var(--primary-bg)]
             placeholder-[var(--placeholder-color)]
             transition-colors duration-200
-           
+			
+         
 
             ${
 							error
 								? "border-[var(--error-color)] focus:ring-[var(--error-color)]"
 								: ""
-						}`}
+						} ${className}`}
 		/>
 		{error && <p className="mt-1 text-sm text-[var(--error-color)]">{error}</p>}
 	</div>

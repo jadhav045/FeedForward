@@ -3,6 +3,10 @@ import { Outlet, NavLink } from "react-router-dom";
 import Navbar from "../../components/shared/Navbar";
 import { History, Bell, Activity, Menu, X } from "lucide-react"; // Import icons
 import type { ReactNode } from "react";
+import HowItWork from "./components/HowItWork";
+import KeyFeatures from "./components/KeyFeatures";
+import VisionMission from "./components/VisionMission";
+import WhyChooseFeedForward from "./components/WhyChooseFeedForward";
 
 interface SidebarItem {
 	name: string;
@@ -41,7 +45,7 @@ const TestLayout: React.FC = () => {
 				{isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
 			</button>
 
-			{/* Sidebar (Responsive) */}
+			{/* Sidebar (Responsive)
 			<aside
 				className={`fixed left-0 top-0 h-full bg-[var(--leftsidebar-bg-color)] text-[var(--leftsidebar-text-color)] 
         p-4 pt-20 transition-transform lg:translate-x-0
@@ -62,7 +66,15 @@ const TestLayout: React.FC = () => {
 						</NavLink>
 					))}
 				</nav>
-			</aside>
+
+
+			// </aside> */}
+			// <HowItWork/>
+			// <VisionMission/>
+			// <KeyFeatures/>
+			// <WhyChooseFeedForward/>
+			
+
 
 			{/* Main Content (Responsive Margin) */}
 			<main className="flex-1 p-6 pt-20 lg:ml-64">

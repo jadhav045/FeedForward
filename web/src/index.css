@@ -2,150 +2,189 @@
 /* 🌟 Global Theme Variables */
 /* ========================= */
 @import "tailwindcss";
-
-
 :root {
-    --primary-bg: #ffffff;
-    --primary-text: #1e293b;
-  
-    /* Navbar */
-    --navbar-bg: #C1BAA1;
-    --navbar-text: #1e293b;
-    --navbar-border: #e2e8f0;
-    --navbar-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --navbar-hover: #A59D84;
-  
-    /* Sidebar */
-    --sidebar-bg: #C1BAA1;
-    --sidebar-text: #334155;
-    --sidebar-border: #0978ff;
-    --sidebar-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
-    --sidebar-hover: #A59D84;
-  
-    /* Forms */
-    --form-bg: #ffffff;
-    --form-hover: #fbfbfb;
-    --form-shadow: 0 2px 4px rgba(89, 11, 245, 0.7);
-    --form-border:#062d54;
+  /* Primary Colors */
+  --primary-bg: #ffffff;              /* Pure white background */
+  --primary-text: #1e293b;            /* Dark gray for strong readability */
+  --primary-shadow: rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 
-    /* Form Titles */
-    --formTitle-color: #3874d4;
-    --formTitle-text: #1e293b;
-    --formTitle-size: 1.2rem;
-  
-    /* Form Inputs */
-    --formInput-color: #cbd0d7;
-    --formInput-text: #080707;
-    --formInput-size: 0.9rem;
-    --formInput-border: #e2e8f0;
+  /* Secondary Colors (Orange Accents) */
+  --secondary-bg: #fdc969;            /* Vibrant orange for buttons, headers, accents */
+  --secondary-text: #ff7207;          /* White text for contrast on orange */
+  --secondary-shadow: rgba(255, 165, 0, 0.3);
 
-    /* placeholder */
-    --placeholder-color: #bd7f7f;
-    --placeholder-text: #191c21;
-  
-    /* Buttons */
-    --primaryButton-bg: #7b93ca;
-    --primaryButton-text: #ffffff;
-    --primaryButton-hover: #43578d;
-    --primaryButton-shadow: 0 2px 4px rgba(89, 11, 245, 0.7);
-  
-    --secondaryButton-bg: #e2e8f0;
-    --secondaryButton-text: #334155;
-    --secondaryButton-hover: #cbd5e1;
-    --secondaryButton-shadow: 0 2px 4px rgba(89, 11, 245, 0.7);
+  /* Tertiary Colors (Warm Off-White) */
+  --tertiary-bg: #fff4e6;             /* Off-white with an orange tint for sections */
+  --tertiary-text: #d35400;           /* Deep orange for highlighted text */
+  --tertiary-shadow: rgba(211, 84, 0, 0.2);
 
-    --outlineButton-bg: #13263e;
-    --outlineButton-text: #334155;
-    --outlineButton-hover: #5e7694;
-    --outlineButton-shadow: 0 2px 4px rgba(89, 11, 245, 0.7);
+  /* Navbar */
+  --navbar-bg: #fff4e6;               /* Clean white navbar */
+  --navbar-text: #1e293b;             /* Dark text */
+  --navbar-border: #e5e7eb;           /* Light gray border */
+  --navbar-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  --navbar-hover: #fff4e6;            /* Subtle orange-tinted hover */
 
-    /*Navlink  */
-    --navlink-bg: #840000;
-    --navlink-text: #0e1b32;
-    --navlink-hover: #d3a10c;
+  /* Sidebar */
+  --sidebar-bg: #fff4e6;              /* Off-white for sidebar differentiation */
+  --sidebar-text: #374151;            /* Neutral dark gray */
+  --sidebar-border: #e2e8f0;          /* Light border */
+  --sidebar-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+  --sidebar-hover: #ffe6cc;           /* Light orange hover effect */
 
+  /* Forms */
+  --form-bg: #ffffff;                /* Clear white form background */
+  --form-hover: #fff8f0;             /* Very subtle orange tint on hover */
+  --form-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --form-border: #d1d5db;
 
-    /* SelectInput */
-    --select-bg: #d57b7b; /* White background */
-    --select-text: #0c1828; /* Dark blue-gray text */
-    --select-border: #ad8787; /* Light gray border */
-    --select-hover-bg: #4f88c2; /* Soft gray hover background */
-    --select-hover-border: #7e94b3; /* Slightly darker border on hover */
-    --select-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow */
-    --select-outline: 2px solid #2563eb; /* Primary blue outline on focus */
-  }
-  
+  /* Form Titles */
+  --formTitle-color: #ff8c00;         /* Orange title accent */
+  --formTitle-text: #1e293b;          /* Dark text for titles */
+  --formTitle-size: 1.2rem;
+
+  /* Form Inputs */
+  --formInput-color: #f9fafb;         /* Light background for inputs */
+  --formInput-text: #1f2937;          /* Dark text */
+  --formInput-size: 0.9rem;
+  --formInput-border: #d1d5db;
+
+  /* Placeholder */
+  --placeholder-color: #000d22;       /* Slightly muted for placeholder backgrounds */
+  --placeholder-text: #6b7280;
+
+  /* Buttons */
+  --primaryButton-bg: #ff8c00;        /* Vibrant orange for primary actions */
+  --primaryButton-text: #ffffff;
+  --primaryButton-hover: #ff7f00;     /* Slightly darker orange on hover */
+  --primaryButton-shadow: 0 2px 4px rgba(255, 140, 0, 0.4);
+
+  --secondaryButton-bg: #ffe6cc;      /* Soft, light orange for secondary actions */
+  --secondaryButton-text: #1f2937;
+  --secondaryButton-hover: #ffd9b3;
+  --secondaryButton-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  --outlineButton-bg: transparent;
+  --outlineButton-text: #ff8c00;
+  --outlineButton-hover: #fff8f0;
+  --outlineButton-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  /* File Input */
+  --fileInput-bg: #fff1e0;            /* Soft orange background */
+  --fileInput-text: #1e293b;
+  --fileInput-hover: #ffe0cc;
+
+  /* Disabled Button */
+  --disabled-bg-color: #fffaf2;       /* Very light off-white */
+  --disabled-text-color: #9ca3af;
+  --disabled-border-color: #ffe6cc;
+
+  /* Navlink */
+  --navlink-bg: #fff8f0;              /* Off-white navlink background */
+  --navlink-text: #1f2937;
+  --navlink-hover: #ffe6cc;
+
+  /* Select Input */
+  --select-bg: #ffffff;
+  --select-text: #1f2937;
+  --select-border: #d1d5db;
+  --select-hover-bg: #fff4e6;
+  --select-hover-border: #ff8c00;
+  --select-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --select-outline: 2px solid #ff8c00;
+}
+
   /* ========================= */
   /* 🌙 Dark Mode Theme */
   /* ========================= */
   .dark {
-    --primary-bg: #1e293b;
-    --primary-text: #f8fafc;
+    --primary-bg: #0F172A;             /* Dark navy background */
+  --primary-text: #F8F8FF;           /* Light text for readability */
+  --primary-shadow: rgba(0, 0, 0, 0.6);
 
+  /* Secondary Colors (Orange Accents) */
+  --secondary-bg: #203245;           /* Vibrant orange accent */
+  --secondary-text: #78A083;
+  --secondary-shadow: rgba(255, 165, 0, 0.6);
+
+  /* Tertiary Colors (Complementary Tones) */
+  --tertiary-bg: #1e293b;            /* Slightly lighter navy for sections */
+  --tertiary-text: #FFA500;          /* Orange for highlights */
+  --tertiary-shadow: rgba(255, 165, 0, 0.3);
     /* Navbar */
-    --navbar-bg: #2c3e50;
-    --navbar-text: #f8fafc;
-    --navbar-border: #475569;
-    --navbar-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    --navbar-hover: #34495e;
+    --navbar-bg: #1e293b; /* Darker navy */
+    --navbar-text: #f8fafc; /* White text */
+    --navbar-border: #334155; /* Subtle dark gray border */
+    --navbar-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    --navbar-hover: #273449; /* Slightly lighter navy */
 
     /* Sidebar */
-    --sidebar-bg: #2c3e50;
-    --sidebar-text: #f8fafc;
-    --sidebar-border: #4a6fa5;
+    --sidebar-bg: #1e293b; /* Dark navy */
+    --sidebar-text: #e2e8f0; /* Light gray text */
+    --sidebar-border: #334155;
     --sidebar-shadow: 2px 0 8px rgba(0, 0, 0, 0.3);
-    --sidebar-hover: #34495e;
+    --sidebar-hover: #2d3b50;
 
     /* Forms */
-    --form-bg: #34495e;
-    --form-hover: #2c3e50;
-    --form-shadow: 0 2px 4px rgba(11, 89, 245, 0.7);
-    --form-border: #4a6fa5;
+    --form-bg: #1e293b; /* Darker background */
+    --form-hover: #273449;
+    --form-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+    --form-border: #334155;
 
     /* Form Titles */
-    --formTitle-color: #7ab1e7;
-    --formTitle-text: #f8fafc;
+    --formTitle-color: #60a5fa; /* Bright blue */
+    --formTitle-text: #e2e8f0; /* Light gray */
     --formTitle-size: 1.2rem;
 
     /* Form Inputs */
-    --formInput-color: #4a6fa5;
-    --formInput-text: #f8fafc;
+    --formInput-color: #334155; /* Dark gray */
+    --formInput-text: #e2e8f0; /* Light gray */
     --formInput-size: 0.9rem;
-    --formInput-border: #475569;
+    --formInput-border: #475569; /* Slightly lighter gray */
 
     /* Placeholder */
-    --placeholder-color: #94a3b8;
-    --placeholder-text: #f8fafc;
+    --placeholder-color: #94a3b8; /* Muted gray */
+    --placeholder-text: #e2e8f0; /* White */
 
     /* Buttons */
-    --primaryButton-bg: #43578d;
-    --primaryButton-text: #ffffff;
-    --primaryButton-hover: #7b93ca;
-    --primaryButton-shadow: 0 2px 4px rgba(11, 89, 245, 0.7);
+    --primaryButton-bg: #2563eb; /* Vibrant blue */
+    --primaryButton-text: #ffffff; /* White text */
+    --primaryButton-hover: #1e40af; /* Darker blue */
+    --primaryButton-shadow: 0 2px 4px rgba(59, 130, 246, 0.5);
 
-    --secondaryButton-bg: #475569;
-    --secondaryButton-text: #f8fafc;
-    --secondaryButton-hover: #4a6fa5;
-    --secondaryButton-shadow: 0 2px 4px rgba(11, 89, 245, 0.7);
+    --secondaryButton-bg: #374151; /* Muted gray */
+    --secondaryButton-text: #e2e8f0; /* Light gray */
+    --secondaryButton-hover: #4b5563;
+    --secondaryButton-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
 
-    --outlineButton-bg: #5e7694;
-    --outlineButton-text: #ffffff;
-    --outlineButton-hover: #7b93ca;
-    --outlineButton-shadow: 0 2px 4px rgba(11, 89, 245, 0.7);
+    --outlineButton-bg: transparent;
+    --outlineButton-text: #60a5fa; /* Soft blue */
+    --outlineButton-hover: #1e3a8a; /* Darker blue */
+    --outlineButton-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+
+    /* File Input */
+    --fileInput-bg: #334155;
+    --fileInput-text: #e2e8f0;
+    --fileInput-hover: #475569;
+
+    /* Disabled Button */
+    --disabled-bg-color: #374151;
+    --disabled-text-color: #9ca3af;
+    --disabled-border-color: #475569;
 
     /* Navlink */
-    --navlink-bg: #840000;
-    --navlink-text: #f8fafc;
-    --navlink-hover: #d3a10c;
+    --navlink-bg: #0f172a;
+    --navlink-text: #e2e8f0;
+    --navlink-hover: #2563eb;
 
     /* SelectInput */
-    --select-bg: #4a6fa5;
-    --select-text: #f8fafc;
-    --select-border: #7e94b3;
-    --select-hover-bg: #5e7694;
-    --select-hover-border: #94a3b8;
+    --select-bg: #1e293b;
+    --select-text: #e2e8f0;
+    --select-border: #334155;
+    --select-hover-bg: #273449;
+    --select-hover-border: #4b5563;
     --select-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
-    --select-outline: 2px solid #7ab1e7;
+    --select-outline: 2px solid #60a5fa;
 }
 
   
