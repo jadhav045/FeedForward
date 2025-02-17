@@ -19,14 +19,14 @@ export default function Register() {
         showOTPInputs,
         isVerified,
         errors,
-        loading,
+       
         handleChange,
         handleSendOTP,
         handleVerificationSuccess,
         handleSubmit,
     } = useRegisterForm();
 
-    const isDisabled = loading || !!(
+    const isDisabled =  !!(
         Object.keys(errors).length > 0 || 
         !isVerified.email || 
         (formData.mobileNo && !isVerified.mobile)
@@ -128,7 +128,7 @@ export default function Register() {
                 variant="primary"
                 className="w-full mt-4"
                 disabled={isDisabled}
-                isLoading={loading}>
+                >
                 SignUp
             </Button>
 

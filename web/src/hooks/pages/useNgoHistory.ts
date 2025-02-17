@@ -12,7 +12,7 @@ export const useNgoHistory = () => {
 
   useEffect(() => {
     if (!history.length) {
-      dispatch(fetchHistory());
+      // dispatch(fetchHistory());
     }
   }, [dispatch, history.length]);
 
