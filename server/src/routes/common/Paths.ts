@@ -7,7 +7,7 @@ export default {
     Login: '/login',
     Logout: '/logout',
     Register: '/register',
-    Profile: '/profile',
+    updateProfile: '/updateProfile',
   },
   OTP: {
     Base: '/otp',

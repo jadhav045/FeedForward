@@ -17,7 +17,7 @@ const userRouter = Router();
 
 userRouter.post(Paths.Auth.Register, UserRoutes.register);
 userRouter.post(Paths.Auth.Login, UserRoutes.login);
-userRouter.put(Paths.Auth.Profile, UserRoutes.profile);
+userRouter.put(Paths.Auth.updateProfile, UserRoutes.updateProfile);
 
 // Add UserRouter
 apiRouter.use(Paths.Auth.Base, userRouter);

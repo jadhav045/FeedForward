@@ -51,7 +51,7 @@ async function login(req: IReq, res: IRes) {
     });
   }
 }
-async function profile(req: IReq, res: IRes) {
+async function updateProfile(req: IReq, res: IRes) {
   const user = req.body;
   const response = await UserService.profile(user) as AuthResponse;
 
@@ -80,5 +80,5 @@ async function profile(req: IReq, res: IRes) {
 export default {
   register,
   login,
-  profile,
+  updateProfile,
 } as const;
