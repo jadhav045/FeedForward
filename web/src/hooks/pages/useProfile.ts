@@ -103,25 +103,6 @@ export const useProfile = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleLocationUpdate = async (locationData: {
-    address: string;
-    longitude: string;
-    latitude: string;
-  }) => {
-    try {
-      const response = await profileService.updateLocation(locationData);
-      if (response.data.status === 200) {
-        dispatch(updateField({ 
-          field: 'address', 
-          value: response.data.data.address 
-        }));
-        toast.success('Location updated successfully');
-      }
-    } catch (error) {
-      toast.error('Failed to update location');
-    }
-  };
-
   const handlePhotoUpload = async (file: File) => {
     try {
       const response = await profileService.updatePhoto(file);
@@ -137,6 +118,30 @@ export const useProfile = () => {
     }
   };
 
+ 
+
+  const handleLocation = async () => {
+    try{
+      const location = await profileService.getLocation();
+      console.log("handle Location: ", location);
+
+      dispatch(updateField({ 
+        field: 'latitude', 
+        value: location.latitude
+      }));
+
+      dispatch(updateField({ 
+        field: 'longitude', 
+        value: location.longitude 
+      }));
+      
+
+      toast.success('Location updated successfully');
+    } catch (error) {
+      toast.error('Failed to get location');
+    }
+  }
+
   return {
     user,
     formData: profileData,
@@ -146,7 +151,7 @@ export const useProfile = () => {
     handleFileChange,
     handleSubmit,
     validateForm,
-    handleLocationUpdate,
+handleLocation,
     handlePhotoUpload
   };
 };
