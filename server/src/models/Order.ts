@@ -11,11 +11,16 @@ const OrderSchema = new mongoose.Schema<IOrder>({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
   },
+
   status: {
     type: String,
     enum: Object.values(OrderStatus),
     required: true,
   },
+  notificationSentTo: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }],
   requestedBy: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
@@ -30,7 +35,7 @@ const OrderSchema = new mongoose.Schema<IOrder>({
     required: true,
   },
   deliveredAt: {type:Date},
-  deliveredPerson: {
+  deliveryPerson: {
     name: { type: String },
     mobNo: { type: String },
     vehicleNo: { type: String },
@@ -59,6 +64,16 @@ const OrderSchema = new mongoose.Schema<IOrder>({
     type: Number,
     enum: [1, 2, 3, 4, 5],
   },
+  locationDonor: {
+    address: { type: String },
+    latitude: { type: Number },
+    longitude: { type: Number },
+  },
+  locationNgo: {
+    address: { type: String },
+    latitude: { type: Number },
+    longitude: { type: Number },
+  }
 }, {
   timestamps: true
 });

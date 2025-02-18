@@ -1,12 +1,13 @@
 import { Types } from 'mongoose';
 
 export enum OrderStatus {
-  Closed = 'closed',
   Active = 'active',
+  Closed = 'closed',
   Confirmed = 'confirmed'
 }
 
 export enum TrackStatus {
+  None = 'none',
   Packed = 'packed',
   Shifting = 'shifting',
   Delivered = 'delivered'
