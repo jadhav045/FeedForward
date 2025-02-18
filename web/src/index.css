@@ -1,98 +1,301 @@
+/* ========================= */
+/* 🌟 Global Theme Variables */
+/* ========================= */
 @import "tailwindcss";
-
-
 :root {
-  --bg-color: #121212;
-  --text-color: #ffffff;
-  --error-color: #ef4444;
+  /* Primary Colors */
+  --primary-bg: #ffffff;              /* Pure white background */
+  --primary-text: #1e293b;            /* Dark gray for strong readability */
+  --primary-shadow: rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+
+  /* Secondary Colors (Orange Accents) */
+  --secondary-bg: #fdc969;            /* Vibrant orange for buttons, headers, accents */
+  --secondary-text: #ff7207;          /* White text for contrast on orange */
+  --secondary-shadow: rgba(255, 165, 0, 0.3);
+
+  /* Tertiary Colors (Warm Off-White) */
+  --tertiary-bg: #fff4e6;             /* Off-white with an orange tint for sections */
+  --tertiary-text: #d35400;           /* Deep orange for highlighted text */
+  --tertiary-shadow: rgba(211, 84, 0, 0.2);
+
+  /* Navbar */
+  --navbar-bg: #EBE5C2;               /* Clean white navbar */
+  --navbar-text: #1e293b;             /* Dark text */
+  --navbar-border: #e5e7eb;           /* Light gray border */
+  --navbar-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  --navbar-hover: #fff4e6;            /* Subtle orange-tinted hover */
+
+  /* Sidebar */
+  --sidebar-bg: #EBE5C2;              /* Off-white for sidebar differentiation */
+  --sidebar-text: #374151;            /* Neutral dark gray */
+  --sidebar-border: #e2e8f0;          /* Light border */
+  --sidebar-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+  --sidebar-hover: #ffe6cc;           /* Light orange hover effect */
+
+  /* Forms */
+  --form-bg: #ffffff;                /* Clear white form background */
+  --form-hover: #c6d4eb;             /* Very subtle orange tint on hover */
+  --form-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --form-border: #d1d5db;
+
+  /* Form Titles */
+  --formTitle-color: #ff8c00;         /* Orange title accent */
+  --formTitle-text: #1e293b;          /* Dark text for titles */
+  --formTitle-size: 1.2rem;
+
+  /* Form Inputs */
+  --formInput-color: #ecf3cf;         /* Light background for inputs */
+  --formInput-text: #1f2937;          /* Dark text */
+  --formInput-size: 0.9rem;
+  --formInput-border: #d1d5db;
+
+  /* Placeholder */
+  --placeholder-color: #000d22;       /* Slightly muted for placeholder backgrounds */
+  --placeholder-text: #6b7280;
+
+  /* Buttons */
+  --primaryButton-bg: #ff8c00;        /* Vibrant orange for primary actions */
+  --primaryButton-text: #ffffff;
+  --primaryButton-hover: #ff7f00;     /* Slightly darker orange on hover */
+  --primaryButton-shadow: 0 2px 4px rgba(255, 140, 0, 0.4);
+
+  --secondaryButton-bg: #ffe6cc;      /* Soft, light orange for secondary actions */
+  --secondaryButton-text: #1f2937;
+  --secondaryButton-hover: #ffd9b3;
+  --secondaryButton-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  --outlineButton-bg: transparent;
+  --outlineButton-text: #ff8c00;
+  --outlineButton-hover: #fff8f0;
+  --outlineButton-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  /* File Input */
+  --fileInput-bg: #fff1e0;            /* Soft orange background */
+  --fileInput-text: #1e293b;
+  --fileInput-hover: #ffe0cc;
+
+  /* Disabled Button */
+  --disabled-bg-color: #fffaf2;       /* Very light off-white */
+  --disabled-text-color: #9ca3af;
+  --disabled-border-color: #ffe6cc;
+
+  /* Navlink */
+  --navlink-bg: #fff8f0;              /* Off-white navlink background */
+  --navlink-text: #1f2937;
+  --navlink-hover: #ffe6cc;
+
+  /* Select Input */
+  --select-bg: #ffffff;
+  --select-text: #1f2937;
+  --select-border: #d1d5db;
+  --select-hover-bg: #fff4e6;
+  --select-hover-border: #ff8c00;
+  --select-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --select-outline: 2px solid #ff8c00;
 }
 
-.light {
-  --bg-color: #fdfdfd; /* Slightly off-white */
-  --text-color: #212529; /* Deep gray for readability */
+  /* ========================= */
+  /* 🌙 Dark Mode Theme */
+  /* ========================= */
+  .dark {
+    --primary-bg: #0F172A;             /* Dark navy background */
+  --primary-text: #F8F8FF;           /* Light text for readability */
+  --primary-shadow: rgba(0, 0, 0, 0.6);
 
-  --navbar-bg-color: #9193a7; /* Muted lavender gray */
-  --navbar-text-color: #3c3f58; /* Deep navy gray */
+  /* Secondary Colors (Orange Accents) */
+  --secondary-bg: #03274d;           /* Vibrant orange accent */
+  --secondary-text: #78A083;
+  --secondary-shadow: rgba(255, 165, 0, 0.6);
 
-  --leftsidebar-bg-color: #e9ecef; /* Soft pastel gray */
-  --leftsidebar-text-color: #495057; /* Dark slate gray */
+  /* Tertiary Colors (Complementary Tones) */
+  --tertiary-bg: #1e293b;            /* Slightly lighter navy for sections */
+  --tertiary-text: #FFA500;          /* Orange for highlights */
+  --tertiary-shadow: rgba(255, 165, 0, 0.3);
+    /* Navbar */
+    --navbar-bg: #1e293b; /* Darker navy */
+    --navbar-text: #f8fafc; /* White text */
+    --navbar-border: #334155; /* Subtle dark gray border */
+    --navbar-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    --navbar-hover: #273449; /* Slightly lighter navy */
 
-  --button-bg-color: #4a90e2; /* Professional medium blue for a trustworthy look */
-  --button-text-color: #ffffff; /* White for clear readability */
+    /* Sidebar */
+    --sidebar-bg: #1e293b; /* Dark navy */
+    --sidebar-text: #e2e8f0; /* Light gray text */
+    --sidebar-border: #334155;
+    --sidebar-shadow: 2px 0 8px rgba(0, 0, 0, 0.3);
+    --sidebar-hover: #2d3b50;
 
-  /* 🆕 Subcomponent Colors */
-  --subcomponent-bg-color: #f8f9fb; /* Near-white for a clean, minimal look */
-  --subcomponent-text-color: #333740; /* Slightly softened black for reduced strain */
-  --subcomponent-border-color: #d1d5db; /* Neutral gray for refined separation */
+    /* Forms */
+    --form-bg: #1e293b; /* Darker background */
+    --form-hover: #273449;
+    --form-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+    --form-border: #334155;
 
-  --hover-bg-color: #dee2e9; /* Muted gray-blue for a soft hover effect */
-  --card-shadow: rgba(0, 0, 0, 0.08); /* Softer shadow for a sleek and subtle depth */
+    /* Form Titles */
+    --formTitle-color: #60a5fa; /* Bright blue */
+    --formTitle-text: #e2e8f0; /* Light gray */
+    --formTitle-size: 1.2rem;
 
-  --input-bg-color: #ffffff; /* Clean white input fields */
-  --input-text-color: #2c3e50; /* Dark navy-gray for a sophisticated touch */
-  --input-border-color: #bfc7d5; /* Soft blue-gray border for a polished look */
+    /* Form Inputs */
+    --formInput-color: #334155; /* Dark gray */
+    --formInput-text: #e2e8f0; /* Light gray */
+    --formInput-size: 0.9rem;
+    --formInput-border: #475569; /* Slightly lighter gray */
+
+    /* Placeholder */
+    --placeholder-color: #94a3b8; /* Muted gray */
+    --placeholder-text: #e2e8f0; /* White */
+
+    /* Buttons */
+    --primaryButton-bg: #2563eb; /* Vibrant blue */
+    --primaryButton-text: #ffffff; /* White text */
+    --primaryButton-hover: #1e40af; /* Darker blue */
+    --primaryButton-shadow: 0 2px 4px rgba(59, 130, 246, 0.5);
+
+    --secondaryButton-bg: #374151; /* Muted gray */
+    --secondaryButton-text: #e2e8f0; /* Light gray */
+    --secondaryButton-hover: #4b5563;
+    --secondaryButton-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+
+    --outlineButton-bg: transparent;
+    --outlineButton-text: #60a5fa; /* Soft blue */
+    --outlineButton-hover: #1e3a8a; /* Darker blue */
+    --outlineButton-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+
+    /* File Input */
+    --fileInput-bg: #334155;
+    --fileInput-text: #e2e8f0;
+    --fileInput-hover: #475569;
+
+    /* Disabled Button */
+    --disabled-bg-color: #374151;
+    --disabled-text-color: #9ca3af;
+    --disabled-border-color: #475569;
+
+    /* Navlink */
+    --navlink-bg: #0f172a;
+    --navlink-text: #e2e8f0;
+    --navlink-hover: #2563eb;
+
+    /* SelectInput */
+    --select-bg: #1e293b;
+    --select-text: #e2e8f0;
+    --select-border: #334155;
+    --select-hover-bg: #273449;
+    --select-hover-border: #4b5563;
+    --select-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+    --select-outline: 2px solid #60a5fa;
 }
-
-
-
-.dark {
-  --bg-color: #24243d; /* Deep charcoal for a rich dark mode experience */
-  --text-color: #e4e6eb; /* Soft white for comfortable reading */
-
-  --navbar-bg-color: #313136; /* Deep muted gray-black */
-  --navbar-text-color: #f1f1f1; /* Soft white */
-
-  --leftsidebar-bg-color: #252526; /* Dark sidebar */
-  --leftsidebar-text-color: #d6d6d6; /* Soft light gray */
 
   
-  --button-bg-color: #4a90e2; /* Vibrant blue for an eye-catching, professional look */
-  --button-text-color: #ffffff; /* Crisp white for clear readability */
-
-  /* 🆕 Subcomponent Colors */
-  --subcomponent-bg-color: #181a1f; /* Slightly lighter than background for depth */
-  --subcomponent-text-color: #c7c9cf; /* Muted light gray for a subtle, polished feel */
-  --subcomponent-border-color: #2b2f36; /* Dark gray-blue for a refined separation */
-
-  --hover-bg-color: #22262d; /* Subtle hover effect with soft contrast */
-  --card-shadow: rgba(0, 0, 0, 0.5); /* Deeper shadow for better layering */
-
-  --input-bg-color: #1f2227; /* Dark gray input fields for a cohesive look */
-  --input-text-color: #e4e6eb; /* Light gray text for readability */
-  --input-border-color: #3a4049; /* Soft gray-blue border for a modern finish */
-}
-
-.blue {
-  --bg-color: #05445E;
-  --text-color: #D4F1F4;
-
-  --leftsidebar-bg-color: #565694;
+  /* ========================= */
+  /* 🌐 General Styles */
+  /* ========================= */
+  body {
+    background-color: var(--primary-bg);
+    color: var(--primary-text);
+    font-family: "Inter", sans-serif;
+  }
   
-  --button-bg-color: #189AB4;
-  --button-text-color: #75E6DA;
-}
-
-.green {
-  --bg-color: #28a745;
-  --text-color: #ffffff;
-  --leftsidebar-bg-color: #3fb8a6;
-  --button-bg-color: pink;
-  --button-text-color: black;
-}
-
-
-.purple {
-  --bg-color: #6f42c1;
-  --text-color: #ffffff;
-
-  --leftsidebar-bg-color: #77096f;
-  --button-bg-color: purple;
-  --button-text-color: rgb(103, 18, 18);
-}
-
-
-body {
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
+  /* ========================= */
+  /* 📌 Navbar Styles */
+  /* ========================= */
+  .navbar {
+    background-color: var(--navbar-bg);
+    color: var(--navbar-text);
+    border-bottom: 2px solid var(--navbar-border);
+    box-shadow: var(--navbar-shadow);
+    padding: 1rem;
+  }
+  
+  .navbar:hover {
+    background-color: var(--navbar-hover);
+  }
+  
+  /* ========================= */
+  /* 📌 Sidebar Styles */
+  /* ========================= */
+  .sidebar {
+    background-color: var(--sidebar-bg);
+    color: var(--sidebar-text);
+    border-right: 2px solid var(--sidebar-border);
+    box-shadow: var(--sidebar-shadow);
+    width: 250px;
+    height: 100vh;
+    padding: 1rem;
+  }
+  
+  .sidebar:hover {
+    background-color: var(--sidebar-hover);
+  }
+  
+  /* ========================= */
+  /* ✍️ Form Styles */
+  /* ========================= */
+  form {
+    background-color: var(--form-bg);
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: var(--form-shadow);
+  }
+  
+  form:hover {
+    background-color: var(--form-hover);
+  }
+  
+  h3 {
+    color: var(--formTitle-color);
+    font-size: var(--formTitle-size);
+    font-weight: bold;
+  }
+  
+  /* ========================= */
+  /* 🔤 Form Inputs */
+  /* ========================= */
+  input, select {
+    background-color: var(--formInput-color);
+    color: var(--formInput-text);
+    font-size: var(--formInput-size);
+    padding: 0.5rem;
+    border: 1px solid var(--formInput-color);
+    border-radius: 6px;
+    width: 100%;
+  }
+  
+  input:focus {
+    outline: none;
+    border: 1px solid var(--primaryButton-bg);
+  }
+  
+  /* ========================= */
+  /* 🎨 Buttons */
+  /* ========================= */
+  .primary-button {
+    background-color: var(--primaryButton-bg);
+    color: var(--primaryButton-text);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .primary-button:hover {
+    background-color: var(--primaryButton-hover);
+  }
+  
+  .secondary-button {
+    background-color: var(--secondaryButton-bg);
+    color: var(--secondaryButton-text);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .secondary-button:hover {
+    background-color: var(--secondaryButton-hover);
+  }

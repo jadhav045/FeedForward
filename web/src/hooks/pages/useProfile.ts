@@ -70,6 +70,7 @@ export const useProfile = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    console.log('Profile Data:', profileData);
     if (!validateForm()) {
       toast.error('Please fix form errors before submitting');
       return;
