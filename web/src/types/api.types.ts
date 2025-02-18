@@ -15,3 +15,8 @@ export interface ApiResponse<T> {
     page: number;
     limit: number;
   }
+
+  export interface BasicResponse {
+    message:string;
+    status: number;
+  }
