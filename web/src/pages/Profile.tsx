@@ -18,6 +18,7 @@ export default function Profile() {
 		handleChange,
 		handleFileChange,
 		handleSubmit,
+		handleLocation,
 	} = useProfile();
 	// const handleSubmit = () => {
 	// 	console.log("submit", formData);
@@ -317,26 +318,20 @@ export default function Profile() {
 							)}
 
 							{/* Location Section - Show for both NGO and Donor */}
-							{(user.role === "ngo" ||
-								(user.role === "donor" && formData.orgType)) && (
+							
 								<section>
 									<h2 className="text-xl font-semibold mb-6 pb-2 border-b border-[var(--border-color)]">
 										Location Information
 									</h2>
 									<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 										<div>
-											<Label
-												htmlFor="address"
-												required
-											>
-												{`${formData.orgType}`} Address
-											</Label>
+											<Label htmlFor="latitude">Latitude</Label>
 											<FormInput
-												name="address"
-												placeholder={` ${formData.orgType} Address`}
-												value={formData.address}
+												name="latitude"
+												placeholder="Latitude"
+												value={formData.latitude}
 												onChange={handleChange}
-												error={errors.address}
+												error={errors.latitude}
 											/>
 										</div>
 										<div>
@@ -350,18 +345,13 @@ export default function Profile() {
 											/>
 										</div>
 										<div>
-											<Label htmlFor="latitude">Latitude</Label>
-											<FormInput
-												name="latitude"
-												placeholder="Latitude"
-												value={formData.latitude}
-												onChange={handleChange}
-												error={errors.latitude}
-											/>
-										</div>
+											<Button type="button" variant="secondary" onClick={handleLocation}>
+												Get Current Location
+												</Button>
+											</div>
 									</div>
 								</section>
-							)}
+							
 						</div>
 
 						{/* Form Actions */}

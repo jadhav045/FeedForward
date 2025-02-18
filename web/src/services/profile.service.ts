@@ -33,6 +33,35 @@ export const profileService = {
     });
   },
 
+ // Update the getLocation method
+getLocation: () => {
+  return new Promise((resolve, reject) => {
+    if (!navigator.geolocation) {
+      reject(new Error('Geolocation is not supported by your browser'));
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        console.log("getting location...");
+        console.log("latitude: ", position.coords.latitude);
+        resolve({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude
+        });
+      },
+      (error) => {
+        reject(new Error(`Error getting location: ${error.message}`));
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+      }
+    );
+  });
+},
+
 //   // Update NGO specific details
 //   updateNGODetails: (data: {
 //     regNo: string;

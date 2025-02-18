@@ -66,6 +66,7 @@ const TestLayout: React.FC = () => {
 
 			{/* Main Content (Responsive Margin) */}
 			<main className="flex-1 p-6 pt-20 lg:ml-64">
+				<p> outlet is below this </p>
 				<Outlet />
 			</main>
 		</div>
