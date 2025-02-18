@@ -14,8 +14,8 @@ export interface IUser extends Document {
   role: string;
   password: string;
   adderss: string;
-  longitude: string;
-  latitude: string;
+  longitude: number;
+  latitude: number;
   photo: string;
   fullName: string;
   profession: string;
@@ -30,8 +30,8 @@ export interface IUser extends Document {
       photo: string;
       address: string;
       // location: string;
-      longitude: string;
-      latitude: string;
+      longitude: number;
+      latitude: number;
       details: string;
     }
   ]
@@ -53,8 +53,8 @@ const UserSchema: Schema = new Schema({
   role: { type: String, required: true },
   password: { type: String, required: true },
   address: { type: String, required: false },
-  longitude: { type: String, required: false },
-  latitude: { type: String, required: false },
+  longitude: { type: Number, required: false },
+  latitude: { type: Number, required: false },
   photo: { type: String, required: false },
   fullName: { type: String, required: false },
   profession: { type: String, required: false },
@@ -63,21 +63,28 @@ const UserSchema: Schema = new Schema({
   foodType: { type: String, required: false },
   motive: { type: String, required: false },
   employeeNos: { type: String, required: false },
+  
   history: [
     {
       eventName: { type: String, required: false },
       photo: { type: String, required: false },
       address: { type: String, required: false },
       // location: { type: String, required: false },
-      longitude: { type: String, required: false },
-      latitude: { type: String, required: false },
+      longitude: { type: Number, required: false },
+      latitude: { type: Number, required: false },
       details: { type: String, required: false },
     }
   ],
+  location: {
+    type: { type: String, default: 'Point' },
+    coordinates: { type: [Number], required: false }, // [longitude, latitude]
+},
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
   // Add other fields as needed
 });
+
+UserSchema.index({ location: '2dsphere' });
 
 /******************************************************************************
                                 Methods
