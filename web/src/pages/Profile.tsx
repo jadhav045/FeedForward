@@ -10,7 +10,11 @@ import {
 	foodTypeOptions,
 } from "../hooks/pages/useProfile";
 
+
+
 export default function Profile() {
+
+	
 	const {
 		user,
 		formData,
