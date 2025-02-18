@@ -1,7 +1,7 @@
 export const roleBasedNavbar = [
-	{ name: "Recent Activities", href: "/common/recent-activities" },
-	{ name: "NGOs", href: "/common/ngosList" },
-	{ name: "Donors", href: "/common/donorsList" },
-	{ name: "About", href: "/common/about" },
-	{ name: "ContactUs", href: "/common/contact-us" },
+	{ name: "Recent Activities", href: "/recent-activities" },
+	{ name: "NGOs", href: "/ngosList" },
+	{ name: "Donors", href: "/donorsList" },
+	{ name: "About", href: "/about" },
+	{ name: "ContactUs", href: "/contact-us" },
 ];

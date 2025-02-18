@@ -44,8 +44,6 @@ import Donors from "./pages/common/donors.tsx";
 import RecentActivities from "./pages/common/RecentActivities.tsx";
 
 function App() {
-
-	
 	return (
 		<Provider store={store}>
 			<ErrorBoundary>
@@ -171,14 +169,14 @@ function App() {
 						</Route>
 
 						<Route
-							path="/common"
-							element={<CommonLayout/>}
+							path="/"
+							element={<CommonLayout />}
 						>
-							{/* Common routes for all users */}
 							<Route
 								path="about"
-								element={<About/>}
+								element={<About />}
 							/>
+							{/* Common routes for all users */}
 							<Route
 								path="contact-us"
 								element={<ContactUs />}

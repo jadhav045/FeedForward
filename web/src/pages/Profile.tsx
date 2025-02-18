@@ -36,20 +36,20 @@ export default function Profile() {
 	}
 
 	return (
-		<div className="min-h-screen bg-[var(--bg-secondary-color)] py-8  ">
-			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-				{/* Header Section */}
-				<div className="mb-8">
-					<h1 className="text-3xl font-bold text-[var(--text-color)]">
-						Profile Settings
-					</h1>
-					<p className="mt-2 text-[var(--text-secondary-color)]">
-						Manage your account information and preferences
-					</p>
-				</div>
-
+		<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			{/* Header Section */}
+			<div className="mb-8  justify-between items-center shadow-[var(--primary-shadow)] border-2">
+				{" "}
 				{/* Main Content */}
-				<div className="bg-[var(--primary-bg)] rounded-xl shadow-lg">
+				<div className="bg-[var(--primary-bg)] rounded-xl shadow-lg p-10">
+					<div>
+						<h1 className="text-3xl font-bold text-[var(--text-color)]">
+							Profile Settings
+						</h1>
+						<p className="mt-2 text-[var(--text-secondary-color)]">
+							Manage your account information and preferences
+						</p>
+					</div>
 					<FormComponent onSubmit={handleSubmit}>
 						<div className="p-6 space-y-8">
 							{/* Common Fields Section */}
@@ -318,40 +318,44 @@ export default function Profile() {
 							)}
 
 							{/* Location Section - Show for both NGO and Donor */}
-							
-								<section>
-									<h2 className="text-xl font-semibold mb-6 pb-2 border-b border-[var(--border-color)]">
-										Location Information
-									</h2>
-									<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-										<div>
-											<Label htmlFor="latitude">Latitude</Label>
-											<FormInput
-												name="latitude"
-												placeholder="Latitude"
-												value={formData.latitude}
-												onChange={handleChange}
-												error={errors.latitude}
-											/>
-										</div>
-										<div>
-											<Label htmlFor="longitude">Longitude</Label>
-											<FormInput
-												name="longitude"
-												placeholder="Longitude"
-												value={formData.longitude}
-												onChange={handleChange}
-												error={errors.longitude}
-											/>
-										</div>
-										<div>
-											<Button type="button" variant="secondary" onClick={handleLocation}>
-												Get Current Location
-												</Button>
-											</div>
+
+							<section>
+								<h2 className="text-xl font-semibold mb-6 pb-2 border-b border-[var(--border-color)]">
+									Location Information
+								</h2>
+								<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+									<div>
+										<Label htmlFor="latitude">Latitude</Label>
+										<FormInput
+											name="latitude"
+											placeholder="Latitude"
+											value={formData.latitude}
+											onChange={handleChange}
+											error={errors.latitude}
+										/>
 									</div>
-								</section>
-							
+									<div>
+										<Label htmlFor="longitude">Longitude</Label>
+										<FormInput
+											name="longitude"
+											placeholder="Longitude"
+											value={formData.longitude}
+											onChange={handleChange}
+											error={errors.longitude}
+										/>
+									</div>
+									<div>
+										<Button
+											type="button"
+											variant="secondary"
+											onClick={handleLocation}
+											className="bg-blue-500 text-white py-2 px-6 rounded-lg shadow-md hover:bg-blue-600 focus:outline-none transition-colors duration-300"
+										>
+											Get Current Location
+										</Button>
+									</div>
+								</div>
+							</section>
 						</div>
 
 						{/* Form Actions */}

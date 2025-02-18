@@ -19,25 +19,25 @@
   --tertiary-shadow: rgba(211, 84, 0, 0.2);
 
   /* Navbar */
-  --navbar-bg: #EBE5C2;               /* Clean white navbar */
+  --navbar-bg: #ffffff;               /* Clean white navbar */
   --navbar-text: #1e293b;             /* Dark text */
   --navbar-border: #e5e7eb;           /* Light gray border */
   --navbar-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   --navbar-hover: #fff4e6;            /* Subtle orange-tinted hover */
 
   /* Sidebar */
-  --sidebar-bg: #EBE5C2;              /* Off-white for sidebar differentiation */
+  --sidebar-bg: #ffffff;              /* Off-white for sidebar differentiation */
   --sidebar-text: #374151;            /* Neutral dark gray */
   --sidebar-border: #e2e8f0;          /* Light border */
   --sidebar-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
   --sidebar-hover: #ffe6cc;           /* Light orange hover effect */
 
-  /* Forms */
-  --form-bg: #ffffff;                /* Clear white form background */
-  --form-hover: #c6d4eb;             /* Very subtle orange tint on hover */
+  /* Form  */
+  --form-bg: #ffffff;
+  --form-hover: #f7faff;
   --form-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --form-shadow-hover: 0 4px 8px rgba(0, 0, 0, 0.1);
   --form-border: #d1d5db;
-
   /* Form Titles */
   --formTitle-color: #ff8c00;         /* Orange title accent */
   --formTitle-text: #727f95;          /* Dark text for titles */
@@ -126,10 +126,11 @@
     --sidebar-hover: #2d3b50;
 
     /* Forms */
-    --form-bg: #1e293b; /* Darker background */
-    --form-hover: #273449;
-    --form-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
-    --form-border: #334155;
+    --form-bg: #1f2937; /* Example dark background */
+    --form-hover: #374151; /* Example dark hover */
+    --form-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --form-shadow-hover: 0 6px 10px rgba(0, 0, 0, 0.2);
+    --form-border: #4b5563; /* Example dark border */
 
     /* Form Titles */
     --formTitle-color: #60a5fa; /* Bright blue */
