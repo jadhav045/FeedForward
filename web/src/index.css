@@ -9,7 +9,7 @@
   --primary-shadow: rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 
   /* Secondary Colors (Orange Accents) */
-  --secondary-bg: #fdc969;            /* Vibrant orange for buttons, headers, accents */
+  --secondary-bg: #ffefd1;            /* Vibrant orange for buttons, headers, accents */
   --secondary-text: #ff7207;          /* White text for contrast on orange */
   --secondary-shadow: rgba(255, 165, 0, 0.3);
 
@@ -40,7 +40,7 @@
 
   /* Form Titles */
   --formTitle-color: #ff8c00;         /* Orange title accent */
-  --formTitle-text: #1e293b;          /* Dark text for titles */
+  --formTitle-text: #727f95;          /* Dark text for titles */
   --formTitle-size: 1.2rem;
 
   /* Form Inputs */
@@ -103,13 +103,13 @@
   --primary-shadow: rgba(0, 0, 0, 0.6);
 
   /* Secondary Colors (Orange Accents) */
-  --secondary-bg: #03274d;           /* Vibrant orange accent */
+  --secondary-bg: #11375f;           /* Vibrant orange accent */
   --secondary-text: #78A083;
   --secondary-shadow: rgba(255, 165, 0, 0.6);
 
   /* Tertiary Colors (Complementary Tones) */
   --tertiary-bg: #1e293b;            /* Slightly lighter navy for sections */
-  --tertiary-text: #FFA500;          /* Orange for highlights */
+  --tertiary-text: #10d3ff;          /* Orange for highlights */
   --tertiary-shadow: rgba(255, 165, 0, 0.3);
     /* Navbar */
     --navbar-bg: #1e293b; /* Darker navy */

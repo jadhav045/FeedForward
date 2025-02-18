@@ -6,42 +6,52 @@ interface Props {
 
 export const HistoryCard = ({ item }: Props) => {
 	return (
-		<div className="bg-[var(--tertiary-bg)] p-6 rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 ">
-			<div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 space-y-4 sm:space-y-0 sm:space-x-4">
+		<div className="bg-[var(--secondary-bg)] p-6 rounded-2xl shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] border border-[var(--primary-shadow)]">
+			{/* Header Section */}
+			<div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
 				<div className="flex-1">
-					<h3 className="font-semibold text-[var(--tertiary-text)] text-lg sm:text-xl">
+					<h3 className="text-lg sm:text-xl font-semibold 
+					text-[var(--secondary-text)]">
 						{item.donorName}
 					</h3>
-					<p className="text-sm text-gray-500">{item.date}</p>
+					<p className="text-sm text-[var(----secondary-text)]">{item.date}</p>
 				</div>
+
+				{/* Status Badge */}
 				<span
-					className={`px-3 py-2 rounded-md text-sm font-medium ${
+					className={`px-4 py-2 rounded-full text-sm font-medium capitalize shadow-sm ${
 						item.status === "completed"
 							? "bg-[var(--secondary-bg)] text-[var(--secondary-text)]"
 							: item.status === "cancelled"
-							? "bg-red-100 text-red-800"
-							: "bg-yellow-100 text-yellow-800"
+							? "bg-red-100 text-red-700"
+							: "bg-yellow-100 text-yellow-700"
 					}`}
 				>
 					{item.status}
 				</span>
 			</div>
 
-			<div className="space-y-4">
+			{/* Food Items List */}
+			<div className="space-y-3">
 				{item.foodItems.map((food, index) => (
 					<div
 						key={index}
-						className="flex justify-between text-sm sm:text-base"
+						className="flex justify-between items-center text-sm sm:text-base border-b border-[var(--tertiary-shadow)] pb-2 last:border-none"
 					>
-						<span className="font-medium">{food.name}</span>
-						<span className="text-gray-700">
+						<span className="font-medium text-[var(--tertiary-text)]">
+							{food.name}
+						</span>
+						<span className="text-[var(----secondary-text)] font-bold">
 							{food.quantity} {food.quantityType}
 						</span>
 					</div>
 				))}
 			</div>
 
-			<p className="mt-4 text-sm text-gray-600">{item.address}</p>
+			{/* Address */}
+			<p className="mt-5 text-sm text-gray-600 leading-relaxed">
+				📍 <span className="text-[var(--tertiary-text)]">{item.address}</span>
+			</p>
 		</div>
 	);
 };

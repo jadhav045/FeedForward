@@ -19,6 +19,9 @@ export default function Profile() {
 		handleFileChange,
 		handleSubmit,
 	} = useProfile();
+	// const handleSubmit = () => {
+	// 	console.log("submit", formData);
+	// };
 
 	if (!user) {
 		return (
@@ -178,45 +181,6 @@ export default function Profile() {
 												error={errors.employeeNos}
 											/>
 										</div>
-
-										<div>
-											<Label
-												htmlFor="address"
-												required
-											>
-												NGO Address
-											</Label>
-											<FormInput
-												name="address"
-												placeholder="NGO Address"
-												value={formData.address}
-												onChange={handleChange}
-												error={errors.address}
-											/>
-										</div>
-
-										{/* <div className="grid grid-cols-2 gap-4">
-											<div>
-												<Label htmlFor="longitude">Longitude</Label>
-												<FormInput
-													name="longitude"
-													placeholder="Longitude"
-													value={formData.longitude}
-													onChange={handleChange}
-													error={errors.longitude}
-												/>
-											</div>
-											<div>
-												<Label htmlFor="latitude">Latitude</Label>
-												<FormInput
-													name="latitude"
-													placeholder="Latitude"
-													value={formData.latitude}
-													onChange={handleChange}
-													error={errors.latitude}
-												/>
-											</div>
-										</div> */}
 									</div>
 								</section>
 							) : (
@@ -282,22 +246,6 @@ export default function Profile() {
 																	error={errors.profession}
 																/>
 															</div>
-
-															<div>
-																<Label
-																	htmlFor="address"
-																	required
-																>
-																	Home Address
-																</Label>
-																<FormInput
-																	name="address"
-																	placeholder="Home Address"
-																	value={formData.address}
-																	onChange={handleChange}
-																	error={errors.address}
-																/>
-															</div>
 														</>
 													)}
 
@@ -359,22 +307,6 @@ export default function Profile() {
 																	error={errors.foodType}
 																/>
 															</div>
-
-															<div>
-																<Label
-																	htmlFor="address"
-																	required
-																>
-																	Enterprise Address
-																</Label>
-																<FormInput
-																	name="address"
-																	placeholder="Enterprise Address"
-																	value={formData.address}
-																	onChange={handleChange}
-																	error={errors.address}
-																/>
-															</div>
 														</>
 													)}
 												</div>
@@ -392,6 +324,21 @@ export default function Profile() {
 										Location Information
 									</h2>
 									<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+										<div>
+											<Label
+												htmlFor="address"
+												required
+											>
+												{`${formData.orgType}`} Address
+											</Label>
+											<FormInput
+												name="address"
+												placeholder={` ${formData.orgType} Address`}
+												value={formData.address}
+												onChange={handleChange}
+												error={errors.address}
+											/>
+										</div>
 										<div>
 											<Label htmlFor="longitude">Longitude</Label>
 											<FormInput

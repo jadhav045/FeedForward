@@ -166,15 +166,27 @@
 // 		</Disclosure>
 // 	);
 // }
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import { RootState } from "../../store/store";
 import ThemeButton from "../shared/ThemeButton";
 import { roleBasedNavbar } from "../../config/nav.config";
+import { logout } from "../../features/authSlice";
+
+function classNames(...classes: string[]) {
+	return classes.filter(Boolean).join(" ");
+}
 
 export default function Navbar() {
 	const { user } = useSelector((state: RootState) => state.auth);
 	const navigation = user ? roleBasedNavbar : [];
+
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+	const handleLogout = () => {
+		dispatch(logout());
+		navigate("/auth/login");
+	};
 
 	return (
 		<nav className="bg-[var(--navbar-bg)] shadow-md fixed top-0 left-0 w-full ">
@@ -208,6 +220,14 @@ export default function Navbar() {
 					{/* User Profile & Theme Toggle */}
 					<div className="flex items-center space-x-4">
 						<ThemeButton />
+						{user && (
+							<button
+								onClick={handleLogout}
+								className="text-sm font-medium text-[var(--navbar-text-color)] hover:text-red-500 transition duration-300"
+							>
+								Sign Out
+							</button>
+						)}
 					</div>
 				</div>
 			</div>

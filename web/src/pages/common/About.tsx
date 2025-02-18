@@ -1,6 +1,6 @@
-
-
 import React, { useEffect, useState } from "react";
+
+import { ArrowRight, ArrowDown } from "lucide-react";
 
 const About = () => {
 	const [currentImage, setCurrentImage] = useState(0);
@@ -26,19 +26,19 @@ const About = () => {
 	const steps = [
 		{
 			src: "https://picsum.photos/400/300?random=1",
-			subheading: "Now one is safe",
+			subheading: "1️⃣ Donor lists surplus food",
 		},
 		{
 			src: "https://picsum.photos/400/300?random=2",
-			subheading: "A tiger is a tiger and a lion is a lion",
+			subheading: "2️⃣ Top 5 nearest NGOs are notified",
 		},
 		{
 			src: "https://picsum.photos/400/300?random=3",
-			subheading: "Judge a book by its cover",
+			subheading: "3️⃣ NGOs respond and confirm pickup",
 		},
 		{
 			src: "https://picsum.photos/400/300?random=3",
-			subheading: "Judge a book by its cover",
+			subheading: "4️⃣ Food is delivered & impact is tracked",
 		},
 	];
 
@@ -51,12 +51,12 @@ const About = () => {
 	}, [images.length]);
 
 	return (
-		<div className="bg-gradient-to-b from-gray-900 to-gray-800 text-white">
-			<section className="py-12 px-6 text-center pd-30">
+		<div className="bg-gradient-to-b bg-[var(--secondary-bg)] text-white ">
+			<section className="py-12 px-6 text-center pd-30 md-20">
 				<h2 className="text-4xl font-extrabold text-indigo-500 mb-6">
 					Introduction
 				</h2>
-				<div className="relative max-w-4xl mx-auto h-80">
+				<div className="relative max-w-4xl mx-auto h-100 md-20">
 					<img
 						src={images[currentImage].src}
 						className="w-full h-full object-cover rounded-lg shadow-lg"
@@ -81,27 +81,37 @@ const About = () => {
 					</div>
 				</div>
 			</section>
-
-			<section className="bg-gray-900 py-12 px-6 shadow-md rounded-lg">
+			<section className="bg-[var(--primary-bg)] py-12 px-6 shadow-md rounded-lg mt-10">
 				<h2 className="text-4xl font-extrabold text-center text-indigo-500 mb-6">
 					How It Works
 				</h2>
-				<div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+
+				<div className="relative grid grid-cols-4 gap-16 w-fit mx-auto">
 					{steps.map((step, index) => (
 						<div
 							key={index}
-							className="bg-gray-800 rounded-lg p-4 shadow-lg transition-transform transform hover:scale-105"
+							className="flex flex-col items-center"
 						>
-							<img
-								src={step.src}
-								alt={`Step ${index + 1}`}
-								className="w-full h-40 object-cover rounded-lg mb-4"
-							/>
-							<p className="text-center text-lg text-gray-300">
+							{/* Image Container */}
+							<div className="relative bg-gray-800 w-48 h-48 flex justify-center items-center rounded-lg shadow-lg transition-transform transform hover:scale-105">
+								<img
+									src={step.src}
+									alt={`Step ${index + 1}`}
+									className="w-full h-full object-cover rounded-lg"
+								/>
+							</div>
+
+							{/* Text - Moved Outside */}
+							<p className="mt-3 text-[var(--primary-text)] text-lg font-semibold text-center">
 								{step.subheading}
 							</p>
 						</div>
 					))}
+
+					{/* Right Arrows for horizontal flow (More space added) */}
+					<ArrowRight className="absolute top-1/3 left-[calc(25%+0.5rem)] text-[var(--primary-text)] w-10 h-10 transition-transform hover:scale-110" />
+					<ArrowRight className="absolute top-1/3 left-[calc(50%+1rem)] text-[var(--primary-text)] w-10 h-10 transition-transform hover:scale-110" />
+					<ArrowRight className="absolute top-1/3 left-[calc(75%+1rem)] text-[var(--primary-text)] w-10 h-10 transition-transform hover:scale-110" />
 				</div>
 			</section>
 
@@ -121,9 +131,8 @@ const About = () => {
 					</div>
 				</div>
 			</section>
-
 			{/* Key Features Section */}
-			<section className="bg-gray-900 py-12 px-6 shadow-md rounded-lg">
+			<section className="bg-[var(--primary-bg)] py-12 px-6 shadow-md rounded-lg">
 				<h2 className="text-4xl font-extrabold text-center text-indigo-500 mb-6">
 					Key Features
 				</h2>
@@ -131,7 +140,6 @@ const About = () => {
 					Here are our platform's key features...
 				</p>
 			</section>
-
 			{/* Why Choose FeedForward Section */}
 			<section className="py-12 px-6">
 				<h2 className="text-4xl font-extrabold text-center text-indigo-500 mb-6">
@@ -139,9 +147,8 @@ const About = () => {
 				</h2>
 				<p className="text-center text-gray-400">Reasons why we stand out...</p>
 			</section>
-
 			{/* Contact Us Section */}
-			<section className="bg-gray-800 py-12 px-6 shadow-md rounded-lg">
+			<section className="bg-[var(--primary-bg)] py-12 px-6 shadow-md rounded-lg">
 				<h2 className="text-4xl font-extrabold text-center text-indigo-500 mb-6">
 					Contact Us
 				</h2>
