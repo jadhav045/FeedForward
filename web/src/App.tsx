@@ -87,7 +87,7 @@ function App() {
 							element={<TestLayout />}
 						>
 							<Route
-								path="test"
+								index
 								element={<Test />}
 							></Route>
 						</Route>
