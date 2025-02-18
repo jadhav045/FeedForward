@@ -15,4 +15,8 @@ export default {
     Verify: '/verify',
   },
   Docs: '/docs',
+  Cloudinary: { 
+    Base: '/cloud',
+    Upload: '/upload',
+  }
 } as const;

@@ -27,5 +27,8 @@
   "homepage": "https://github.com/jadhav045/FeedForward#readme",
   "dependencies": {
     "concurrently": "^9.1.2"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2"
   }
 }

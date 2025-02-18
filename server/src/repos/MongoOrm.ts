@@ -11,7 +11,7 @@ async function connectDb(): Promise<typeof mongoose> {
       throw new Error('MONGO_URI not found in environment variables');
     }
 
-    const db = await mongoose.connect(process.env.MONGO_URI);
+    const db = await mongoose.connect(process.env.MONGO_URI,{serverSelectionTimeoutMS: 30000});
     logger.info("🗄️ Successfully connected to MongoDB");
     return db;
   } catch (error) {
