@@ -4,6 +4,7 @@ import Paths from './common/Paths';
 import UserRoutes from './UserRoutes';
 import OTPRoutes from './OTPRoutes';
 import DocsRoutes from './DocsRoutes';
+import CloudinaryRoutes from './CloudinaryRoutes';
 /******************************************************************************
                                 Variables
 ******************************************************************************/
@@ -34,6 +35,10 @@ apiRouter.use(Paths.OTP.Base, otpRouter);
 apiRouter.get(Paths.Docs, DocsRoutes.getDocsPage);
 apiRouter.get(`${Paths.Docs}/data`, DocsRoutes.getDocs);
 
+// Add cloudinary routes
+const cloudinaryRouter = Router();
+cloudinaryRouter.post(Paths.Cloudinary.Upload, CloudinaryRoutes.upload);
+apiRouter.use(Paths.Cloudinary.Base, cloudinaryRouter);
 /******************************************************************************
                                 Export default
 ******************************************************************************/
