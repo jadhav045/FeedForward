@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import { Toaster } from "react-hot-toast";
 import { store } from "./store/store.ts";
 import { isAuthenticated, getStoredUserRole } from "./utils/auth";
-import { ErrorBoundary } from './components/shared/ErrorBoundary';
+import { ErrorBoundary } from "./components/shared/ErrorBoundary";
 
 // Layouts
 import AdminLayout from "./components/layouts/AdminLayout.tsx";
@@ -18,8 +18,11 @@ import AdminHome from "./pages/admin/Home.tsx";
 import DonorHome from "./pages/donor/DonorHome.tsx";
 import NgoHome from "./pages/ngo/NgoHome.tsx";
 
-import {ErrorPage} from "./pages/Error.tsx";
-import { ProtectedPrivateRoute, ProtectedRoute } from "./components/shared/ProtectedRoute.tsx";
+import { ErrorPage } from "./pages/Error.tsx";
+import {
+	ProtectedPrivateRoute,
+	ProtectedRoute,
+} from "./components/shared/ProtectedRoute.tsx";
 import Register from "./pages/auth/Register.jsx";
 import Test from "./pages/Test/Test.tsx";
 import TestLayout from "./pages/Test/TestLayout.tsx";
@@ -33,12 +36,19 @@ import NgoNotifications from "./pages/ngo/NgoNotifications.tsx";
 import DonorHistory from "./pages/donor/DonorHistory.tsx";
 import DonorNotifications from "./pages/donor/DonorNotifications.tsx";
 import DonorPostings from "./pages/donor/DonorPostings.tsx";
-
+import CommonLayout from "./components/layouts/CommonLayout.tsx";
+import About from "./pages/common/About.tsx";
+import ContactUs from "./pages/common/ContactUs.tsx";
+import Ngos from "./pages/common/Ngos.tsx";
+import Donors from "./pages/common/donors.tsx";
+import RecentActivities from "./pages/common/RecentActivities.tsx";
 
 function App() {
+
+	
 	return (
 		<Provider store={store}>
-			 <ErrorBoundary>
+			<ErrorBoundary>
 				<BrowserRouter>
 					<Routes>
 						<Route
@@ -80,8 +90,6 @@ function App() {
 								path="test"
 								element={<Test />}
 							></Route>
-
-							
 						</Route>
 
 						<Route
@@ -130,7 +138,6 @@ function App() {
 								path="postings"
 								element={<DonorPostings />}
 							/>
-
 						</Route>
 
 						<Route
@@ -164,12 +171,38 @@ function App() {
 						</Route>
 
 						<Route
+							path="/common"
+							element={<CommonLayout/>}
+						>
+							{/* Common routes for all users */}
+							<Route
+								path="about"
+								element={<About/>}
+							/>
+							<Route
+								path="contact-us"
+								element={<ContactUs />}
+							/>
+							<Route
+								path="donorsList"
+								element={<Donors />}
+							/>
+							<Route
+								path="ngosList"
+								element={<Ngos />}
+							/>
+							<Route
+								path="recent-activities"
+								element={<RecentActivities />}
+							/>
+						</Route>
+						<Route
 							path="/error"
 							element={<ErrorPage />}
 						/>
-						<Route 
-							path="*" 
-							element={<ErrorPage status={404} />} 
+						<Route
+							path="*"
+							element={<ErrorPage status={404} />}
 						/>
 					</Routes>
 					<Toaster position="top-right" />

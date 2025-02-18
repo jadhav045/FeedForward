@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import Navbar from "../shared/Navbar";
 import Sidebar from "../shared/Sidebar";
 
-export default function DonorLayout() {
+export default function CommonLayout() {
 	return (
 		<div className="min-h-screen bg-[var(--bg-color)] flex flex-col">
 			{/* Navbar - Takes Full Width */}
