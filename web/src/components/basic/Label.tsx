@@ -5,7 +5,7 @@ interface LabelProps {
   }
   
   export const Label: React.FC<LabelProps> = ({ htmlFor, children, required }) => (
-    <label htmlFor={htmlFor} className="block mb-1">
+    <label htmlFor={htmlFor} className="block mb-1 text-[var(--label-text)]">
       {children} {required && <span className="text-red-500">*</span>}
     </label>
   );

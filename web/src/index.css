@@ -54,7 +54,7 @@
   --placeholder-text: #6b7280;
 
   /* Buttons */
-  --primaryButton-bg: #ff8c00;        /* Vibrant orange for primary actions */
+  --primaryButton-bg: #0059ff;        /* Vibrant orange for primary actions */
   --primaryButton-text: #ffffff;
   --primaryButton-hover: #ff7f00;     /* Slightly darker orange on hover */
   --primaryButton-shadow: 0 2px 4px rgba(255, 140, 0, 0.4);
@@ -127,7 +127,7 @@
 
     /* Forms */
     --form-bg: #1f2937; /* Example dark background */
-    --form-hover: #374151; /* Example dark hover */
+    --form-hover: #0F172A; /* Example dark hover */
     --form-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     --form-shadow-hover: 0 6px 10px rgba(0, 0, 0, 0.2);
     --form-border: #4b5563; /* Example dark border */
@@ -144,7 +144,7 @@
     --formInput-border: #475569; /* Slightly lighter gray */
 
     /* Placeholder */
-    --placeholder-color: #94a3b8; /* Muted gray */
+    --placeholder-color: #1a1f27; /* Muted gray */
     --placeholder-text: #e2e8f0; /* White */
 
     /* Buttons */
@@ -165,7 +165,7 @@
 
     /* File Input */
     --fileInput-bg: #334155;
-    --fileInput-text: #e2e8f0;
+    --fileInput-text: #ffffff;
     --fileInput-hover: #475569;
 
     /* Disabled Button */
