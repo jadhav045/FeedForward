@@ -8,9 +8,10 @@ class NotificationService {
     this.wss = wss;
   }
 
-  sendNotification(message: string) {
+  sendNotification(email:string, message: string) {
     this.wss.clients.forEach((client) => {
       if (client.readyState === client.OPEN) {
+        console.log(client)
         client.send(message);
       }
     });

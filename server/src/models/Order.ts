@@ -5,7 +5,7 @@ const OrderSchema = new mongoose.Schema<IOrder>({
   donorId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true,
+    required: false,
   },
   ngoId: {
     type: mongoose.Schema.Types.ObjectId,
@@ -35,7 +35,12 @@ const OrderSchema = new mongoose.Schema<IOrder>({
     mobNo: { type: String },
     vehicleNo: { type: String },
   },
-  foodItem: [{
+  location:{
+    address:{type:String},
+    latitude:{type:Number},
+    longitude:{type:Number}
+  },
+  foodItems: [{
     name: {
       type: String,
       required: true,
@@ -49,7 +54,7 @@ const OrderSchema = new mongoose.Schema<IOrder>({
       enum: Object.values(QuantityType),
       required: true,
     },
-    photo: { type: String, required: false },
+    photo: { type: Object, required: false },
     expiryDate: {
       type: Date
     },

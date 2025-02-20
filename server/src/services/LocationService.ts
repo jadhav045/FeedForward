@@ -31,9 +31,9 @@ async function getNearestLocations(longitude: number, latitude: number,distance:
     
 }
 
-getNearestLocations(77.5946, 12.9716, 1000).then((data) => {
-    console.log(data);
-});
+// getNearestLocations(77.5946, 12.9716, 1000).then((data) => {
+//     console.log(data);
+// });
 export default {
     getNearestLocations
 };

@@ -16,7 +16,9 @@ export interface DeliveryPerson {
 }
 
 export interface DonationForm {
-  foodItems: FoodItem[];
+  donorId:string;
+  ngoId:object;
+  foodItem: FoodItem[];
   deliveryBy: DeliveryBy;
   deliveryPerson?: DeliveryPerson;
   location: {

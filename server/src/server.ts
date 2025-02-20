@@ -74,9 +74,9 @@ io.on('connection', (socket) => {
   socket.on('message', (message) => {
     logger.info(`Received message => ${message}`);
   });
-  setInterval(() => {
+  
     socket.emit('notification', 'This is a test notification from server!');
-  }, 5000);
+
   
 });
 server.listen(4001, () => logger.info(`webSocket started on port ${ENV.Port}`));
@@ -86,5 +86,5 @@ server.listen(4001, () => logger.info(`webSocket started on port ${ENV.Port}`));
 /******************************************************************************
                                 Export default
 ******************************************************************************/
-
+export {io};
 export default app;
