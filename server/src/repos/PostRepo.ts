@@ -16,15 +16,13 @@ async function create(postData: any): Promise<IOrder> {
             console.log("✅ Post created successfully:");
             const locations= await getLocation.getNearestLocations(postData.location.longitude,postData.location.latitude,20000);
             // console.log(locations);
+            let ngos=[]
             for(let i in locations){
                 const email = locations[i]['email'];
-            console.log(email);
-            // Send notifications to users of this email
-            // NotificationService.sendNotification(email, 'New post created near your location!');
-            io.emit('notification','new post created')
-            console.log("notified")
+                ngos.push(email);
                
             }
+            io.emit("notification",JSON.stringify({'from':newPost.donorId,'to':ngos,'message':`post is created by ${newPost.donorId}` }))
             return newPost.toObject();
             
         } catch (error) {
