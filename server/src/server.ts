@@ -75,7 +75,7 @@ io.on('connection', (socket) => {
     logger.info(`Received message => ${message}`);
   });
   
-    socket.emit('notification', 'This is a test notification from server!');
+    // socket.emit('notification', 'This is a test notification from server!');
 
   
 });

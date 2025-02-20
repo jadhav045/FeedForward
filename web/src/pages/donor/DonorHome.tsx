@@ -23,7 +23,8 @@ export default function DonorHome() {
     handleGetLocation,
     handleSubmit
   } = useDonationForm();
-  console.log(useWebSocket());
+  useWebSocket();
+  // console.log(useWebSocket());
   const [newItem, setNewItem] = useState<Partial<FoodItem>>({});
 
   const handleAddItem = () => {

@@ -9,7 +9,7 @@ import {
 
 export const useDonationForm = () => {
   const {user}=useProfile();
-  console.log(user);
+  // console.log(user);
   const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState<DonationForm>({
     donorId:user._id,
