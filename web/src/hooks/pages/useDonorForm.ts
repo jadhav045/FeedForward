@@ -3,10 +3,16 @@ import { toast } from "react-hot-toast";
 import { DonationForm, FoodItem, DeliveryBy } from '../../types/order.types';
 import { donorService } from '../../services/donor.service';
 import {profileService} from '../../services/profile.service';
+import {
+	useProfile,
+} from "./useProfile";
 
 export const useDonationForm = () => {
+  const {user}=useProfile();
+  console.log(user);
   const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState<DonationForm>({
+    donorId:user._id,
     foodItems: [],
     deliveryBy: 'donor',
     location: {
@@ -66,12 +72,13 @@ export const useDonationForm = () => {
       const response = await donorService.createPost(formData);
   
       console.log('Response in useDonorForm (handleSubmit):', response);
-      set
+      // console.log(response.data.status);
 
-      if(response.data.status === 200)
+      if(response.status === 200)
       {
         setFormData(
           {
+            donorId: user._id,
             foodItems: [],
             deliveryBy: 'donor',
             location: {

@@ -18,5 +18,13 @@ export default {
   Cloudinary: { 
     Base: '/cloud',
     Upload: '/upload',
+  },
+  Post:{
+    Base: '/post',
+    Create: '/create',
+    Update: '/update',
+    Delete: '/delete',
+    Get: '/get',
   }
+  
 } as const;

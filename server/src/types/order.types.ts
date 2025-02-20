@@ -1,9 +1,13 @@
 import { Types } from 'mongoose';
 
 export enum OrderStatus {
-  Closed = 'closed',
-  Active = 'active',
-  Confirmed = 'confirmed'
+  // Closed = 'closed',
+  // Active = 'active',
+  // Confirmed = 'confirmed'
+  PENDING = 'PENDING',
+  APPROVED = 'APPROVED',
+  DELIVERED = 'DELIVERED',
+  CANCELLED = 'CANCELLED'
 }
 
 export enum TrackStatus {

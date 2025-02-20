@@ -3,6 +3,8 @@ import path from 'path';
 import helmet from 'helmet';
 import express, { Request, Response, NextFunction } from 'express';
 import logger from 'jet-logger';
+import http from 'http';
+import { Server as SocketIOServer } from 'socket.io';
 
 import 'express-async-errors';
 
@@ -21,7 +23,13 @@ import cors from 'cors';
 ******************************************************************************/
 
 const app = express();
-
+const server = http.createServer(app);
+// const wss = new Server({ server, });
+const io = new SocketIOServer(server, {
+  cors: {
+    origin: '*',
+  },
+});
 
 // **** Setup
 
@@ -58,8 +66,25 @@ app.use((err: Error, _: Request, res: Response, next: NextFunction) => {
 });
 
 
+io.on('connection', (socket) => {
+  logger.info('Client connected');
+  socket.on('disconnect', () => {
+    logger.info('Client disconnected');
+  });
+  socket.on('message', (message) => {
+    logger.info(`Received message => ${message}`);
+  });
+  
+    socket.emit('notification', 'This is a test notification from server!');
+
+  
+});
+server.listen(4001, () => logger.info(`webSocket started on port ${ENV.Port}`));
+
+
+
 /******************************************************************************
                                 Export default
 ******************************************************************************/
-
+export {io};
 export default app;

@@ -5,6 +5,7 @@ import UserRoutes from './UserRoutes';
 import OTPRoutes from './OTPRoutes';
 import DocsRoutes from './DocsRoutes';
 import CloudinaryRoutes from './CloudinaryRoutes';
+import PostRoutes from './PostRoutes';
 /******************************************************************************
                                 Variables
 ******************************************************************************/
@@ -39,6 +40,12 @@ apiRouter.get(`${Paths.Docs}/data`, DocsRoutes.getDocs);
 const cloudinaryRouter = Router();
 cloudinaryRouter.post(Paths.Cloudinary.Upload, CloudinaryRoutes.upload);
 apiRouter.use(Paths.Cloudinary.Base, cloudinaryRouter);
+
+// Add post routes
+const postRouter = Router();
+postRouter.post(Paths.Post.Create, PostRoutes.create);
+apiRouter.use(Paths.Post.Base, postRouter);
+
 /******************************************************************************
                                 Export default
 ******************************************************************************/

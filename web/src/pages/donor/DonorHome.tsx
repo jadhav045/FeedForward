@@ -7,7 +7,8 @@ import { Toggle } from '../../components/basic/Toggle';
 import { FileInput } from '../../components/basic/FileInput';
 import { useDonationForm } from '../../hooks/pages/useDonorForm';
 import type { FoodItem, QuantityType } from '../../types/order.types';
-import { profileService } from '../../services/profile.service';
+import useWebSocket from '../../hooks/useWebSocket';
+// import { profileService } from '../../services/profile.service';
 
 export default function DonorHome() {
   const {
@@ -22,7 +23,7 @@ export default function DonorHome() {
     handleGetLocation,
     handleSubmit
   } = useDonationForm();
-
+  console.log(useWebSocket());
   const [newItem, setNewItem] = useState<Partial<FoodItem>>({});
 
   const handleAddItem = () => {

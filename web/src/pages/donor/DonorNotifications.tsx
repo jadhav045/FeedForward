@@ -1,7 +1,9 @@
+
 export default function DonorNotifications () {
+    // const not=useWebSocket();
     return (
-        <div>
+    <div>
         <h1>DonorNotifications</h1>
-        </div>
+    </div>
     );
 }
