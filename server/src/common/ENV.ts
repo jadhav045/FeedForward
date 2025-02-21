@@ -10,6 +10,6 @@ import { NodeEnvs } from './constants';
 
 export default jetEnv({
   NodeEnv: isEnumVal(NodeEnvs),
-  Port: num,
+  Port: num ,
 
 });

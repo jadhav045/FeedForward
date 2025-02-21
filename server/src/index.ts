@@ -1,6 +1,6 @@
 import logger from 'jet-logger';
 
-import ENV from '@src/common/ENV';
+import ENV from './common/ENV';
 import server from './server';
 
 

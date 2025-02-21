@@ -8,6 +8,10 @@ yarn-error.log
 .env.production
 .env.test
 
+# TypeScript cache
+*.tsbuildinfo
+.tscache/
+
 # But allow
 !.env.example
 
