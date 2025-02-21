@@ -19,10 +19,10 @@ export const Button: React.FC<ButtonProps> = ({
 
 	const variantStyles = {
 		primary:
-			"bg-[var(--primaryButton-bg)] text-[var(--primaryButton-text)] hover:[var(--primaryButton-hover)] disabled:bg-gray-400",
-		secondary: "bg-[var(--secondaryButton-bg)] text-[var(--secondaryButton-text)] hover:[var(--secondaryButton-hover)] disabled:bg-gray-400",
+			"bg-[var(--primaryButton-bg)] text-[var(--primaryButton-text)] hover:[var(--primaryButton-hover)] disabled:bg-gray-400 cursor-pointer",
+		secondary: "bg-[var(--secondaryButton-bg)] text-[var(--secondaryButton-text)] hover:[var(--secondaryButton-hover)] disabled:bg-gray-400 cursor-pointer",
 		outline:
-			"bg-[var(--outlineButton-bg)] text-[var(--outlineButton-text)] hover:[var(--outlineButton-hover)] disabled:border-gray-400 disabled:text-gray-400",
+			"bg-[var(--outlineButton-bg)] text-[var(--outlineButton-text)] hover:[var(--outlineButton-hover)] disabled:border-gray-400 disabled:text-gray-400 cursor-pointer",
 	};
 
 	return (

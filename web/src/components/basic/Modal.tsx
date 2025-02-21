@@ -63,7 +63,9 @@ export const Modal = ({
 							leaveTo="opacity-0 scale-95"
 						>
 							<Dialog.Panel
-								className={`w-full ${sizeClasses[size]} transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all ${className}`}
+								className={`w-full ${sizeClasses[size]} transform overflow-hidden 
+								rounded-2xl bg-gradient-to-br from-[var(--modal-bg-from)] to-[var(--modal-bg-to)] 
+								p-6 text-left align-middle shadow-xl transition-all ${className}`}
 							>
 								{(title || showCloseButton) && (
 									<div className="flex justify-between items-center mb-4">

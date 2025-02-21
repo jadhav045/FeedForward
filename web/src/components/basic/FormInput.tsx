@@ -1,4 +1,4 @@
-interface FormInputProps {
+interface FormInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     type?: string;
     name: string;
     placeholder: string;
@@ -6,11 +6,12 @@ interface FormInputProps {
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     required?: boolean;
     error?: string;
-    maxLength?: number;  // Add maxLength prop
+    maxLength?: number;
     disabled?: boolean;
 }
 
-export const FormInput = ({
+export const FormInput: React.FC<FormInputProps> = ({
+    className = "",
     type = "text",
     name,
     placeholder,
@@ -18,33 +19,33 @@ export const FormInput = ({
     onChange,
     required = false,
     error,
-    maxLength,  // Destructure maxLength prop
+    maxLength,
     disabled,
-}: FormInputProps) => (
-    <div className="mb-4">
-        <input
-            id={name}
-            type={type}
-            name={name}
-            placeholder={placeholder}
-            value={value}
-            onChange={onChange}
-            required={required}
-            maxLength={maxLength}  // Add maxLength attribute
-            disabled={disabled}
-            className={`w-full px-4 py-2 rounded-md border 
-            bg-[var(--bg-color)] 
-            text-[var(--text-color)]
-            border-[var(--border-color)]
-            focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]
-            placeholder-[var(--placeholder-color)]
-            transition-colors duration-200
-            ${error ? 'border-[var(--error-color)] focus:ring-[var(--error-color)]' : ''}`}
-        />
-        {error && (
-            <p className="mt-1 text-sm text-[var(--error-color)]">
-                {error}
-            </p>
-        )}
-    </div>
-);
+    ...props
+}) => {
+    return (
+        <div className="mb-4">
+            <input
+                id={name}
+                type={type}
+                name={name}
+                placeholder={placeholder}
+                value={value}
+                onChange={onChange}
+                required={required}
+                maxLength={maxLength}
+                disabled={disabled}
+                className={`w-full px-4 py-2 rounded-lg border 
+                    bg-[var(--input-bg)] text-[var(--text-color)]
+                    border-[var(--border-color)] focus:ring-2 focus:ring-blue-500
+                    ${className}`}
+                {...props}
+            />
+            {error && (
+                <p className="mt-1 text-sm text-[var(--error-color)]">
+                    {error}
+                </p>
+            )}
+        </div>
+    );
+};
