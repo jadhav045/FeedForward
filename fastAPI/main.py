@@ -1,18 +1,26 @@
-from fastapi import FastAPI, File, UploadFile
+from fastapi import FastAPI, HTTPException
+import requests
+from PIL import Image
+from io import BytesIO
 from models import classify_image
 from groq_api import check_with_groq
 
 app = FastAPI()
 
 @app.post("/predict")
-async def predict(file: UploadFile = File(...)):
+async def predict(url: str):
     try:
-        image_bytes = await file.read()
+        # Download image from the provided URL
+        response = requests.get(url)
+        if response.status_code != 200:
+            raise HTTPException(status_code=400, detail="Failed to download image")
 
-        # Get prediction from ResNet18
-        label = classify_image(image_bytes)
+        image = Image.open(BytesIO(response.content)).convert("RGB") 
+        img_buffer = BytesIO()
+        image.save(img_buffer, format="JPEG")  
+        image_bytes = img_buffer.getvalue()
 
-        # Check with Groq API
+        label = classify_image(image_bytes)  
         result = check_with_groq(label)
 
         return {
